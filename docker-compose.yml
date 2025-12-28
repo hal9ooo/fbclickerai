@@ -1,0 +1,20 @@
+services:
+  fbclicker:
+    build: .
+    container_name: fbclicker
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8081:8081"
+    volumes:
+      # Use Docker volume for persistence on remote host
+      - fbclicker_data:/app/data
+      - fbclicker_cache:/root/.cache
+    environment:
+      - TZ=Europe/Rome
+      - DISPLAY=${DISPLAY:-:0}
+
+volumes:
+  fbclicker_data:
+  fbclicker_cache:

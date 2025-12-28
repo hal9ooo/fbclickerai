@@ -1,0 +1,27 @@
+# Browser automation
+playwright==1.40.0
+playwright-stealth==1.0.6
+
+# LLM API (OpenRouter compatible)
+openai>=1.6.0
+
+# Telegram bot
+python-telegram-bot>=20.7
+
+# Configuration
+pydantic-settings>=2.1.0
+python-dotenv>=1.0.0
+
+# Image processing
+Pillow>=10.1.0
+opencv-python-headless>=4.8.0
+numpy>=1.24.0
+# OCR
+surya-ocr
+
+# HTTP client
+httpx>=0.25.0
+
+# Utilities
+structlog>=23.2.0
+

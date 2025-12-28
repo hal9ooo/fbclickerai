@@ -1,0 +1,47 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Session data
+data/sessions/
+*.session.json
+facebook_session.json
+fingerprint.json
+
+# Screenshots and debug files
+data/screenshots/
+debug_*.png
+*.tar
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Docker volumes backup
+volume_backup/
+
+# Logs
+*.log
+logs/
