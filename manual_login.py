@@ -77,11 +77,64 @@ async def main():
             lambda: input("Press ENTER when you have successfully logged in and are on the group page...")
         )
         
-        # Save session using StealthBrowser's method
+        # Verify cookies BEFORE saving
+        print()
+        print("Checking cookies...")
+        context = browser._context
+        cookies = await context.cookies()
+        
+        cookie_names = [c['name'] for c in cookies]
+        print(f"Found {len(cookies)} cookies: {cookie_names}")
+        
+        # Check for critical auth cookies
+        has_c_user = 'c_user' in cookie_names
+        has_xs = 'xs' in cookie_names
+        
+        if not has_c_user or not has_xs:
+            print()
+            print("⚠️  WARNING: Missing authentication cookies!")
+            print(f"   c_user: {'✅ Found' if has_c_user else '❌ MISSING'}")
+            print(f"   xs:     {'✅ Found' if has_xs else '❌ MISSING'}")
+            print()
+            print("This means you are NOT logged in. Please:")
+            print("1. Log into Facebook in the browser window")
+            print("2. Make sure you see your name/profile in the top right")
+            print("3. Press ENTER to check cookies again")
+            
+            await asyncio.get_event_loop().run_in_executor(
+                None,
+                lambda: input("\nPress ENTER to re-check cookies...")
+            )
+            
+            # Re-check cookies
+            cookies = await context.cookies()
+            cookie_names = [c['name'] for c in cookies]
+            has_c_user = 'c_user' in cookie_names
+            has_xs = 'xs' in cookie_names
+            
+            if not has_c_user or not has_xs:
+                print("\n❌ Still missing auth cookies! Session may not work.")
+                print("   Saving anyway, but you may need to debug further.")
+        else:
+            print(f"✅ Authentication cookies found!")
+        
+        # Save session using StealthBrowser's method (force=True since user explicitly saving)
         print()
         print("Saving session...")
-        await browser.save_session()
-        print(f"✅ Session saved!")
+        await browser.save_session(force=True)
+        
+        # Verify what was saved
+        import json
+        session_path = browser._session_path
+        with open(session_path) as f:
+            saved = json.load(f)
+        saved_names = [c['name'] for c in saved.get('cookies', [])]
+        print(f"✅ Session saved with {len(saved_names)} cookies: {saved_names}")
+        
+        if 'c_user' not in saved_names or 'xs' not in saved_names:
+            print("\n⚠️  WARNING: Auth cookies were NOT saved to file!")
+            print("   This is a Playwright/browser issue.")
+        
         print()
         
         # Ask if user wants to close

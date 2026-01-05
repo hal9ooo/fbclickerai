@@ -380,12 +380,28 @@ class StealthBrowser:
                    fingerprint_hash=hashlib.md5(json.dumps(self._fingerprint).encode()).hexdigest()[:8])
         return self._page
     
-    async def save_session(self):
-        """Save browser session for reuse."""
+    async def save_session(self, force: bool = False):
+        """Save browser session for reuse.
+        
+        Args:
+            force: If True, save session even if auth cookies are missing.
+                   If False (default), only save if c_user and xs cookies are present.
+        """
         if self._context:
+            # Check for auth cookies before saving
+            cookies = await self._context.cookies()
+            cookie_names = [c['name'] for c in cookies]
+            has_auth = 'c_user' in cookie_names and 'xs' in cookie_names
+            
+            if not has_auth and not force:
+                logger.warning("Skipping session save - auth cookies missing", 
+                             cookies=cookie_names)
+                return
+            
             os.makedirs(self._session_path.parent, exist_ok=True)
             await self._context.storage_state(path=str(self._session_path))
-            logger.info("Session saved", path=str(self._session_path))
+            logger.info("Session saved", path=str(self._session_path), 
+                       cookies_count=len(cookies), has_auth=has_auth)
     
     async def screenshot(self, name: str = "screenshot") -> str:
         """Take a screenshot and return the file path."""
