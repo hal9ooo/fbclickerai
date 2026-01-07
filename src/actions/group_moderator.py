@@ -223,7 +223,7 @@ class GroupModerator:
                     extra_texts = [t['text'] for t in valid_texts if t['text'] != detected_name and len(t['text']) > 2]
                     # Filter out common UI elements
                     filtered_extra = [t for t in extra_texts if not any(ui in t.lower() for ui in ['approva', 'rifiuta', 'invia messaggio', 'richiesta'])]
-                    extra_info = " | ".join(filtered_extra[:5]) if filtered_extra else None
+                    extra_info = "\n".join(filtered_extra) if filtered_extra else None
                     
                     # Check for "Anteprima" link and capture preview if present
                     preview_screenshot_path = None
@@ -252,14 +252,28 @@ class GroupModerator:
                         # Execute the decision (click approve/decline)
                         logger.info(f"EXECUTING: {decision.upper()} for '{detected_name}'")
                         
-                        card_img = cv2.imread(card.image_path)
-                        h, w = card_img.shape[:2]
-                        approve_rel, decline_rel = self.card_detector.get_button_coords(w, h)
+                        # Find button coordinates from OCR bbox (more accurate than hardcoded %)
+                        button_coords = None
+                        target_text = "approva" if decision == "approve" else "rifiuta"
                         
-                        if decision == "approve":
-                            button_coords = approve_rel
-                        else:
-                            button_coords = decline_rel
+                        for t in valid_texts:
+                            if target_text in t['text'].lower():
+                                bbox = t.get('bbox')
+                                if bbox:
+                                    # Click at center of bbox
+                                    center_x = int((bbox[0] + bbox[2]) / 2)
+                                    center_y = int((bbox[1] + bbox[3]) / 2)
+                                    button_coords = (center_x, center_y)
+                                    logger.info(f"Found '{target_text}' via OCR bbox: {bbox} -> center ({center_x}, {center_y})")
+                                    break
+                        
+                        # Fallback to hardcoded percentages if OCR didn't find button
+                        if not button_coords:
+                            logger.warning(f"OCR didn't find '{target_text}', using fallback percentages")
+                            card_img = cv2.imread(card.image_path)
+                            h, w = card_img.shape[:2]
+                            approve_rel, decline_rel = self.card_detector.get_button_coords(w, h)
+                            button_coords = approve_rel if decision == "approve" else decline_rel
                         
                         # Calculate absolute page coordinates
                         abs_x, abs_y = self.card_detector.get_absolute_coords(card, button_coords[0], button_coords[1])

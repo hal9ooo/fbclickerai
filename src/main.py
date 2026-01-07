@@ -36,6 +36,7 @@ class FBClickerBot:
         self.telegram: Optional[TelegramBot] = None
         
         self._running = False
+        self._night_mode = False  # Track if browser is closed for night
     
     async def start(self):
         """Start all bot components."""
@@ -51,12 +52,12 @@ class FBClickerBot:
         
         # Initialize Telegram bot
         self.telegram = TelegramBot()
-        await self.telegram.start()
+        self.telegram.start()  # Starts in background thread
         
         # Check if logged in
         if not await self.login_handler.is_logged_in():
             logger.warning("Not logged in - session may be expired")
-            await self.telegram.send_message(
+            self.telegram.send_message(
                 "⚠️ Sessione Facebook scaduta!\n\n"
                 "Esegui di nuovo `manual_login.py` per fare il login."
             )
@@ -64,7 +65,7 @@ class FBClickerBot:
                 logger.info("Waiting for valid session...")
                 await asyncio.sleep(30)
         
-        await self.telegram.send_message("✅ Connesso a Facebook! Avvio moderazione...")
+        self.telegram.send_message("✅ Connesso a Facebook! Avvio moderazione...")
         
         self._running = True
         await self._main_loop()
@@ -116,10 +117,46 @@ class FBClickerBot:
                 now = datetime.now()
                 current_hour = now.hour
                 if not (6 <= current_hour < 22):
+                    # Entering night mode - close browser to save session
+                    if not self._night_mode:
+                        logger.info("Entering night mode - closing browser to preserve session")
+                        self.telegram.send_message("🌙 Pausa notturna (22:00-06:00) - Chiudo browser per preservare sessione")
+                        
+                        if self.browser:
+                            await self.browser.close()
+                        
+                        self._night_mode = True
+                    
                     sleep_time = self._get_jittered_interval()
                     logger.info("Outside working hours (06:00-22:00), sleeping...", current_hour=current_hour, sleep_seconds=sleep_time)
                     await asyncio.sleep(sleep_time)
                     continue
+                
+                # Returning from night mode - restart browser
+                if self._night_mode:
+                    logger.info("Exiting night mode - restarting browser")
+                    self.telegram.send_message("☀️ Fine pausa notturna - Riavvio browser...")
+                    
+                    # Reinitialize browser and components
+                    self.browser = StealthBrowser()
+                    page = await self.browser.start()
+                    
+                    self.login_handler = FacebookLogin(page, self.analyzer)
+                    self.moderator = GroupModerator(page, self.analyzer)
+                    
+                    # Check if still logged in
+                    if not await self.login_handler.is_logged_in():
+                        logger.warning("Not logged in after restart - session may have expired")
+                        self.telegram.send_message(
+                            "⚠️ Sessione Facebook scaduta dopo la pausa notturna!\\n\\n"
+                            "Esegui di nuovo `manual_login.py` per fare il login."
+                        )
+                        while not await self.login_handler.is_logged_in():
+                            logger.info("Waiting for valid session...")
+                            await asyncio.sleep(30)
+                    
+                    self.telegram.send_message("✅ Browser riavviato e connesso!")
+                    self._night_mode = False
 
                 # Cleanup old cache entries
                 cache.cleanup_old(max_age_hours=24)
@@ -144,7 +181,7 @@ class FBClickerBot:
                     """Callback to send notification - add to cache first, then send."""
                     # Add to cache so we can track the decision
                     cache.add_notification(name, extra_info)
-                    await self.telegram.send_member_request(
+                    self.telegram.send_member_request(
                         name=name,
                         extra_info=extra_info,
                         screenshot_path=screenshot_path,
@@ -162,7 +199,7 @@ class FBClickerBot:
                     # Mark all processed decisions as executed
                     for name in list(decision_dict.keys()):
                         cache.mark_executed(name)
-                        await self.telegram.send_message(f"✅ Eseguito: <b>{name}</b>")
+                        self.telegram.send_message(f"✅ Eseguito: <b>{name}</b>")
                 
                 # Wait for next poll with jitter for stealth
                 sleep_time = self._get_jittered_interval()
@@ -171,7 +208,7 @@ class FBClickerBot:
                 
             except Exception as e:
                 logger.error("Error in main loop", error=str(e))
-                await self.telegram.send_message(f"⚠️ Errore: {str(e)}")
+                self.telegram.send_message(f"⚠️ Errore: {str(e)}")
                 await asyncio.sleep(30)
     
     async def _execute_pending_decisions(self):
@@ -188,7 +225,7 @@ class FBClickerBot:
         self._running = False
         
         if self.telegram:
-            await self.telegram.stop()
+            self.telegram.stop()
         
         if self.analyzer:
             await self.analyzer.close()

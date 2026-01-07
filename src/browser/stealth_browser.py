@@ -76,7 +76,7 @@ class StealthBrowser:
         # Create new fingerprint
         fingerprint = {
             "user_agent": random.choice(USER_AGENTS),
-            "viewport": random.choice(VIEWPORTS),
+            "viewport": {"width": 1920, "height": 1080},  # Fixed for consistent card detection
             "hardware_concurrency": random.choice([4, 8, 12, 16]),
             "device_memory": random.choice([4, 8, 16, 32]),
             "platform": "Win32",

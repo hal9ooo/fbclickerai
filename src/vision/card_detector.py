@@ -309,8 +309,7 @@ class CardDetector:
         Calculate button coordinates based on card dimensions.
         
         Buttons are at TOP RIGHT of the card, around 46px from top.
-        Using fixed offset from RIGHT EDGE (instead of percentage from left)
-        to work correctly with any viewport width.
+        Using percentages of card width for responsive positioning.
         
         Args:
             card_width: Width of the card content area in pixels
@@ -319,12 +318,11 @@ class CardDetector:
         Returns:
             ((approve_x, approve_y), (decline_x, decline_y)) - both relative to card
         """
-        # Fixed offsets from RIGHT edge of card (works with any viewport)
-        APPROVE_FROM_RIGHT = 475  # Approva button ~475px from right edge
-        DECLINE_FROM_RIGHT = 290  # Rifiuta button ~290px from right edge
-        
-        approve_x = card_width - APPROVE_FROM_RIGHT
-        decline_x = card_width - DECLINE_FROM_RIGHT
+        # Percentages from LEFT edge (calculated from OCR bbox detection)
+        # Approva button center: bbox [834, 902] → center 868 → 868/1560 = 0.556
+        # Rifiuta button center: bbox [1020, 1073] → center 1046 → 1046/1560 = 0.671
+        approve_x = int(card_width * 0.556)
+        decline_x = int(card_width * 0.671)
         
         # Buttons are at TOP of card, about 46px from top
         button_y = BUTTON_Y_OFFSET  # 46px from top

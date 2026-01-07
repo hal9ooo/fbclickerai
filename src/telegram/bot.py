@@ -1,5 +1,10 @@
-"""Telegram bot for manual approval of member requests - saves to cache."""
+"""Telegram bot for manual approval of member requests - saves to cache.
+
+Runs in a separate thread with its own event loop to prevent OCR from blocking
+Telegram command responsiveness.
+"""
 import asyncio
+import threading
 from typing import Dict, Optional
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
@@ -19,7 +24,12 @@ logger = structlog.get_logger()
 
 
 class TelegramBot:
-    """Telegram bot for remote control and manual approvals."""
+    """Telegram bot for remote control and manual approvals.
+    
+    Runs in a separate thread with its own asyncio event loop, allowing
+    Telegram commands to be received even when the main thread is busy
+    with CPU-intensive tasks like OCR.
+    """
     
     def __init__(self):
         self.token = settings.telegram_bot_token
@@ -32,15 +42,40 @@ class TelegramBot:
         # Bot status
         self._is_paused = False
         self._running = False
+        
+        # Threading support
+        self._thread: Optional[threading.Thread] = None
+        self._loop: Optional[asyncio.AbstractEventLoop] = None
+        self._started_event = threading.Event()
     
     @property
     def is_paused(self) -> bool:
         """Check if bot is paused."""
         return self._is_paused
     
-    async def start(self):
-        """Start the Telegram bot."""
-        logger.info("Starting Telegram bot")
+    def _run_in_thread(self):
+        """Run the Telegram bot in its own event loop (called from thread)."""
+        # Create new event loop for this thread
+        self._loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self._loop)
+        
+        try:
+            self._loop.run_until_complete(self._async_start())
+            # Signal that we're started
+            self._started_event.set()
+            # Run forever (until stop is called)
+            self._loop.run_forever()
+        finally:
+            # Cleanup
+            try:
+                self._loop.run_until_complete(self._async_stop())
+            except Exception as e:
+                logger.warning("Error during async stop", error=str(e))
+            self._loop.close()
+    
+    async def _async_start(self):
+        """Async initialization (runs in thread's event loop)."""
+        logger.info("Starting Telegram bot in background thread")
         
         self.app = Application.builder().token(self.token).build()
         
@@ -58,13 +93,13 @@ class TelegramBot:
         await self.app.updater.start_polling(allowed_updates=Update.ALL_TYPES)
         
         self._running = True
-        logger.info("Telegram bot started")
+        logger.info("Telegram bot started in background thread")
         
         # Send startup message
-        await self.send_message("🤖 FBClicker bot avviato!\n\nComandi:\n/status - Stato bot\n/pause - Pausa moderazione\n/resume - Riprendi moderazione\n/help - Aiuto")
+        await self._send_message_internal("🤖 FBClicker bot avviato!\n\nComandi:\n/status - Stato bot\n/pause - Pausa moderazione\n/resume - Riprendi moderazione\n/help - Aiuto")
     
-    async def stop(self):
-        """Stop the Telegram bot."""
+    async def _async_stop(self):
+        """Async cleanup (runs in thread's event loop)."""
         if self.app and self._running:
             logger.info("Stopping Telegram bot")
             await self.app.updater.stop()
@@ -72,8 +107,45 @@ class TelegramBot:
             await self.app.shutdown()
             self._running = False
     
-    async def send_message(self, text: str):
-        """Send a message to the admin."""
+    def start(self):
+        """Start the Telegram bot in a background thread.
+        
+        This method is synchronous and returns immediately after starting the thread.
+        The Telegram bot runs in its own event loop, allowing it to respond to
+        commands even when the main thread is busy with OCR.
+        """
+        if self._thread and self._thread.is_alive():
+            logger.warning("Telegram bot thread already running")
+            return
+        
+        self._started_event.clear()
+        self._thread = threading.Thread(target=self._run_in_thread, daemon=True, name="TelegramBot")
+        self._thread.start()
+        
+        # Wait for the bot to be ready (max 10 seconds)
+        if not self._started_event.wait(timeout=10):
+            logger.error("Telegram bot failed to start within timeout")
+        else:
+            logger.info("Telegram bot thread started successfully")
+    
+    def stop(self):
+        """Stop the Telegram bot thread."""
+        if not self._loop or not self._running:
+            return
+            
+        logger.info("Stopping Telegram bot thread")
+        
+        # Schedule stop on the bot's event loop
+        self._loop.call_soon_threadsafe(self._loop.stop)
+        
+        # Wait for thread to finish
+        if self._thread and self._thread.is_alive():
+            self._thread.join(timeout=5)
+            if self._thread.is_alive():
+                logger.warning("Telegram bot thread did not stop cleanly")
+    
+    async def _send_message_internal(self, text: str):
+        """Internal async send message (runs in bot's thread)."""
         if self.app:
             await self.app.bot.send_message(
                 chat_id=self.admin_id,
@@ -81,10 +153,30 @@ class TelegramBot:
                 parse_mode="HTML"
             )
     
-    async def send_member_request(self, name: str, extra_info: Optional[str] = None, 
+    def send_message(self, text: str):
+        """Send a message to the admin (thread-safe, can be called from any thread).
+        
+        This schedules the message to be sent on the Telegram bot's event loop.
+        """
+        if not self._loop or not self._running:
+            logger.warning("Cannot send message - Telegram bot not running")
+            return
+        
+        # Schedule the coroutine on the bot's event loop
+        future = asyncio.run_coroutine_threadsafe(
+            self._send_message_internal(text),
+            self._loop
+        )
+        # Wait for it to complete (with timeout)
+        try:
+            future.result(timeout=10)
+        except Exception as e:
+            logger.error("Failed to send Telegram message", error=str(e))
+    
+    async def _send_member_request_internal(self, name: str, extra_info: Optional[str] = None, 
                                    screenshot_path: Optional[str] = None, 
                                    preview_path: Optional[str] = None):
-        """Send a member request notification with approve/decline buttons.
+        """Internal async send member request (runs in bot's thread).
         
         If both card and preview images are available, sends them as a single media group.
         Then sends the text message with buttons.
@@ -212,6 +304,28 @@ class TelegramBot:
                 )
             except Exception as e2:
                 logger.error(f"Fallback text also failed: {e2}")
+    
+    def send_member_request(self, name: str, extra_info: Optional[str] = None, 
+                           screenshot_path: Optional[str] = None, 
+                           preview_path: Optional[str] = None):
+        """Send a member request notification (thread-safe, can be called from any thread).
+        
+        This schedules the request to be sent on the Telegram bot's event loop.
+        """
+        if not self._loop or not self._running:
+            logger.warning("Cannot send member request - Telegram bot not running")
+            return
+        
+        # Schedule the coroutine on the bot's event loop
+        future = asyncio.run_coroutine_threadsafe(
+            self._send_member_request_internal(name, extra_info, screenshot_path, preview_path),
+            self._loop
+        )
+        # Wait for it to complete (with timeout)
+        try:
+            future.result(timeout=30)  # Longer timeout for media uploads
+        except Exception as e:
+            logger.error("Failed to send Telegram member request", error=str(e), name=name)
     
     async def _cmd_start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /start command."""
