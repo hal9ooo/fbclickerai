@@ -309,8 +309,9 @@ class GroupModerator:
                         break  # Exit card loop, re-screenshot needed
                     
                     # CHECK 2: Queue for notification (if not clicking)
-                    # This name will be checked against cache in the callback
-                    notifications_to_send.append((detected_name, card.image_path, extra_info, preview_screenshot_path))
+                    # Crop card to text content only (using OCR bbox)
+                    cropped_card_path = self._crop_card_to_text_bbox(card.image_path, valid_texts)
+                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path))
                     
                 except Exception as e:
                     logger.error(f"Error processing card {card.card_index}", error=str(e))
@@ -882,3 +883,60 @@ Be very brief and direct."""
             except:
                 pass
             return None
+    
+    def _crop_card_to_text_bbox(self, card_image_path: str, ocr_texts: list, padding: int = 20) -> str:
+        """
+        Crop card image to the bounding box of all OCR text, plus padding.
+        
+        Args:
+            card_image_path: Path to the original card image
+            ocr_texts: List of {'text': str, 'bbox': [x1, y1, x2, y2]} from OCR
+            padding: Pixels to add around the text bbox
+            
+        Returns:
+            Path to the cropped image (or original if crop fails)
+        """
+        try:
+            # Filter to get only text elements with valid bbox (exclude buttons)
+            text_bboxes = []
+            for t in ocr_texts:
+                bbox = t.get('bbox')
+                text_lower = t['text'].lower()
+                # Exclude UI buttons from bbox calculation
+                if bbox and not any(ui in text_lower for ui in ['approva', 'rifiuta', '•••']):
+                    text_bboxes.append(bbox)
+            
+            if not text_bboxes:
+                logger.warning("No text bboxes found for cropping")
+                return card_image_path
+            
+            # Calculate bounding box of all text
+            min_x = min(b[0] for b in text_bboxes)
+            min_y = min(b[1] for b in text_bboxes)
+            max_x = max(b[2] for b in text_bboxes)
+            max_y = max(b[3] for b in text_bboxes)
+            
+            # Add padding
+            img = Image.open(card_image_path)
+            img_width, img_height = img.size
+            
+            crop_left = max(0, int(min_x) - padding)
+            crop_top = max(0, int(min_y) - padding)
+            crop_right = min(img_width, int(max_x) + padding)
+            crop_bottom = min(img_height, int(max_y) + padding)
+            
+            # Crop
+            cropped = img.crop((crop_left, crop_top, crop_right, crop_bottom))
+            
+            # Save to new file
+            cropped_path = card_image_path.replace('.png', '_cropped.png')
+            cropped.save(cropped_path)
+            
+            logger.info(f"Card cropped to text bbox: ({crop_left}, {crop_top}) - ({crop_right}, {crop_bottom})")
+            
+            return cropped_path
+            
+        except Exception as e:
+            logger.error(f"Failed to crop card to text bbox: {e}")
+            return card_image_path
+

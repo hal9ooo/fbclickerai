@@ -219,21 +219,13 @@ class TelegramBot:
         # Prepare images
         media_group = []
         
-        # Process card screenshot (with cropping)
+        # Process card screenshot (already cropped by group_moderator using OCR bbox)
         card_buffer = None
         if screenshot_path:
             try:
                 img = Image.open(screenshot_path)
-                width, height = img.size
-                crop_left = 95
-                crop_right = 160
-                if width > crop_left + crop_right:
-                    cropped = img.crop((crop_left, 0, width - crop_right, height))
-                else:
-                    cropped = img
-                
                 card_buffer = io.BytesIO()
-                cropped.save(card_buffer, format='PNG')
+                img.save(card_buffer, format='PNG')
                 card_buffer.seek(0)
             except Exception as e:
                 logger.error(f"Failed to process card screenshot: {e}")

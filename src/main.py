@@ -176,6 +176,11 @@ class FBClickerBot:
                 
                 logger.info(f"Pending decisions: {len(decision_dict)}")
                 
+                # Run start notification
+                run_start_time = datetime.now()
+                run_time_str = run_start_time.strftime("%H:%M")
+                self.telegram.send_message(f"🔄 Run delle ore {run_time_str} iniziato")
+                
                 # UNIFIED WORKFLOW: process decisions AND send notifications in one pass
                 async def notification_callback(name: str, screenshot_path: str, extra_info: str = None, preview_path: str = None):
                     """Callback to send notification - add to cache first, then send."""
@@ -200,6 +205,11 @@ class FBClickerBot:
                     for name in list(decision_dict.keys()):
                         cache.mark_executed(name)
                         self.telegram.send_message(f"✅ Eseguito: <b>{name}</b>")
+                
+                # Run end notification with duration
+                run_end_time = datetime.now()
+                run_duration = (run_end_time - run_start_time).total_seconds() / 60
+                self.telegram.send_message(f"✅ Run delle ore {run_time_str} terminato - durata: {run_duration:.1f} minuti")
                 
                 # Wait for next poll with jitter for stealth
                 sleep_time = self._get_jittered_interval()
