@@ -286,9 +286,12 @@ class GroupModerator:
                         await self.page.evaluate(f"window.scrollTo(0, {scroll_to_y})")
                         await self.human.random_delay(0.5, 0.8)
                         
-                        # Now click at VIEWPORT coordinates (original abs_y minus scroll offset)
-                        # abs_y already includes header offset, so we just subtract scroll position
-                        viewport_y = abs_y - scroll_to_y
+                        # Get ACTUAL scroll position (browser clamps if page is shorter than requested)
+                        actual_scroll_y = await self.page.evaluate("window.scrollY")
+                        
+                        # Now click at VIEWPORT coordinates using ACTUAL scroll position
+                        viewport_y = abs_y - actual_scroll_y
+                        logger.info(f"Scroll requested: {scroll_to_y}, actual: {actual_scroll_y}")
                         logger.info(f"Clicking at viewport coords ({abs_x}, {viewport_y})")
                         
                         # Save debug overlay before click
@@ -841,9 +844,13 @@ Be very brief and direct."""
             await self.page.evaluate(f"window.scrollTo(0, {scroll_to_y})")
             await self.human.random_delay(0.3, 0.5)
             
-            # Adjust Y for viewport
-            viewport_y = abs_y - scroll_to_y
+            # Get ACTUAL scroll position (browser clamps if page is shorter than requested)
+            actual_scroll_y = await self.page.evaluate("window.scrollY")
             
+            # Adjust Y for viewport using ACTUAL scroll position
+            viewport_y = abs_y - actual_scroll_y
+            
+            logger.info(f"Scroll requested: {scroll_to_y}, actual: {actual_scroll_y}")
             logger.info(f"After scroll: viewport coords ({abs_x}, {viewport_y})")
             
             # Save debug overlay before click

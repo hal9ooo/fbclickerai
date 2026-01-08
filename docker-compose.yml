@@ -14,6 +14,10 @@ services:
     environment:
       - TZ=Europe/Rome
       - DISPLAY=${DISPLAY:-:0}
+      # RIDUCI I BATCH: Questo è il trucco principale per CPU vecchie
+      # Default è spesso 32 o 64, che intasa la tua CPU. Mettiamolo basso.
+      - DETECTOR_BATCH_SIZE=2
+      - RECOGNITION_BATCH_SIZE=4
 
 volumes:
   fbclicker_data:
