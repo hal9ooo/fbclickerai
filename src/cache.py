@@ -22,6 +22,7 @@ class PendingRequest:
     decision: Optional[str] = None  # None, "approve", or "decline"
     executed: bool = False
     extra_info: Optional[str] = None
+    card_hash: Optional[str] = None  # Perceptual hash of card image
 
 
 class DecisionCache:
@@ -29,6 +30,7 @@ class DecisionCache:
     
     def __init__(self):
         self._cache: Dict[str, PendingRequest] = {}
+        self._hash_cache: Dict[str, str] = {}  # hash -> name mapping for quick lookup
         self._load()
     
     def _get_key(self, name: str) -> str:
@@ -44,6 +46,9 @@ class DecisionCache:
                     data = json.load(f)
                     for key, value in data.get("pending", {}).items():
                         self._cache[key] = PendingRequest(**value)
+                        # Rebuild hash cache
+                        if self._cache[key].card_hash:
+                            self._hash_cache[self._cache[key].card_hash] = self._cache[key].name
                 logger.info("Cache loaded", count=len(self._cache))
             except Exception as e:
                 logger.error("Failed to load cache", error=str(e))
@@ -63,8 +68,37 @@ class DecisionCache:
             logger.debug("Cache saved", count=len(self._cache))
         except Exception as e:
             logger.error("Failed to save cache", error=str(e))
+
+    def is_hash_similar(self, new_hash: str, threshold: int) -> Optional[str]:
+        """
+        Check if a similar hash already exists in cache.
+        
+        Args:
+            new_hash: The perceptual hash of the new card image
+            threshold: Maximum Hamming distance to consider as "same" card
+
+        Returns:
+            Name of the matching request if found, None otherwise
+        """
+        if threshold <= 0:
+            return None  # Feature disabled
+
+        try:
+            import imagehash
+            new_hash_obj = imagehash.hex_to_hash(new_hash)
+
+            for cached_hash, name in self._hash_cache.items():
+                cached_hash_obj = imagehash.hex_to_hash(cached_hash)
+                distance = new_hash_obj - cached_hash_obj
+                if distance <= threshold:
+                    logger.debug(f"Hash match found: distance={distance}, name={name}")
+                    return name
+        except Exception as e:
+            logger.warning(f"Hash comparison error: {e}")
+        
+        return None
     
-    def add_notification(self, name: str, extra_info: Optional[str] = None) -> bool:
+    def add_notification(self, name: str, extra_info: Optional[str] = None, card_hash: Optional[str] = None) -> bool:
         """Add a new notification to cache. Returns False if already exists."""
         key = self._get_key(name)
         
@@ -76,8 +110,14 @@ class DecisionCache:
         self._cache[key] = PendingRequest(
             name=name,
             notified_at=datetime.now().isoformat(),
-            extra_info=extra_info
+            extra_info=extra_info,
+            card_hash=card_hash
         )
+        
+        # Add to hash cache
+        if card_hash:
+            self._hash_cache[card_hash] = name
+        
         self._save()
         logger.info("Notification added to cache", name=name)
         return True
@@ -105,6 +145,9 @@ class DecisionCache:
         """Mark a request as executed (remove from cache)."""
         key = self._get_key(name)
         if key in self._cache:
+            # Remove from hash cache too
+            if self._cache[key].card_hash:
+                self._hash_cache.pop(self._cache[key].card_hash, None)
             del self._cache[key]
             self._save()
             logger.info("Request executed and removed", name=name)
@@ -119,24 +162,43 @@ class DecisionCache:
         key = self._get_key(name)
         return key in self._cache
     
-    def cleanup_old(self, max_age_hours: int = 24):
-        """Remove old entries that were never decided."""
+    def cleanup_old(self, max_age_hours: int = 168, pending_decision_max_hours: int = 168):
+        """
+        Remove old entries from cache.
+        
+        Args:
+            max_age_hours: Remove notifications without decision after this many hours (default: 168h = 1 week)
+            pending_decision_max_hours: Remove pending decisions that were never executed after 
+                                        this many hours (default: 168h = 1 week). These are likely
+                                        requests that were handled by another moderator.
+        """
         now = datetime.now()
         to_remove = []
-        
+
         for key, req in self._cache.items():
-            if req.decision is None:
-                notified = datetime.fromisoformat(req.notified_at)
-                age_hours = (now - notified).total_seconds() / 3600
-                if age_hours > max_age_hours:
-                    to_remove.append(key)
-        
-        for key in to_remove:
+            notified = datetime.fromisoformat(req.notified_at)
+            age_hours = (now - notified).total_seconds() / 3600
+
+            # Case 1: No decision yet, older than max_age_hours
+            if req.decision is None and age_hours > max_age_hours:
+                to_remove.append((key, "no decision"))
+                continue
+
+            # Case 2: Decision pending but never executed, older than pending_decision_max_hours
+            if req.decision is not None and not req.executed and age_hours > pending_decision_max_hours:
+                to_remove.append((key, f"stale pending ({req.decision})"))
+
+        for key, reason in to_remove:
+            # Clean up hash cache
+            if self._cache[key].card_hash:
+                self._hash_cache.pop(self._cache[key].card_hash, None)
+            name = self._cache[key].name
             del self._cache[key]
-            logger.info("Removed stale request", name=self._cache.get(key, {}).get("name", key))
-        
+            logger.info(f"Removed stale entry: '{name}' ({reason})")
+
         if to_remove:
             self._save()
+            logger.info(f"Cleanup complete: removed {len(to_remove)} stale entries")
 
 
 # Global cache instance

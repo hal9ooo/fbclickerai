@@ -177,17 +177,31 @@ class GroupModerator:
             
             click_performed = False
             
+            # Import cache and imagehash for hash checking
+            from src.cache import cache
+            import imagehash
+            
             # 4. Process each card
             for card in cards:
                 try:
-                    # Surya OCR
+                    # Load image first (needed for hash AND OCR)
+                    image = Image.open(card.image_path)
+                    img_width, img_height = image.size
+                    
+                    # OPTIMIZATION: Check perceptual hash BEFORE expensive OCR
+                    card_hash = str(imagehash.average_hash(image))
+                    
+                    if settings.card_hash_threshold > 0:
+                        matched_name = cache.is_hash_similar(card_hash, settings.card_hash_threshold)
+                        if matched_name:
+                            logger.info(f"SKIPPING card {card.card_index}: hash matches cached '{matched_name}'")
+                            continue
+                    
+                    # Surya OCR (only for new/unknown cards)
                     logger.info("=" * 50)
                     logger.info(f"OCR PROCESSING CARD {card.card_index}")
                     logger.info(f"  Image path: {card.image_path}")
                     logger.info(f"  Card Y range: {card.y_start}-{card.y_end}")
-                    
-                    image = Image.open(card.image_path)
-                    img_width, img_height = image.size
                     logger.info(f"  Image dimensions: {img_width}x{img_height}")
                     
                     predictions = self.rec_predictor([image], ["ocr_with_boxes"], self.det_predictor)
@@ -230,6 +244,11 @@ class GroupModerator:
                     has_preview = any('anteprima' in t['text'].lower() for t in valid_texts)
                     if has_preview:
                         preview_screenshot_path = await self._capture_post_preview(card, valid_texts)
+                        # Crop preview to just the modal content
+                        if preview_screenshot_path:
+                            cropped_modal = self.card_detector.crop_preview_modal(preview_screenshot_path)
+                            if cropped_modal:
+                                preview_screenshot_path = cropped_modal
                     
                     logger.info(f"Card {card.card_index}: '{detected_name}'"  + (" [has preview]" if preview_screenshot_path else ""))
                     if extra_info:
@@ -314,7 +333,7 @@ class GroupModerator:
                     # CHECK 2: Queue for notification (if not clicking)
                     # Crop card to text content only (using OCR bbox)
                     cropped_card_path = self._crop_card_to_text_bbox(card.image_path, valid_texts)
-                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path))
+                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path, card_hash))
                     
                 except Exception as e:
                     logger.error(f"Error processing card {card.card_index}", error=str(e))
@@ -333,9 +352,9 @@ class GroupModerator:
         # 6. Send all accumulated notifications
         if notifications_to_send:
             logger.info(f"Sending {len(notifications_to_send)} potential notifications...")
-            for name, screenshot_path, extra_info, preview_path in notifications_to_send:
+            for name, screenshot_path, extra_info, preview_path, card_hash in notifications_to_send:
                 try:
-                    await telegram_callback(name, screenshot_path, extra_info, preview_path)
+                    await telegram_callback(name, screenshot_path, extra_info, preview_path, card_hash)
                 except Exception as e:
                     logger.error(f"Failed to send notification for {name}", error=str(e))
         

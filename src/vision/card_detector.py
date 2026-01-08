@@ -5,6 +5,7 @@ from PIL import Image
 from pathlib import Path
 from typing import List, Tuple, Optional
 from dataclasses import dataclass
+from datetime import datetime
 import structlog
 
 logger = structlog.get_logger()
@@ -515,4 +516,114 @@ class CardDetector:
 
         except Exception as e:
             logger.error("Error finding card on screen", error=str(e))
+            return None
+
+    def crop_preview_modal(self, image_path: str) -> Optional[str]:
+        """
+        Detect and crop the preview modal from a screenshot.
+        
+        Uses edge detection to find the centered white modal rectangle.
+        
+        Args:
+            image_path: Path to the screenshot containing the modal
+
+        Returns:
+            Path to the cropped modal image, or None if detection failed
+        """
+        try:
+            img = cv2.imread(image_path)
+            if img is None:
+                logger.warning(f"Could not load image for modal crop: {image_path}")
+                return None
+
+            h, w = img.shape[:2]
+            center_x = w // 2
+
+            logger.info(f"Cropping preview modal from {Path(image_path).name} ({w}x{h})")
+
+            # Convert to grayscale and detect edges
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+            edges = cv2.Canny(blurred, 50, 150)
+
+            # Dilate edges to close gaps
+            kernel = np.ones((3, 3), np.uint8)
+            dilated = cv2.dilate(edges, kernel, iterations=2)
+
+            # Find contours
+            contours, _ = cv2.findContours(dilated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+            if not contours:
+                logger.warning("No contours found in preview modal detection")
+                return None
+
+            # Filter contours: look for centered rectangles of modal size
+            # Modal is typically 400-700px wide and at least 150px tall
+            candidates = []
+            for contour in contours:
+                x, y, cw, ch = cv2.boundingRect(contour)
+                cx = x + cw // 2
+                dist_from_center = abs(cx - center_x)
+
+                min_width, max_width = 350, 700
+                min_height = 150
+
+                if min_width <= cw <= max_width and ch >= min_height:
+                    candidates.append({
+                        "box": (x, y, cw, ch),
+                        "center_dist": dist_from_center,
+                        "area": cw * ch
+                    })
+
+            if not candidates:
+                # Fallback: find white region in center third
+                center_strip = gray[:, w//3:2*w//3]
+                row_means = np.mean(center_strip, axis=1)
+                white_rows = np.where(row_means > 200)[0]
+
+                if len(white_rows) > 50:
+                    y1 = white_rows[0]
+                    y2 = white_rows[-1]
+                    modal_rows = gray[y1:y2, :]
+                    col_means = np.mean(modal_rows, axis=0)
+                    white_cols = np.where(col_means > 200)[0]
+
+                    if len(white_cols) > 100:
+                        x1 = white_cols[0]
+                        x2 = white_cols[-1]
+                        candidates.append({
+                            "box": (x1, y1, x2-x1, y2-y1),
+                            "center_dist": abs((x1+x2)//2 - center_x),
+                            "area": (x2-x1) * (y2-y1)
+                        })
+
+            if not candidates:
+                logger.warning("No modal candidates found in preview")
+                return None
+
+            # Pick best candidate (most centered)
+            best = min(candidates, key=lambda c: (c["center_dist"], -c["area"]))
+            x, y, cw, ch = best["box"]
+
+            logger.info(f"Modal detected at ({x}, {y}) size: {cw}x{ch}")
+
+            # Add small padding
+            padding = 5
+            x1 = max(0, x - padding)
+            y1 = max(0, y - padding)
+            x2 = min(w, x + cw + padding)
+            y2 = min(h, y + ch + padding)
+
+            # Crop the modal
+            cropped = img[y1:y2, x1:x2]
+
+            # Save cropped image
+            cropped_path = image_path.replace(".png", "_modal.png")
+            cv2.imwrite(cropped_path, cropped)
+            logger.info(f"Modal cropped to {x2-x1}x{y2-y1}, saved: {cropped_path}")
+
+            return cropped_path
+
+        except Exception as e:
+            logger.error(f"Error cropping preview modal: {e}")
             return None

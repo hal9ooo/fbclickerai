@@ -47,6 +47,13 @@ class Settings(BaseSettings):
         default=0.3, 
         description="Random jitter factor (0.3 = ±30% variation on poll_interval)"
     )
+
+    # Perceptual hash threshold for skipping OCR on already-seen cards
+    # 0 = disabled, higher = more tolerant (10 = recommended, max ~64)
+    card_hash_threshold: int = Field(
+        default=10,
+        description="Hamming distance threshold for card image similarity (0=disabled, 10=default)"
+    )
     
     # Paths
     data_dir: str = Field(default="/app/data", description="Data directory path")
