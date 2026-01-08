@@ -879,7 +879,7 @@ Be very brief and direct."""
             
             # Wait for popup to appear - give it enough time!
             logger.info("Waiting for popup to appear...")
-            await self.human.random_delay(3.0, 4.0)
+            await self.human.random_delay(5.0, 6.0)
             
             # Take screenshot of the popup with unique name
             preview_path = await self._take_screenshot(f"preview_card_{card.card_index}")
