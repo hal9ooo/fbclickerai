@@ -195,6 +195,29 @@ GALLERY_HTML = """
         .refresh-btn:hover {
             transform: scale(1.05);
         }
+        
+        .breadcrumb {
+            max-width: 1800px;
+            margin: 0 auto 20px;
+            font-size: 1.2rem;
+            color: #ccc;
+            display: none; /* Hidden by default */
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            color: #00d4ff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0;
+        }
+        
+        .folder .name {
+            font-size: 1.4rem;
+            color: #00d4ff;
+        }
     </style>
 </head>
 <body>
@@ -202,6 +225,7 @@ GALLERY_HTML = """
     <p class="stats" id="stats">Loading...</p>
     <button class="refresh-btn" onclick="location.reload()">🔄 Refresh Gallery</button>
     
+    <div class="breadcrumb" id="breadcrumb"></div>
     <div class="gallery" id="gallery"></div>
     
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
@@ -213,61 +237,162 @@ GALLERY_HTML = """
     
     <script>
         let images = [];
-        let currentIndex = 0;
+        let groups = {}; // { "0": [img1, img2], "1": [...] }
+        let currentView = 'collections'; // 'collections' | 'detail'
+        let currentGroupId = null;
+        let currentIndex = 0; // For lightbox
         
+        // Regex to match card series (card_N or cardN, max 2 digits)
+        // Matches: card_0, card_13, debug_..._card0, etc.
+        const SERIES_REGEX = /card_?(\d{1,2})/i;
+
         async function loadGallery() {
             try {
                 const response = await fetch('/api/screenshots');
                 images = await response.json();
                 
-                document.getElementById('stats').textContent = `${images.length} screenshots found`;
+                // Group images
+                groups = {};
+                let uncategorized = [];
                 
-                const gallery = document.getElementById('gallery');
+                images.forEach(img => {
+                    const match = img.name.match(SERIES_REGEX);
+                    if (match && match[1]) {
+                        const id = match[1];
+                        if (!groups[id]) groups[id] = [];
+                        groups[id].push(img);
+                    } else {
+                        uncategorized.push(img);
+                    }
+                });
                 
-                if (images.length === 0) {
-                    gallery.innerHTML = '<div class="empty">No screenshots yet. Run the bot to generate some!</div>';
-                    return;
+                // Sort groups by ID (numeric)
+                // If there are uncategorized images, we can add them to a "Misc" group if desired
+                if (uncategorized.length > 0) {
+                    groups['Misc'] = uncategorized;
                 }
                 
-                gallery.innerHTML = images.map((img, i) => `
-                    <div class="card" onclick="openLightbox(${i})">
-                        <img src="/thumbnail/${img.name}" loading="lazy" alt="${img.name}" onerror="this.src='/screenshots/${img.name}'">
-                        <div class="info">
-                            <div class="name">${img.name}</div>
-                            <div class="meta">
-                                <span>${img.size} KB</span>
-                                <span>${img.modified}</span>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
+                document.getElementById('stats').textContent = `${images.length} screenshots found, ${Object.keys(groups).length} series`;
+                
+                render();
             } catch (e) {
                 console.error("Error loading gallery:", e);
                 document.getElementById('stats').textContent = "Error loading gallery data";
             }
         }
         
+        function render() {
+            const gallery = document.getElementById('gallery');
+            const breadcrumb = document.getElementById('breadcrumb');
+            gallery.innerHTML = '';
+            
+            if (currentView === 'collections') {
+                renderCollections(gallery);
+                if (breadcrumb) breadcrumb.style.display = 'none';
+            } else {
+                renderDetail(gallery);
+                if (breadcrumb) {
+                    breadcrumb.style.display = 'block';
+                    breadcrumb.innerHTML = `<button class="back-btn" onclick="goBack()">← Back to Collections</button> / Series ${currentGroupId}`;
+                }
+            }
+        }
+        
+        function renderCollections(container) {
+            const sortedKeys = Object.keys(groups).sort((a, b) => {
+                if (a === 'Misc') return 1;
+                if (b === 'Misc') return -1;
+                return parseInt(b) - parseInt(a); // Newest series first (assuming higher ID is newer)
+            });
+
+            if (sortedKeys.length === 0) {
+                container.innerHTML = '<div class="empty">No images found.</div>';
+                return;
+            }
+
+            container.innerHTML = sortedKeys.map(id => {
+                const groupImages = groups[id];
+                // Try to find the main "card_N.png" for thumbnail, otherwise use first
+                let thumbImg = groupImages.find(img => img.name === `card_${id}.png` || img.name === `card${id}.png`) || groupImages[0];
+                
+                return `
+                <div class="card folder" onclick="openGroup('${id}')">
+                    <img src="/thumbnail/${thumbImg.name}" loading="lazy" alt="Series ${id}" onerror="this.src='/screenshots/${thumbImg.name}'">
+                    <div class="info">
+                        <div class="name">${id === 'Misc' ? 'Uncategorized' : 'Card Series ' + id}</div>
+                        <div class="meta">
+                            <span>${groupImages.length} items</span>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+        
+        function renderDetail(container) {
+            const groupImages = groups[currentGroupId];
+            if (!groupImages) return;
+            
+            container.innerHTML = groupImages.map((img, i) => `
+                <div class="card" onclick="openLightbox(${i})">
+                    <img src="/thumbnail/${img.name}" loading="lazy" alt="${img.name}" onerror="this.src='/screenshots/${img.name}'">
+                    <div class="info">
+                        <div class="name">${img.name}</div>
+                        <div class="meta">
+                            <span>${img.size} KB</span>
+                            <span>${img.modified}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function openGroup(id) {
+            currentGroupId = id;
+            currentView = 'detail';
+            render();
+            window.scrollTo(0, 0);
+        }
+        
+        function goBack() {
+            currentView = 'collections';
+            currentGroupId = null;
+            render();
+        }
+        
         function openLightbox(index) {
+            // Need to map index relative to current filtered view if in detail mode?
+            // Actually, for lightbox navigation to work across the whole group, we should probably ONLY let it navigate within the group.
+            
+            // Let's re-map the global 'currentIndex' logic to strictly follow the current displayed list.
+            // Simplified: we pass the index within the groupImages array.
+            
             currentIndex = index;
-            const img = images[index];
+            const groupImages = groups[currentGroupId];
+            const img = groupImages[index];
+            
             const lightboxImg = document.getElementById('lightbox-img');
             lightboxImg.src = '/screenshots/' + img.name;
             document.getElementById('lightbox').classList.add('active');
         }
         
+        function navigate(delta, event) {
+            event.stopPropagation();
+            if (currentView !== 'detail' || !currentGroupId) return;
+            
+            const groupImages = groups[currentGroupId];
+            currentIndex = (currentIndex + delta + groupImages.length) % groupImages.length;
+            document.getElementById('lightbox-img').src = '/screenshots/' + groupImages[currentIndex].name;
+        }
+        
+        // ... (Close Lightbox logic remains same) ...
         function closeLightbox(event) {
             if (event.target.classList.contains('lightbox') || event.target.classList.contains('close')) {
                 document.getElementById('lightbox').classList.remove('active');
                 document.getElementById('lightbox-img').src = '';
             }
         }
-        
-        function navigate(delta, event) {
-            event.stopPropagation();
-            currentIndex = (currentIndex + delta + images.length) % images.length;
-            document.getElementById('lightbox-img').src = '/screenshots/' + images[currentIndex].name;
-        }
-        
+
         document.addEventListener('keydown', (e) => {
             if (!document.getElementById('lightbox').classList.contains('active')) return;
             if (e.key === 'Escape') {
