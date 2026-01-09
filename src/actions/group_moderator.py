@@ -195,10 +195,9 @@ class GroupModerator:
                         matched_name = cache.is_hash_similar(card_hash, settings.card_hash_threshold)
                         if matched_name:
                             logger.info(f"Card {card.card_index}: hash matches cached '{matched_name}' - skipping OCR")
-                            # Still send notification if not already notified (card reappeared)
-                            if not cache.is_notified(matched_name):
-                                logger.info(f"  Queuing notification for hash-matched card")
-                                notifications_to_send.append((matched_name, card.image_path, None, None, card_hash))
+                            # Always queue notification (cache is only for skipping OCR, not notifications)
+                            logger.info(f"  Queuing notification for hash-matched card")
+                            notifications_to_send.append((matched_name, card.image_path, None, None, card_hash))
                             continue
                     
                     # Surya OCR (only for new/unknown cards)
@@ -230,7 +229,7 @@ class GroupModerator:
                         })
                     
                     valid_texts.sort(key=lambda x: x['y'])
-                    candidates = [t['text'] for t in valid_texts if len(t['text']) > 3]
+                    candidates = [t['text'] for t in valid_texts if len(t['text']) >= 2]
                     detected_name = candidates[0] if candidates else ""
                     
                     if not detected_name:
@@ -238,7 +237,7 @@ class GroupModerator:
                         continue
                     
                     # Extract extra info (all text except name)
-                    extra_texts = [t['text'] for t in valid_texts if t['text'] != detected_name and len(t['text']) > 2]
+                    extra_texts = [t['text'] for t in valid_texts if t['text'] != detected_name and len(t['text']) >= 2]
                     # Filter out common UI elements
                     filtered_extra = [t for t in extra_texts if not any(ui in t.lower() for ui in ['approva', 'rifiuta', 'invia messaggio', 'richiesta'])]
                     extra_info = "\n".join(filtered_extra) if filtered_extra else None
