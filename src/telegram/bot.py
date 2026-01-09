@@ -87,6 +87,7 @@ class TelegramBot:
         self.app.add_handler(CommandHandler("pause", self._cmd_pause))
         self.app.add_handler(CommandHandler("resume", self._cmd_resume))
         self.app.add_handler(CommandHandler("cache", self._cmd_cache))
+        self.app.add_handler(CommandHandler("set_threshold", self._cmd_set_threshold))
         self.app.add_handler(CommandHandler("help", self._cmd_help))
         self.app.add_handler(CallbackQueryHandler(self._handle_callback))
         
@@ -390,6 +391,7 @@ class TelegramBot:
             "/pause - Metti in pausa la moderazione\n"
             "/resume - Riprendi la moderazione\n"
             "/cache - Visualizza contenuto cache\n"
+            "/set_threshold <N> - Imposta threshold hash (default: 2)\n"
             "/help - Mostra questo messaggio\n\n"
             "<i>Usa i bottoni qui sotto per eseguire rapidamente i comandi</i>",
             parse_mode="HTML",
@@ -442,6 +444,49 @@ class TelegramBot:
                 msg += f"  <i>... e altre {len(pending) - 5}</i>\n"
         
         await update.message.reply_text(msg, parse_mode="HTML")
+    
+    async def _cmd_set_threshold(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle /set_threshold command - modify hash threshold at runtime."""
+        if update.effective_user.id != self.admin_id:
+            return
+        
+        # Parse argument
+        if not context.args or len(context.args) != 1:
+            await update.message.reply_text(
+                "⚙️ <b>Imposta Threshold Hash</b>\n\n"
+                f"Valore attuale: <b>{settings.card_hash_threshold}</b>\n\n"
+                "Uso: /set_threshold <valore>\n"
+                "Esempio: /set_threshold 5\n\n"
+                "<i>0 = disabilitato, 1-2 = molto stretto, 3-10 = normale</i>",
+                parse_mode="HTML"
+            )
+            return
+        
+        try:
+            new_threshold = int(context.args[0])
+            if new_threshold < 0 or new_threshold > 64:
+                await update.message.reply_text(
+                    "❌ Valore non valido. Usa un numero tra 0 e 64.",
+                    parse_mode="HTML"
+                )
+                return
+            
+            old_threshold = settings.card_hash_threshold
+            settings.card_hash_threshold = new_threshold
+            
+            await update.message.reply_text(
+                f"✅ <b>Threshold aggiornato!</b>\n\n"
+                f"Vecchio: {old_threshold}\n"
+                f"Nuovo: {new_threshold}\n\n"
+                f"<i>Attivo dalla prossima scansione</i>",
+                parse_mode="HTML"
+            )
+            logger.info(f"Hash threshold changed by admin: {old_threshold} -> {new_threshold}")
+        except ValueError:
+            await update.message.reply_text(
+                "❌ Valore non valido. Usa un numero intero.",
+                parse_mode="HTML"
+            )
     
     async def _handle_callback(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle inline button callbacks - save decision to cache or execute command."""
