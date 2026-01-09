@@ -33,7 +33,7 @@ class TelegramBot:
     
     def __init__(self):
         self.token = settings.telegram_bot_token
-        self.admin_id = settings.telegram_admin_id
+        self.admin_ids = settings.telegram_admin_ids
         self.app: Optional[Application] = None
         
         # Store request names by message ID for callback handling
@@ -100,7 +100,7 @@ class TelegramBot:
         logger.info("Telegram bot started in background thread")
         
         # Send startup message
-        await self._send_message_internal("🤖 FBClicker bot avviato!\n\nComandi:\n/status - Stato bot\n/pause - Pausa moderazione\n/resume - Riprendi moderazione\n/help - Aiuto")
+        await self._send_message_internal("🤖 FBClicker bot avviato!\n\n/help - Recupera i comandi del bot")
     
     async def _async_stop(self):
         """Async cleanup (runs in thread's event loop)."""
@@ -151,11 +151,15 @@ class TelegramBot:
     async def _send_message_internal(self, text: str):
         """Internal async send message (runs in bot's thread)."""
         if self.app:
-            await self.app.bot.send_message(
-                chat_id=self.admin_id,
-                text=text,
-                parse_mode="HTML"
-            )
+            for admin_id in self.admin_ids:
+                try:
+                    await self.app.bot.send_message(
+                        chat_id=admin_id,
+                        text=text,
+                        parse_mode="HTML"
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to send message to admin {admin_id}", error=str(e))
     
     def send_message(self, text: str):
         """Send a message to the admin (thread-safe, can be called from any thread).
@@ -244,65 +248,68 @@ class TelegramBot:
             except Exception as e:
                 logger.error(f"Failed to load preview: {e}")
         
-        # Send based on what we have
-        try:
-            if card_buffer and preview_buffer:
-                # BOTH images: send as media group (album)
-                logger.info(f"Sending both images as media group for {name}")
-                media_group = [
-                    InputMediaPhoto(media=card_buffer, caption="👤 Scheda utente"),
-                    InputMediaPhoto(media=preview_buffer, caption="📄 Anteprima post")
-                ]
-                await self.app.bot.send_media_group(
-                    chat_id=self.admin_id,
-                    media=media_group
-                )
-                
-                # Then send text with buttons
-                await self.app.bot.send_message(
-                    chat_id=self.admin_id,
-                    text=message,
-                    parse_mode="HTML",
-                    reply_markup=reply_markup
-                )
-                self._message_type[request_id] = 'text'
-                logger.info(f"Media group + text sent for {name}")
-                
-            elif card_buffer:
-                # Only card: send as single photo with caption and buttons
-                logger.info(f"Sending card photo only for {name}")
-                await self.app.bot.send_photo(
-                    chat_id=self.admin_id,
-                    photo=card_buffer,
-                    caption=message,
-                    parse_mode="HTML",
-                    reply_markup=reply_markup
-                )
-                self._message_type[request_id] = 'caption'
-                logger.info(f"Card photo sent for {name}")
-                
-            else:
-                # No images: just text
-                await self.app.bot.send_message(
-                    chat_id=self.admin_id,
-                    text=message,
-                    parse_mode="HTML",
-                    reply_markup=reply_markup
-                )
-                self._message_type[request_id] = 'text'
-                
-        except Exception as e:
-            logger.error(f"Failed to send Telegram notification: {e}")
-            # Fallback to text only
+        # Send to all admins
+        for admin_id in self.admin_ids:
             try:
-                await self.app.bot.send_message(
-                    chat_id=self.admin_id,
-                    text=message,
-                    parse_mode="HTML",
-                    reply_markup=reply_markup
-                )
-            except Exception as e2:
-                logger.error(f"Fallback text also failed: {e2}")
+                # Reset buffers for each send
+                if card_buffer: card_buffer.seek(0)
+                if preview_buffer: preview_buffer.seek(0)
+                
+                if card_buffer and preview_buffer:
+                    # BOTH images: send as media group (album)
+                    logger.info(f"Sending both images to {admin_id} for {name}")
+                    media_group = [
+                        InputMediaPhoto(media=card_buffer, caption="👤 Scheda utente"),
+                        InputMediaPhoto(media=preview_buffer, caption="📄 Anteprima post")
+                    ]
+                    await self.app.bot.send_media_group(
+                        chat_id=admin_id,
+                        media=media_group
+                    )
+                    
+                    # Then send text with buttons
+                    await self.app.bot.send_message(
+                        chat_id=admin_id,
+                        text=message,
+                        parse_mode="HTML",
+                        reply_markup=reply_markup
+                    )
+                    self._message_type[request_id] = 'text'
+                    
+                elif card_buffer:
+                    # Only card: send as single photo with caption and buttons
+                    logger.info(f"Sending card photo to {admin_id} for {name}")
+                    await self.app.bot.send_photo(
+                        chat_id=admin_id,
+                        photo=card_buffer,
+                        caption=message,
+                        parse_mode="HTML",
+                        reply_markup=reply_markup
+                    )
+                    self._message_type[request_id] = 'caption'
+                    
+                else:
+                    # No images: just text
+                    await self.app.bot.send_message(
+                        chat_id=admin_id,
+                        text=message,
+                        parse_mode="HTML",
+                        reply_markup=reply_markup
+                    )
+                    self._message_type[request_id] = 'text'
+                    
+            except Exception as e:
+                logger.error(f"Failed to send notification to {admin_id}: {e}")
+                # Fallback to text only
+                try:
+                    await self.app.bot.send_message(
+                        chat_id=admin_id,
+                        text=message,
+                        parse_mode="HTML",
+                        reply_markup=reply_markup
+                    )
+                except Exception as e2:
+                    logger.error(f"Fallback text also failed for {admin_id}: {e2}")
     
     def send_member_request(self, name: str, extra_info: Optional[str] = None, 
                            screenshot_path: Optional[str] = None, 
@@ -328,7 +335,7 @@ class TelegramBot:
     
     async def _cmd_start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /start command."""
-        if update.effective_user.id != self.admin_id:
+        if update.effective_user.id not in self.admin_ids:
             await update.message.reply_text("⛔ Non autorizzato")
             return
         
@@ -341,7 +348,7 @@ class TelegramBot:
     
     async def _cmd_status(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /status command."""
-        if update.effective_user.id != self.admin_id:
+        if update.effective_user.id not in self.admin_ids:
             return
         
         status = "⏸️ In pausa" if self._is_paused else "▶️ Attivo"
@@ -356,7 +363,7 @@ class TelegramBot:
     
     async def _cmd_pause(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /pause command."""
-        if update.effective_user.id != self.admin_id:
+        if update.effective_user.id not in self.admin_ids:
             return
         
         self._is_paused = True
@@ -365,7 +372,7 @@ class TelegramBot:
     
     async def _cmd_resume(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /resume command."""
-        if update.effective_user.id != self.admin_id:
+        if update.effective_user.id not in self.admin_ids:
             return
         
         self._is_paused = False
@@ -374,7 +381,7 @@ class TelegramBot:
     
     async def _cmd_help(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /help command with interactive buttons."""
-        if update.effective_user.id != self.admin_id:
+        if update.effective_user.id not in self.admin_ids:
             return
         
         keyboard = [
@@ -400,7 +407,7 @@ class TelegramBot:
     
     async def _cmd_cache(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /cache command - display cache content."""
-        if update.effective_user.id != self.admin_id:
+        if update.effective_user.id not in self.admin_ids:
             return
         
         from datetime import datetime
@@ -447,7 +454,7 @@ class TelegramBot:
     
     async def _cmd_set_threshold(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle /set_threshold command - modify hash threshold at runtime."""
-        if update.effective_user.id != self.admin_id:
+        if update.effective_user.id not in self.admin_ids:
             return
         
         # Parse argument
@@ -492,7 +499,7 @@ class TelegramBot:
         """Handle inline button callbacks - save decision to cache or execute command."""
         query = update.callback_query
         
-        if query.from_user.id != self.admin_id:
+        if query.from_user.id not in self.admin_ids:
             await query.answer("⛔ Non autorizzato")
             return
         

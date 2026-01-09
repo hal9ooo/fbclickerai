@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     
     # Telegram
     telegram_bot_token: str = Field(..., description="Telegram bot token")
-    telegram_admin_id: int = Field(..., description="Telegram admin user ID")
+    telegram_admin_ids: List[int] = Field(..., description="List of Telegram admin user IDs")
     
     # Browser settings
     headless: bool = Field(default=True, description="Run browser in headless mode")
