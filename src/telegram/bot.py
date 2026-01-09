@@ -391,7 +391,7 @@ class TelegramBot:
             "/pause - Metti in pausa la moderazione\n"
             "/resume - Riprendi la moderazione\n"
             "/cache - Visualizza contenuto cache\n"
-            "/set_threshold <N> - Imposta threshold hash (default: 2)\n"
+            "/set_threshold &lt;valore&gt; - Imposta threshold hash (default: 2)\n"
             "/help - Mostra questo messaggio\n\n"
             "<i>Usa i bottoni qui sotto per eseguire rapidamente i comandi</i>",
             parse_mode="HTML",
