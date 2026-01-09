@@ -210,7 +210,7 @@ class FBClickerBot:
                     
                     # If actions were taken, recycle immediately (don't wait for full interval)
                     logger.info("Actions taken - restarting poll immediately to process remaining items")
-                    await asyncio.sleep(10)
+                    await self.human.random_delay(5, 15)
                     continue
                 
                 # Run end notification with duration

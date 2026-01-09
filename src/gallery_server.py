@@ -10,13 +10,14 @@ from urllib.parse import unquote
 import json
 import logging
 import io
+import sys
 
 try:
     from PIL import Image
     HAS_PILLOW = True
 except ImportError:
     HAS_PILLOW = False
-    print("WARNING: Pillow not installed. Thumbnails will be disabled.")
+    print("WARNING: Pillow not installed. Thumbnails will be disabled.", flush=True)
 
 SCREENSHOTS_DIR = "/app/data/screenshots"
 PORT = 8081
@@ -60,10 +61,9 @@ GALLERY_HTML = """
         
         .gallery {
             display: grid;
-            /* Modified for ~3 columns on large screens (min 500px) */
             grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
             gap: 20px;
-            max-width: 1800px; /* Increased max width */
+            max-width: 1800px;
             margin: 0 auto;
         }
         
@@ -84,8 +84,8 @@ GALLERY_HTML = """
         
         .card img {
             width: 100%;
-            height: 350px; /* Increased height for larger cards */
-            object-fit: contain; /* Keep aspect ratio visible */
+            height: 350px;
+            object-fit: contain;
             background: #000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
@@ -109,7 +109,6 @@ GALLERY_HTML = """
             justify-content: space-between;
         }
         
-        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -199,7 +198,7 @@ GALLERY_HTML = """
     </style>
 </head>
 <body>
-    <h1>📸 FBClicker Screenshots</h1>
+    <h1>📸 FBClicker Screenshots Gallery</h1>
     <p class="stats" id="stats">Loading...</p>
     <button class="refresh-btn" onclick="location.reload()">🔄 Refresh Gallery</button>
     
@@ -252,9 +251,6 @@ GALLERY_HTML = """
             currentIndex = index;
             const img = images[index];
             const lightboxImg = document.getElementById('lightbox-img');
-            
-            // Show loading placeholder or thumb first?
-            // For now just load full res
             lightboxImg.src = '/screenshots/' + img.name;
             document.getElementById('lightbox').classList.add('active');
         }
@@ -262,7 +258,7 @@ GALLERY_HTML = """
         function closeLightbox(event) {
             if (event.target.classList.contains('lightbox') || event.target.classList.contains('close')) {
                 document.getElementById('lightbox').classList.remove('active');
-                document.getElementById('lightbox-img').src = ''; // Clear image
+                document.getElementById('lightbox-img').src = '';
             }
         }
         
@@ -288,18 +284,19 @@ GALLERY_HTML = """
 </html>
 """
 
-
 class GalleryHandler(http.server.SimpleHTTPRequestHandler):
-    """Custom handler for the gallery server."""
-    
     def __init__(self, *args, **kwargs):
         self.screenshots_dir = SCREENSHOTS_DIR
         super().__init__(*args, directory=self.screenshots_dir, **kwargs)
-    
+
     def do_GET(self):
+        # Debugging: print to stderr to be seen in docker logs
+        print(f"REQUEST: {self.path}", file=sys.stderr, flush=True)
+        
         if self.path == '/' or self.path == '/index.html':
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
+            self.send_header('Cache-Control', 'no-store, must-revalidate')
             self.end_headers()
             self.wfile.write(GALLERY_HTML.encode())
             
@@ -326,8 +323,7 @@ class GalleryHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps(screenshots).encode())
             
         elif self.path.startswith('/thumbnail/'):
-            # Generate and serve thumbnail
-            filename = unquote(self.path[11:])  # Remove '/thumbnail/'
+            filename = unquote(self.path[11:])
             filepath = Path(self.screenshots_dir) / filename
             
             if not filepath.exists():
@@ -335,49 +331,40 @@ class GalleryHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
             if not HAS_PILLOW:
-                # Fallback to full image if Pillow is missing
                 self._serve_file(filepath)
                 return
             
             try:
-                # Create on-the-fly thumbnail
                 with Image.open(filepath) as img:
-                    # Convert to RGB (in case of RGBA/P palette) for JPEG
                     if img.mode in ('RGBA', 'P'):
                         img = img.convert('RGB')
                     
-                    # Resize to optimized width (e.g., 600px width)
                     target_width = 800
-                    w_percent = (target_width / float(img.size[0]))
-                    h_size = int((float(img.size[1]) * float(w_percent)))
+                    ratio = target_width / float(img.size[0])
+                    target_height = int(float(img.size[1]) * ratio)
                     
-                    # Using resize() directly
-                    img_resized = img.resize((target_width, h_size), Image.Resampling.LANCZOS)
+                    img_resized = img.resize((target_width, target_height), Image.Resampling.LANCZOS)
                     
-                    # Save to memory buffer
                     buf = io.BytesIO()
                     img_resized.save(buf, format='JPEG', quality=85)
                     buf.seek(0)
                     
                     self.send_response(200)
                     self.send_header('Content-type', 'image/jpeg')
-                    # Cache for 1 hour
                     self.send_header('Cache-Control', 'max-age=3600')
                     self.end_headers()
                     self.wfile.write(buf.read())
-                    
             except Exception as e:
-                logger.error(f"Thumbnail generation failed for {filename}: {e}")
-                # Fallback to original file on error
+                print(f"THUMBNAIL ERROR for {filename}: {e}", file=sys.stderr, flush=True)
                 self._serve_file(filepath)
                 
         elif self.path.startswith('/screenshots/'):
-            # Serve actual screenshot files
-            filename = unquote(self.path[13:])  # Remove '/screenshots/'
+            filename = unquote(self.path[13:])
             filepath = Path(self.screenshots_dir) / filename
             self._serve_file(filepath)
         else:
-            self.send_error(404, 'Not found')
+            # For any other path, use standard handler or return 404
+            super().do_GET()
             
     def _serve_file(self, filepath: Path):
         if filepath.exists() and filepath.suffix.lower() in ['.png', '.jpg', '.jpeg', '.gif', '.webp']:
@@ -395,24 +382,13 @@ class GalleryHandler(http.server.SimpleHTTPRequestHandler):
         from datetime import datetime
         dt = datetime.fromtimestamp(timestamp)
         return dt.strftime('%Y-%m-%d %H:%M:%S')
-    
-    def log_message(self, format, *args):
-        # Suppress standard logging to avoid clutter
-        if logger.isEnabledFor(logging.DEBUG):
-             super().log_message(format, *args)
-
 
 def run_server():
-    """Run the gallery server."""
     os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
-    
-    # Allow address reuse to avoid "Address already in use" errors on restart
     socketserver.TCPServer.allow_reuse_address = True
-    
     with socketserver.TCPServer(("", PORT), GalleryHandler) as httpd:
-        print(f"📸 Gallery server running at http://0.0.0.0:{PORT}")
+        print(f"📸 Gallery server running at http://0.0.0.0:{PORT}", flush=True)
         httpd.serve_forever()
-
 
 if __name__ == "__main__":
     run_server()
