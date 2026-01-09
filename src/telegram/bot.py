@@ -401,13 +401,13 @@ class TelegramBot:
         # Save decision to cache
         if cache.set_decision(name, action):
             if action == "approve":
-                await query.edit_message_caption(
-                    caption=f"✅ <b>{name}</b> - Approvazione in coda!\n\n<i>Verrà eseguita al prossimo controllo.</i>",
+                await query.edit_message_text(
+                    text=f"✅ <b>{name}</b> - Approvazione in coda!\n\n<i>Verrà eseguita al prossimo controllo.</i>",
                     parse_mode="HTML"
                 )
             else:
-                await query.edit_message_caption(
-                    caption=f"❌ <b>{name}</b> - Rifiuto in coda!\n\n<i>Verrà eseguito al prossimo controllo.</i>",
+                await query.edit_message_text(
+                    text=f"❌ <b>{name}</b> - Rifiuto in coda!\n\n<i>Verrà eseguito al prossimo controllo.</i>",
                     parse_mode="HTML"
                 )
             logger.info("Decision saved to cache", name=name, action=action)
