@@ -162,14 +162,14 @@ class DecisionCache:
         key = self._get_key(name)
         return key in self._cache
     
-    def cleanup_old(self, max_age_hours: int = 168, pending_decision_max_hours: int = 168):
+    def cleanup_old(self, max_age_hours: int = 360, pending_decision_max_hours: int = 360):
         """
         Remove old entries from cache.
         
         Args:
-            max_age_hours: Remove notifications without decision after this many hours (default: 168h = 1 week)
+            max_age_hours: Remove notifications without decision after this many hours (default: 360h = 15 days)
             pending_decision_max_hours: Remove pending decisions that were never executed after 
-                                        this many hours (default: 168h = 1 week). These are likely
+                                        this many hours (default: 360h = 15 days). These are likely
                                         requests that were handled by another moderator.
         """
         now = datetime.now()
@@ -199,6 +199,24 @@ class DecisionCache:
         if to_remove:
             self._save()
             logger.info(f"Cleanup complete: removed {len(to_remove)} stale entries")
+
+
+def cleanup_old_screenshots(screenshots_dir: str, max_age_days: int = 15):
+    """Delete screenshot files older than max_age_days."""
+    from pathlib import Path
+    from datetime import timedelta
+    
+    cutoff = datetime.now() - timedelta(days=max_age_days)
+    count = 0
+    try:
+        for f in Path(screenshots_dir).glob("*.png"):
+            if datetime.fromtimestamp(f.stat().st_mtime) < cutoff:
+                f.unlink()
+                count += 1
+        if count:
+            logger.info(f"Screenshot cleanup: deleted {count} files older than {max_age_days} days")
+    except Exception as e:
+        logger.warning(f"Screenshot cleanup error: {e}")
 
 
 # Global cache instance

@@ -79,8 +79,8 @@ class FBClickerBot:
         interval = int(base * (1 + variation))
         return max(60, interval)  # Minimum 1 minute
     
-    def _cleanup_old_screenshots(self, max_age_hours: int = 24):
-        """Delete screenshots older than max_age_hours."""
+    def _cleanup_old_screenshots(self, max_age_hours: int = 360):
+        """Delete screenshots older than max_age_hours (default: 360h = 15 days)."""
         import os
         from pathlib import Path
         import time
@@ -158,11 +158,11 @@ class FBClickerBot:
                     self.telegram.send_message("✅ Browser riavviato e connesso!")
                     self._night_mode = False
 
-                # Cleanup old cache entries
-                cache.cleanup_old(max_age_hours=24)
+                # Cleanup old cache entries (15 days)
+                cache.cleanup_old(max_age_hours=360)
                 
-                # Cleanup old screenshots (older than 24 hours)
-                self._cleanup_old_screenshots(max_age_hours=24)
+                # Cleanup old screenshots (older than 15 days)
+                self._cleanup_old_screenshots(max_age_hours=360)
                 
                 # Navigate to requests page
                 if not await self.moderator.navigate_to_member_requests():

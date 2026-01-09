@@ -194,7 +194,11 @@ class GroupModerator:
                     if settings.card_hash_threshold > 0:
                         matched_name = cache.is_hash_similar(card_hash, settings.card_hash_threshold)
                         if matched_name:
-                            logger.info(f"SKIPPING card {card.card_index}: hash matches cached '{matched_name}'")
+                            logger.info(f"Card {card.card_index}: hash matches cached '{matched_name}' - skipping OCR")
+                            # Still send notification if not already notified (card reappeared)
+                            if not cache.is_notified(matched_name):
+                                logger.info(f"  Queuing notification for hash-matched card")
+                                notifications_to_send.append((matched_name, card.image_path, None, None, card_hash))
                             continue
                     
                     # Surya OCR (only for new/unknown cards)
@@ -618,9 +622,11 @@ class GroupModerator:
         await self.human.random_delay(3, 5)
     
     async def _take_screenshot(self, name: str) -> str:
-        """Take a screenshot for analysis."""
+        """Take a screenshot with timestamp for uniqueness."""
+        from datetime import datetime
         os.makedirs(settings.screenshots_dir, exist_ok=True)
-        path = f"{settings.screenshots_dir}/{name}.png"
+        timestamp = datetime.now().strftime("%H%M%S")
+        path = f"{settings.screenshots_dir}/{name}_{timestamp}.png"
         await self.page.screenshot(path=path)
         return path
     
