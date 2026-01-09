@@ -38,6 +38,8 @@ class TelegramBot:
         
         # Store request names by message ID for callback handling
         self._message_to_name: Dict[str, str] = {}
+        # Store message type ('text' or 'caption') for each request_id
+        self._message_type: Dict[str, str] = {}
         
         # Bot status
         self._is_paused = False
@@ -261,6 +263,7 @@ class TelegramBot:
                     parse_mode="HTML",
                     reply_markup=reply_markup
                 )
+                self._message_type[request_id] = 'text'
                 logger.info(f"Media group + text sent for {name}")
                 
             elif card_buffer:
@@ -273,6 +276,7 @@ class TelegramBot:
                     parse_mode="HTML",
                     reply_markup=reply_markup
                 )
+                self._message_type[request_id] = 'caption'
                 logger.info(f"Card photo sent for {name}")
                 
             else:
@@ -283,6 +287,7 @@ class TelegramBot:
                     parse_mode="HTML",
                     reply_markup=reply_markup
                 )
+                self._message_type[request_id] = 'text'
                 
         except Exception as e:
             logger.error(f"Failed to send Telegram notification: {e}")
@@ -400,16 +405,31 @@ class TelegramBot:
         
         # Save decision to cache
         if cache.set_decision(name, action):
+            # Get message type to use correct edit method
+            msg_type = self._message_type.get(request_id, 'text')
+            
             if action == "approve":
-                await query.edit_message_text(
-                    text=f"✅ <b>{name}</b> - Approvazione in coda!\n\n<i>Verrà eseguita al prossimo controllo.</i>",
-                    parse_mode="HTML"
-                )
+                if msg_type == 'caption':
+                    await query.edit_message_caption(
+                        caption=f"✅ <b>{name}</b> - Approvazione in coda!\n\n<i>Verrà eseguita al prossimo controllo.</i>",
+                        parse_mode="HTML"
+                    )
+                else:
+                    await query.edit_message_text(
+                        text=f"✅ <b>{name}</b> - Approvazione in coda!\n\n<i>Verrà eseguita al prossimo controllo.</i>",
+                        parse_mode="HTML"
+                    )
             else:
-                await query.edit_message_text(
-                    text=f"❌ <b>{name}</b> - Rifiuto in coda!\n\n<i>Verrà eseguito al prossimo controllo.</i>",
-                    parse_mode="HTML"
-                )
+                if msg_type == 'caption':
+                    await query.edit_message_caption(
+                        caption=f"❌ <b>{name}</b> - Rifiuto in coda!\n\n<i>Verrà eseguito al prossimo controllo.</i>",
+                        parse_mode="HTML"
+                    )
+                else:
+                    await query.edit_message_text(
+                        text=f"❌ <b>{name}</b> - Rifiuto in coda!\n\n<i>Verrà eseguito al prossimo controllo.</i>",
+                        parse_mode="HTML"
+                    )
             logger.info("Decision saved to cache", name=name, action=action)
         else:
             await query.edit_message_caption(
