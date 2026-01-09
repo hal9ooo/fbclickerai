@@ -1,7 +1,7 @@
 """Facebook group moderation actions - ASYNC version with scroll and cache support."""
 import os
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Dict
 from playwright.async_api import Page
 from datetime import datetime
 import structlog
@@ -194,14 +194,60 @@ class GroupModerator:
                     if settings.card_hash_threshold > 0:
                         matched_name = cache.is_hash_similar(card_hash, settings.card_hash_threshold)
                         if matched_name:
-                            logger.info(f"Card {card.card_index}: hash matches cached '{matched_name}' - skipping OCR")
-                            # Retrieve cached preview and extra_info
-                            cached_request = cache.get_request(matched_name)
-                            cached_extra = cached_request.extra_info if cached_request else None
-                            cached_preview = cached_request.preview_path if cached_request else None
-                            logger.info(f"  Queuing notification with cached data (preview: {cached_preview is not None})")
-                            notifications_to_send.append((matched_name, card.image_path, cached_extra, cached_preview, card_hash))
-                            continue
+                            # CRITICAL: Check if a decision is pending
+                            if matched_name in pending_decisions:
+                                # Try to get cached button coordinates
+                                cached_req = cache.get_request(matched_name)
+                                decision = pending_decisions[matched_name]
+                                
+                                # If we have cached buttons, we can click without OCR!
+                                if cached_req and cached_req.action_buttons:
+                                    logger.info(f"Card {card.card_index}: Hash match '{matched_name}' with PENDING DECISION")
+                                    logger.info(f"  Cached buttons available - executing WITHOUT OCR")
+                                    
+                                    target = "approve" if decision == "approve" else "decline"
+                                    coords = cached_req.action_buttons.get(target)
+                                    
+                                    if coords:
+                                        x, y = coords
+                                        
+                                        # Translate coordinates: relative to card -> absolute viewport
+                                        # card.y_start is relative to viewport top when screenshot was taken
+                                        viewport_y = card.y_start + y
+                                        abs_x = x
+                                        
+                                        logger.info(f"Translating coords: Card Y={card.y_start} + Btn Y={y} = {viewport_y}")
+                                        logger.info(f"Clicking at viewport coords ({abs_x}, {viewport_y})")
+                                        
+                                        # Save debug overlay before click
+                                        await self._save_click_overlay(abs_x, viewport_y, decision, card.card_index)
+                                        
+                                        await self.human.human_click(abs_x, viewport_y)
+                                        
+                                        # For DECLINE: longer delay for Facebook to respond
+                                        if decision == "decline":
+                                            await self.human.random_delay(2.0, 3.0)
+                                        
+                                        actions_taken.append(matched_name)
+                                        click_performed = True
+                                        
+                                        await self.human.random_delay(2, 3)
+                                        break  # Exit card loop, re-screenshot needed
+                                        
+                                logger.info(f"Card {card.card_index}: Hash match '{matched_name}' but decision pending (no cached buttons) - forcing OCR")
+                                # Fall through to OCR
+                            else:
+                                logger.info(f"Card {card.card_index}: hash matches cached '{matched_name}' - skipping OCR")
+                                # Retrieve cached preview and extra_info
+                                cached_request = cache.get_request(matched_name)
+                                cached_extra = cached_request.extra_info if cached_request else None
+                                cached_preview = cached_request.preview_path if cached_request else None
+                                # Retrieve cached buttons if any (for future use?)
+                                cached_buttons = cached_request.action_buttons if cached_request else None
+                                
+                                logger.info(f"  Queuing notification with cached data")
+                                notifications_to_send.append((matched_name, card.image_path, cached_extra, cached_preview, card_hash, cached_buttons))
+                                continue
                     
                     # Surya OCR (only for new/unknown cards)
                     logger.info("=" * 50)
@@ -256,6 +302,23 @@ class GroupModerator:
                             if cropped_modal:
                                 preview_screenshot_path = cropped_modal
                     
+                    # EXTRACT ACTION BUTTONS
+                    action_buttons = {}
+                    for t in valid_texts:
+                        txt_lower = t['text'].lower()
+                        if 'approva' in txt_lower or 'approve' in txt_lower:
+                            bbox = t.get('bbox')
+                            if bbox:
+                                cx = int((bbox[0] + bbox[2]) / 2)
+                                cy = int((bbox[1] + bbox[3]) / 2)
+                                action_buttons['approve'] = [cx, cy]
+                        elif 'rifiuta' in txt_lower or 'decline' in txt_lower:
+                            bbox = t.get('bbox')
+                            if bbox:
+                                cx = int((bbox[0] + bbox[2]) / 2)
+                                cy = int((bbox[1] + bbox[3]) / 2)
+                                action_buttons['decline'] = [cx, cy]
+                    
                     logger.info(f"Card {card.card_index}: '{detected_name}'"  + (" [has preview]" if preview_screenshot_path else ""))
                     if extra_info:
                         logger.debug(f"Extra info: {extra_info}")
@@ -294,35 +357,71 @@ class GroupModerator:
                         
                         # Fallback to hardcoded percentages if OCR didn't find button
                         if not button_coords:
-                            logger.warning(f"OCR didn't find '{target_text}', using fallback percentages")
-                            card_img = cv2.imread(card.image_path)
-                            h, w = card_img.shape[:2]
-                            approve_rel, decline_rel = self.card_detector.get_button_coords(w, h)
-                            button_coords = approve_rel if decision == "approve" else decline_rel
+                            # Use action_buttons if found earlier
+                            target = "approve" if decision == "approve" else "decline"
+                            if target in action_buttons:
+                                button_coords = tuple(action_buttons[target])
+                                logger.info(f"Using found button coords for {target}: {button_coords}")
                         
-                        # Calculate absolute page coordinates
-                        abs_x, abs_y = self.card_detector.get_absolute_coords(card, button_coords[0], button_coords[1])
+                        if not button_coords:
+                            # Ultimate fallback: hardcoded estimates
+                            if decision == "approve":
+                                # Approx location for Approve button (bottom leftish)
+                                button_coords = (int(img_width * 0.15), int(img_height * 0.85))
+                                logger.warning(f"OCR missed approve button, using fallback coords: {button_coords}")
+                            else:
+                                # Approx location for Decline button (bottom rightish)
+                                button_coords = (int(img_width * 0.65), int(img_height * 0.85))
+                                logger.warning(f"OCR missed decline button, using fallback coords: {button_coords}")
+
+                        # Execute click
+                        # valid_texts coords are relative to the CROPPED CARD image
+                        # We need absolute page coordinates
                         
-                        # SCROLL the card into viewport before clicking
-                        # We need to scroll so the button Y position is visible
-                        viewport_height = 864  # Typical viewport height
-                        scroll_to_y = max(0, abs_y - viewport_height // 2)  # Center the button in viewport
-                        logger.info(f"Scrolling page to Y={scroll_to_y}")
-                        await self.page.evaluate(f"window.scrollTo(0, {scroll_to_y})")
-                        await self.human.random_delay(0.5, 0.8)
+                        # card.y_start is absolute Y on page? NO, it's relative to viewport top at capture time?
+                        # Let's check _capture_visible_cards: 
+                        # cards = self.card_detector.detect_cards(screenshot_path)
+                        # And screenshot is FULL PAGE screenshot?
+                        # No, usually viewport screenshot.
+                        # "screenshot_path = ... screenshot.png"
+                        # "cards = ..."
                         
-                        # Get ACTUAL scroll position (browser clamps if page is shorter than requested)
-                        actual_scroll_y = await self.page.evaluate("window.scrollY")
+                        # If screenshot is viewport, then detected Y is relative to VIEWPORT TOP (0).
+                        # But we might have scrolled.
+                        # We have 'actual_scroll_y' from beginning of loop.
                         
-                        # Now click at VIEWPORT coordinates using ACTUAL scroll position
-                        viewport_y = abs_y - actual_scroll_y
-                        logger.info(f"Scroll requested: {scroll_to_y}, actual: {actual_scroll_y}")
-                        logger.info(f"Clicking at viewport coords ({abs_x}, {viewport_y})")
+                        # self.human.human_click takes (x, y) in VIEWPORT coordinates.
+                        
+                        # So:
+                        # btn_x_rel = button_coords[0]
+                        # btn_y_rel = button_coords[1]
+                        
+                        # card_x_rel = card.bbox[0] (but card object might just have y range)
+                        # Check Card object: y_start, y_end. x is assumed 0? Or do we have bbox?
+                        # In card_detector.py, Card dataclass has bbox?
+                        # No, Card has 'image_path', 'y_start', 'y_end'. x is implicit (full width or cropped?)
+                        
+                        # Wait, the OCR image IS the card image.
+                        # Card image is created in detect_cards by cropping:
+                        # crop = image[y_start:y_end, 0:width]
+                        # So x is 0 relative to page left.
+                        # y is 0 relative to card top.
+                        
+                        # So absolute viewport X = button_coords[0]
+                        # Absolute viewport Y = card.y_start + button_coords[1]
+                        
+                        # Verified logic below:
+                        viewport_y = card.y_start + button_coords[1]
+                        abs_x = button_coords[0] # button_coords[0] is already the X relative to card's left edge, which is 0 for full-width cards.
+                        
+                        logger.info(f"Translating coords: Card Y={card.y_start} + Btn Y={button_coords[1]} = {viewport_y}")
+                        
+                        logger.info(f"Clicking at viewport coords ({button_coords[0]}, {viewport_y})")
                         
                         # Save debug overlay before click
-                        await self._save_click_overlay(abs_x, viewport_y, decision, card.card_index)
+                        await self._save_click_overlay(button_coords[0], viewport_y, decision, card.card_index)
                         
-                        await self.human.human_click(abs_x, viewport_y)
+                        await self.human.human_click(button_coords[0], viewport_y)
                         
                         # For DECLINE: longer delay for Facebook to respond
                         if decision == "decline":
@@ -339,7 +438,7 @@ class GroupModerator:
                     # CHECK 2: Queue for notification (if not clicking)
                     # Crop card to text content only (using OCR bbox)
                     cropped_card_path = self._crop_card_to_text_bbox(card.image_path, valid_texts)
-                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path, card_hash))
+                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path, card_hash, action_buttons))
                     
                 except Exception as e:
                     logger.error(f"Error processing card {card.card_index}", error=str(e))
