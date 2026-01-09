@@ -474,9 +474,9 @@ class GroupModerator:
         # 6. Send all accumulated notifications
         if notifications_to_send:
             logger.info(f"Sending {len(notifications_to_send)} potential notifications...")
-            for name, screenshot_path, extra_info, preview_path, card_hash in notifications_to_send:
+            for name, screenshot_path, extra_info, preview_path, card_hash, action_buttons in notifications_to_send:
                 try:
-                    await telegram_callback(name, screenshot_path, extra_info, preview_path, card_hash)
+                    await telegram_callback(name, screenshot_path, extra_info, preview_path, card_hash, action_buttons)
                 except Exception as e:
                     logger.error(f"Failed to send notification for {name}", error=str(e))
         
