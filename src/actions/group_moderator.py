@@ -350,10 +350,10 @@ class GroupModerator:
                 logger.info("No more actions to take, finishing scan")
                 break
             
-            # Refresh page before re-scanning to ensure any popup is closed
-            logger.info("Click performed, refreshing page before re-scan...")
-            await self.page.reload()
-            await self.human.random_delay(2, 3)
+            # If click WAS performed: Facebook changes page layout after approve/decline
+            # Must exit and restart entire poll cycle for next decision
+            logger.info("Click performed - exiting scan (layout changed, restart poll for next decision)")
+            break
         
         # 6. Send all accumulated notifications
         if notifications_to_send:
