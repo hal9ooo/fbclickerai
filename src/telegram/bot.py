@@ -86,6 +86,7 @@ class TelegramBot:
         self.app.add_handler(CommandHandler("status", self._cmd_status))
         self.app.add_handler(CommandHandler("pause", self._cmd_pause))
         self.app.add_handler(CommandHandler("resume", self._cmd_resume))
+        self.app.add_handler(CommandHandler("cache", self._cmd_cache))
         self.app.add_handler(CommandHandler("help", self._cmd_help))
         self.app.add_handler(CallbackQueryHandler(self._handle_callback))
         
@@ -371,21 +372,79 @@ class TelegramBot:
         logger.info("Bot resumed by admin")
     
     async def _cmd_help(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle /help command."""
+        """Handle /help command with interactive buttons."""
         if update.effective_user.id != self.admin_id:
             return
+        
+        keyboard = [
+            [InlineKeyboardButton("📊 Status", callback_data="cmd:status")],
+            [InlineKeyboardButton("⏸️ Pause", callback_data="cmd:pause"),
+             InlineKeyboardButton("▶️ Resume", callback_data="cmd:resume")],
+            [InlineKeyboardButton("💾 Cache", callback_data="cmd:cache")]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
         
         await update.message.reply_text(
             "📖 <b>Comandi disponibili</b>\n\n"
             "/status - Mostra stato bot\n"
             "/pause - Metti in pausa la moderazione\n"
             "/resume - Riprendi la moderazione\n"
-            "/help - Mostra questo messaggio",
-            parse_mode="HTML"
+            "/cache - Visualizza contenuto cache\n"
+            "/help - Mostra questo messaggio\n\n"
+            "<i>Usa i bottoni qui sotto per eseguire rapidamente i comandi</i>",
+            parse_mode="HTML",
+            reply_markup=reply_markup
         )
     
+    async def _cmd_cache(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle /cache command - display cache content."""
+        if update.effective_user.id != self.admin_id:
+            return
+        
+        from datetime import datetime
+        
+        # Get all cache entries
+        all_requests = list(cache._cache.values())
+        
+        if not all_requests:
+            await update.message.reply_text(
+                "💾 <b>Cache vuota</b>\n\nNessuna richiesta in cache al momento.",
+                parse_mode="HTML"
+            )
+            return
+        
+        # Build message
+        msg = "💾 <b>Contenuto Cache</b>\n\n"
+        msg += f"<b>Totale richieste:</b> {len(all_requests)}\n\n"
+        
+        # Group by status
+        no_decision = [r for r in all_requests if r.decision is None]
+        pending = [r for r in all_requests if r.decision is not None and not r.executed]
+        
+        if no_decision:
+            msg += f"<b>⏳ Notificate (senza decisione):</b> {len(no_decision)}\n"
+            for req in no_decision[:5]:  # Show max 5
+                age = datetime.now() - datetime.fromisoformat(req.notified_at)
+                hours = int(age.total_seconds() / 3600)
+                msg += f"  • {req.name} ({hours}h fa)\n"
+            if len(no_decision) > 5:
+                msg += f"  <i>... e altre {len(no_decision) - 5}</i>\n"
+            msg += "\n"
+        
+        if pending:
+            msg += f"<b>📋 Decisioni in coda:</b> {len(pending)}\n"
+            for req in pending[:5]:  # Show max 5
+                age = datetime.now() - datetime.fromisoformat(req.notified_at)
+                hours = int(age.total_seconds() / 3600)
+                action_emoji = "✅" if req.decision == "approve" else "❌"
+                msg += f"  {action_emoji} {req.name} ({hours}h fa)\n"
+            if len(pending) > 5:
+                msg += f"  <i>... e altre {len(pending) - 5}</i>\n"
+        
+        await update.message.reply_text(msg, parse_mode="HTML")
+    
     async def _handle_callback(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Handle inline button callbacks - save decision to cache."""
+        """Handle inline button callbacks - save decision to cache or execute command."""
         query = update.callback_query
         
         if query.from_user.id != self.admin_id:
@@ -395,6 +454,51 @@ class TelegramBot:
         await query.answer()
         
         data = query.data
+        
+        # Check if it's a command button from /help
+        if data.startswith("cmd:"):
+            cmd = data.split(":", 1)[1]
+            if cmd == "status":
+                status = "⏸️ In pausa" if self._is_paused else "▶️ Attivo"
+                pending = len(cache.get_pending_decisions())
+                await query.edit_message_text(
+                    f"📊 <b>Stato Bot</b>\n\n"
+                    f"Stato: {status}\n"
+                    f"Decisioni da eseguire: {pending}",
+                    parse_mode="HTML"
+                )
+            elif cmd == "pause":
+                self._is_paused = True
+                await query.edit_message_text("⏸️ Moderazione in pausa")
+                logger.info("Bot paused by admin via button")
+            elif cmd == "resume":
+                self._is_paused = False
+                await query.edit_message_text("▶️ Moderazione ripresa")
+                logger.info("Bot resumed by admin via button")
+            elif cmd == "cache":
+                from datetime import datetime
+                all_requests = list(cache._cache.values())
+                if not all_requests:
+                    await query.edit_message_text(
+                        "💾 <b>Cache vuota</b>\n\nNessuna richiesta in cache.",
+                        parse_mode="HTML"
+                    )
+                    return
+                
+                msg = "💾 <b>Contenuto Cache</b>\n\n"
+                msg += f"<b>Totale:</b> {len(all_requests)}\n\n"
+                no_decision = [r for r in all_requests if r.decision is None]
+                pending = [r for r in all_requests if r.decision is not None and not r.executed]
+                
+                if no_decision:
+                    msg += f"⏳ Notificate: {len(no_decision)}\n"
+                if pending:
+                    msg += f"📋 In coda: {len(pending)}\n"
+                
+                await query.edit_message_text(msg, parse_mode="HTML")
+            return
+        
+        # Otherwise it's an approve/decline button
         action, request_id = data.split(":", 1)
         
         # Get the original name
