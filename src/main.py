@@ -11,6 +11,7 @@ from src.browser.stealth_browser import StealthBrowser
 from src.vision.screenshot_analyzer import ScreenshotAnalyzer
 from src.actions.facebook_login import FacebookLogin
 from src.actions.group_moderator import GroupModerator
+from src.browser.human_behavior import HumanBehavior
 from src.telegram.bot import TelegramBot
 from src.cache import cache
 
@@ -33,7 +34,9 @@ class FBClickerBot:
         self.analyzer: Optional[ScreenshotAnalyzer] = None
         self.login_handler: Optional[FacebookLogin] = None
         self.moderator: Optional[GroupModerator] = None
+        self.moderator: Optional[GroupModerator] = None
         self.telegram: Optional[TelegramBot] = None
+        self.human: Optional[HumanBehavior] = None
         
         self._running = False
         self._night_mode = False  # Track if browser is closed for night
@@ -45,6 +48,7 @@ class FBClickerBot:
         # Initialize components
         self.browser = StealthBrowser()
         page = await self.browser.start()
+        self.human = HumanBehavior(page)
         
         self.analyzer = ScreenshotAnalyzer()
         self.login_handler = FacebookLogin(page, self.analyzer)
