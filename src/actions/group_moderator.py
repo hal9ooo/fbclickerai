@@ -211,13 +211,21 @@ class GroupModerator:
                                     if coords:
                                         x, y = coords
                                         
-                                        # Translate coordinates: relative to card -> absolute viewport
-                                        # card.y_start is relative to viewport top when screenshot was taken
-                                        viewport_y = card.y_start + y
-                                        abs_x = x
+                                        # RESTORED: Calculate absolute page coordinates (handles sidebar/header offset)
+                                        abs_x, abs_y = self.card_detector.get_absolute_coords(card, x, y)
                                         
-                                        logger.info(f"Translating coords: Card Y={card.y_start} + Btn Y={y} = {viewport_y}")
-                                        logger.info(f"Clicking at viewport coords ({abs_x}, {viewport_y})")
+                                        # RESTORED: Scroll to element to ensure visibility
+                                        viewport_height = 864
+                                        scroll_to_y = max(0, abs_y - viewport_height // 2)
+                                        # logger.info(f"Scrolling to Y={scroll_to_y}")
+                                        await self.page.evaluate(f"window.scrollTo(0, {scroll_to_y})")
+                                        await self.human.random_delay(0.5, 0.8)
+                                        
+                                        # Get ACTUAL scroll position
+                                        actual_scroll_y = await self.page.evaluate("window.scrollY")
+                                        viewport_y = abs_y - actual_scroll_y
+                                        
+                                        logger.info(f"Clicking cached button at absolute ({abs_x}, {abs_y}) -> viewport ({abs_x}, {viewport_y})")
                                         
                                         # Save debug overlay before click
                                         await self._save_click_overlay(abs_x, viewport_y, decision, card.card_index)
@@ -410,18 +418,27 @@ class GroupModerator:
                         # So absolute viewport X = button_coords[0]
                         # Absolute viewport Y = card.y_start + button_coords[1]
                         
-                        # Verified logic below:
-                        viewport_y = card.y_start + button_coords[1]
-                        abs_x = button_coords[0] # button_coords[0] is already the X relative to card's left edge, which is 0 for full-width cards.
+                        # Calculate absolute page coordinates
+                        abs_x, abs_y = self.card_detector.get_absolute_coords(card, button_coords[0], button_coords[1])
                         
-                        logger.info(f"Translating coords: Card Y={card.y_start} + Btn Y={button_coords[1]} = {viewport_y}")
+                        # SCROLL the card into viewport before clicking
+                        viewport_height = 864  # Typical viewport height
+                        scroll_to_y = max(0, abs_y - viewport_height // 2)  # Center the button in viewport
+                        # logger.info(f"Scrolling page to Y={scroll_to_y}")
+                        await self.page.evaluate(f"window.scrollTo(0, {scroll_to_y})")
+                        await self.human.random_delay(0.5, 0.8)
                         
-                        logger.info(f"Clicking at viewport coords ({button_coords[0]}, {viewport_y})")
+                        # Get ACTUAL scroll position (browser clamps if page is shorter than requested)
+                        actual_scroll_y = await self.page.evaluate("window.scrollY")
+                        
+                        # Now click at VIEWPORT coordinates using ACTUAL scroll position
+                        viewport_y = abs_y - actual_scroll_y
+                        logger.info(f"Clicking at viewport coords ({abs_x}, {viewport_y})")
                         
                         # Save debug overlay before click
-                        await self._save_click_overlay(button_coords[0], viewport_y, decision, card.card_index)
+                        await self._save_click_overlay(abs_x, viewport_y, decision, card.card_index)
                         
-                        await self.human.human_click(button_coords[0], viewport_y)
+                        await self.human.human_click(abs_x, viewport_y)
                         
                         # For DECLINE: longer delay for Facebook to respond
                         if decision == "decline":

@@ -207,6 +207,11 @@ class FBClickerBot:
                     for name in actions:
                         cache.mark_executed(name)
                         self.telegram.send_message(f"✅ Eseguito: <b>{name}</b>")
+                    
+                    # If actions were taken, recycle immediately (don't wait for full interval)
+                    logger.info("Actions taken - restarting poll immediately to process remaining items")
+                    await asyncio.sleep(10)
+                    continue
                 
                 # Run end notification with duration
                 run_end_time = datetime.now()
