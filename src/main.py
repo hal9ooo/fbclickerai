@@ -199,10 +199,10 @@ class FBClickerBot:
                     telegram_callback=notification_callback
                 )
                 
-                if actions > 0:
-                    logger.info(f"Executed {actions} actions")
+                if actions:
+                    logger.info(f"Executed {len(actions)} actions")
                     # Mark all processed decisions as executed
-                    for name in list(decision_dict.keys()):
+                    for name in actions:
                         cache.mark_executed(name)
                         self.telegram.send_message(f"✅ Eseguito: <b>{name}</b>")
                 

@@ -128,7 +128,7 @@ class GroupModerator:
         except Exception as e:
             logger.debug(f"Error dismissing Messenger popup (non-critical): {e}")
     
-    async def process_and_notify(self, pending_decisions: dict, telegram_callback) -> int:
+    async def process_and_notify(self, pending_decisions: dict, telegram_callback) -> list:
         """
         UNIFIED WORKFLOW: Process pending decisions AND send notifications.
         
@@ -139,9 +139,9 @@ class GroupModerator:
             telegram_callback: async function(name, screenshot_path) to send notifications
             
         Returns:
-            Number of actions taken (approvals + declines)
+            List of names for which actions were taken (approvals + declines)
         """
-        actions_taken = 0
+        actions_taken = []
         notifications_to_send = []  # [(name, screenshot_path), ...]
         processed_names = set()  # Track names we've already seen
         
@@ -328,9 +328,9 @@ class GroupModerator:
                         if decision == "decline":
                             await self.human.random_delay(2.0, 3.0)
                         
-                        # Remove from pending decisions
-                        del pending_decisions[matched_name]
-                        actions_taken += 1
+                        # Remove from pending decisions (optional, but good for local loop if logic changes)
+                        # del pending_decisions[matched_name] - REMOVED: main.py uses return value
+                        actions_taken.append(matched_name)
                         click_performed = True
                         
                         await self.human.random_delay(2, 3)
@@ -364,7 +364,7 @@ class GroupModerator:
                 except Exception as e:
                     logger.error(f"Failed to send notification for {name}", error=str(e))
         
-        logger.info(f"Unified scan complete: {actions_taken} actions, {len(notifications_to_send)} notifications queued")
+        logger.info(f"Unified scan complete: {len(actions_taken)} actions, {len(notifications_to_send)} notifications queued")
         return actions_taken
     
     # Keep scan_all_requests as a simpler wrapper for backward compatibility
