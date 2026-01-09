@@ -195,9 +195,12 @@ class GroupModerator:
                         matched_name = cache.is_hash_similar(card_hash, settings.card_hash_threshold)
                         if matched_name:
                             logger.info(f"Card {card.card_index}: hash matches cached '{matched_name}' - skipping OCR")
-                            # Always queue notification (cache is only for skipping OCR, not notifications)
-                            logger.info(f"  Queuing notification for hash-matched card")
-                            notifications_to_send.append((matched_name, card.image_path, None, None, card_hash))
+                            # Retrieve cached preview and extra_info
+                            cached_request = cache.get_request(matched_name)
+                            cached_extra = cached_request.extra_info if cached_request else None
+                            cached_preview = cached_request.preview_path if cached_request else None
+                            logger.info(f"  Queuing notification with cached data (preview: {cached_preview is not None})")
+                            notifications_to_send.append((matched_name, card.image_path, cached_extra, cached_preview, card_hash))
                             continue
                     
                     # Surya OCR (only for new/unknown cards)

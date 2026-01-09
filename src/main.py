@@ -184,8 +184,8 @@ class FBClickerBot:
                 # UNIFIED WORKFLOW: process decisions AND send notifications in one pass
                 async def notification_callback(name: str, screenshot_path: str, extra_info: str = None, preview_path: str = None, card_hash: str = None):
                     """Callback to send notification - add to cache first, then send."""
-                    # Add to cache so we can track the decision (with hash for future matching)
-                    cache.add_notification(name, extra_info, card_hash)
+                    # Add to cache so we can track the decision (with hash and preview for future matching)
+                    cache.add_notification(name, extra_info, card_hash, preview_path)
                     self.telegram.send_member_request(
                         name=name,
                         extra_info=extra_info,
