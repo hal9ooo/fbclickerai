@@ -188,17 +188,23 @@ class FBClickerBot:
                 # UNIFIED WORKFLOW: process decisions AND send notifications in one pass
                 async def notification_callback(name: str, screenshot_path: str, extra_info: str = None, 
                                               preview_path: str = None, card_hash: str = None,
-                                              action_buttons: dict = None):
+                                              action_buttons: dict = None, is_unanswered: bool = False):
                     """Callback to send notification - add to cache first, then send."""
                     # Add to cache so we can track the decision (with hash and preview for future matching)
                     cache.add_notification(name, extra_info, card_hash, preview_path, action_buttons)
-                    self.telegram.send_member_request(
-                        name=name,
-                        extra_info=extra_info,
-                        screenshot_path=screenshot_path,
-                        preview_path=preview_path
-                    )
-                    logger.info(f"Sent notification for: {name}" + (" [with preview]" if preview_path else ""))
+                    
+                    # If user hasn't answered questions, send simplified text-only notification
+                    if is_unanswered:
+                        self.telegram.send_message(f"⏳ <b>{name}</b> non ha risposto alle domande - verrà cancellato automaticamente da FB")
+                        logger.info(f"Sent simplified notification for: {name} [unanswered questions]")
+                    else:
+                        self.telegram.send_member_request(
+                            name=name,
+                            extra_info=extra_info,
+                            screenshot_path=screenshot_path,
+                            preview_path=preview_path
+                        )
+                        logger.info(f"Sent notification for: {name}" + (" [with preview]" if preview_path else ""))
                 
                 actions = await self.moderator.process_and_notify(
                     pending_decisions=decision_dict,

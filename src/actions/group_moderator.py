@@ -254,7 +254,8 @@ class GroupModerator:
                                 cached_buttons = cached_request.action_buttons if cached_request else None
                                 
                                 logger.info(f"  Queuing notification with cached data")
-                                notifications_to_send.append((matched_name, card.image_path, cached_extra, cached_preview, card_hash, cached_buttons))
+                                # For cached matches, we can't determine is_unanswered without OCR, default to False
+                                notifications_to_send.append((matched_name, card.image_path, cached_extra, cached_preview, card_hash, cached_buttons, False))
                                 continue
                     
                     # Surya OCR (only for new/unknown cards)
@@ -453,9 +454,12 @@ class GroupModerator:
                         break  # Exit card loop, re-screenshot needed
                     
                     # CHECK 2: Queue for notification (if not clicking)
+                    # Check if user hasn't answered questions
+                    is_unanswered = self._is_unanswered_question(valid_texts)
+                    
                     # Crop card to text content only (using OCR bbox)
                     cropped_card_path = self._crop_card_to_text_bbox(card.image_path, valid_texts)
-                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path, card_hash, action_buttons))
+                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path, card_hash, action_buttons, is_unanswered))
                     
                 except Exception as e:
                     logger.error(f"Error processing card {card.card_index}", error=str(e))
@@ -472,11 +476,12 @@ class GroupModerator:
             break
         
         # 6. Send all accumulated notifications
+        # 6. Send all accumulated notifications
         if notifications_to_send:
             logger.info(f"Sending {len(notifications_to_send)} potential notifications...")
-            for name, screenshot_path, extra_info, preview_path, card_hash, action_buttons in notifications_to_send:
+            for name, screenshot_path, extra_info, preview_path, card_hash, action_buttons, is_unanswered in notifications_to_send:
                 try:
-                    await telegram_callback(name, screenshot_path, extra_info, preview_path, card_hash, action_buttons)
+                    await telegram_callback(name, screenshot_path, extra_info, preview_path, card_hash, action_buttons, is_unanswered)
                 except Exception as e:
                     logger.error(f"Failed to send notification for {name}", error=str(e))
         
@@ -523,6 +528,23 @@ class GroupModerator:
         n1 = name1.strip().lower()
         n2 = name2.strip().lower()
         return n1 == n2 or n1 in n2 or n2 in n1
+    
+    def _is_unanswered_question(self, valid_texts: list) -> bool:
+        """Check if OCR text indicates user hasn't answered questions.
+        
+        Returns True if text contains 'non ha ancora risposto' or 'in attesa della risposta'.
+        """
+        unanswered_phrases = [
+            "non ha ancora risposto",
+            "in attesa della risposta"
+        ]
+        
+        for t in valid_texts:
+            text_lower = t['text'].lower()
+            for phrase in unanswered_phrases:
+                if phrase in text_lower:
+                    return True
+        return False
     
     async def approve_member(self, request: MemberRequest) -> bool:
         """Approve a member request by finding it on screen and clicking directly.

@@ -51,7 +51,7 @@ class Settings(BaseSettings):
     # Perceptual hash threshold for skipping OCR on already-seen cards
     # 0 = disabled, higher = more tolerant (10 = recommended, max ~64)
     card_hash_threshold: int = Field(
-        default=3,
+        default=1,
         description="Hamming distance threshold for card image similarity (0=disabled, 2=strict)"
     )
     
