@@ -192,7 +192,7 @@ class FBClickerBot:
                                               cropped_path: str = None):
                     """Callback to send notification - add to cache first, then send."""
                     # Add to cache so we can track the decision (with hash and preview for future matching)
-                    cache.add_notification(name, extra_info, card_hash, preview_path, action_buttons, cropped_path)
+                    cache.add_notification(name, extra_info, card_hash, preview_path, action_buttons, cropped_path, is_unanswered)
                     
                     # If user hasn't answered questions, send simplified text-only notification
                     if is_unanswered:

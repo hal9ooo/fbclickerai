@@ -254,12 +254,15 @@ class GroupModerator:
                                 cached_buttons = cached_request.action_buttons if cached_request else None
                                 # Retrieve cached cropped path - use it instead of raw card image
                                 cached_cropped = cached_request.cropped_path if cached_request else None
+                                # Retrieve cached is_unanswered status
+                                cached_unanswered = cached_request.is_unanswered if cached_request else False
+                                
                                 # Use cached cropped path if available, otherwise fall back to raw card image
                                 screenshot_to_send = cached_cropped if cached_cropped else card.image_path
                                 
-                                logger.info(f"  Queuing notification with cached data (cropped: {cached_cropped is not None})")
+                                logger.info(f"  Queuing notification with cached data (cropped: {cached_cropped is not None}, unanswered: {cached_unanswered})")
                                 # For cached matches, we can't determine is_unanswered without OCR, default to False
-                                notifications_to_send.append((matched_name, screenshot_to_send, cached_extra, cached_preview, card_hash, cached_buttons, False, cached_cropped))
+                                notifications_to_send.append((matched_name, screenshot_to_send, cached_extra, cached_preview, card_hash, cached_buttons, cached_unanswered, cached_cropped))
                                 continue
                     
                     # Surya OCR (only for new/unknown cards)
@@ -460,6 +463,9 @@ class GroupModerator:
                     # CHECK 2: Queue for notification (if not clicking)
                     # Check if user hasn't answered questions
                     is_unanswered = self._is_unanswered_question(valid_texts)
+                    if not is_unanswered:
+                        # Debug log to see what text we actually found
+                        logger.info(f"detected_texts: {[t['text'] for t in valid_texts]}")
                     
                     # Crop card to text content only (using OCR bbox)
                     cropped_card_path = self._crop_card_to_text_bbox(card.image_path, valid_texts)
