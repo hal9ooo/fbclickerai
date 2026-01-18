@@ -252,10 +252,14 @@ class GroupModerator:
                                 cached_preview = cached_request.preview_path if cached_request else None
                                 # Retrieve cached buttons if any (for future use?)
                                 cached_buttons = cached_request.action_buttons if cached_request else None
+                                # Retrieve cached cropped path - use it instead of raw card image
+                                cached_cropped = cached_request.cropped_path if cached_request else None
+                                # Use cached cropped path if available, otherwise fall back to raw card image
+                                screenshot_to_send = cached_cropped if cached_cropped else card.image_path
                                 
-                                logger.info(f"  Queuing notification with cached data")
+                                logger.info(f"  Queuing notification with cached data (cropped: {cached_cropped is not None})")
                                 # For cached matches, we can't determine is_unanswered without OCR, default to False
-                                notifications_to_send.append((matched_name, card.image_path, cached_extra, cached_preview, card_hash, cached_buttons, False))
+                                notifications_to_send.append((matched_name, screenshot_to_send, cached_extra, cached_preview, card_hash, cached_buttons, False, cached_cropped))
                                 continue
                     
                     # Surya OCR (only for new/unknown cards)
@@ -459,7 +463,8 @@ class GroupModerator:
                     
                     # Crop card to text content only (using OCR bbox)
                     cropped_card_path = self._crop_card_to_text_bbox(card.image_path, valid_texts)
-                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path, card_hash, action_buttons, is_unanswered))
+                    # Tuple: (name, screenshot_path, extra_info, preview_path, card_hash, action_buttons, is_unanswered, cropped_path)
+                    notifications_to_send.append((detected_name, cropped_card_path, extra_info, preview_screenshot_path, card_hash, action_buttons, is_unanswered, cropped_card_path))
                     
                 except Exception as e:
                     logger.error(f"Error processing card {card.card_index}", error=str(e))
@@ -479,9 +484,9 @@ class GroupModerator:
         # 6. Send all accumulated notifications
         if notifications_to_send:
             logger.info(f"Sending {len(notifications_to_send)} potential notifications...")
-            for name, screenshot_path, extra_info, preview_path, card_hash, action_buttons, is_unanswered in notifications_to_send:
+            for name, screenshot_path, extra_info, preview_path, card_hash, action_buttons, is_unanswered, cropped_path in notifications_to_send:
                 try:
-                    await telegram_callback(name, screenshot_path, extra_info, preview_path, card_hash, action_buttons, is_unanswered)
+                    await telegram_callback(name, screenshot_path, extra_info, preview_path, card_hash, action_buttons, is_unanswered, cropped_path)
                 except Exception as e:
                     logger.error(f"Failed to send notification for {name}", error=str(e))
         

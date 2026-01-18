@@ -25,6 +25,7 @@ class PendingRequest:
     card_hash: Optional[str] = None  # Perceptual hash of card image
     preview_path: Optional[str] = None  # Path to preview screenshot
     action_buttons: Optional[Dict[str, List[int]]] = None  # {'approve': [x,y], 'decline': [x,y]}
+    cropped_path: Optional[str] = None  # Path to cropped card image (text bbox only)
 
 
 class DecisionCache:
@@ -101,7 +102,8 @@ class DecisionCache:
         return None
     
     def add_notification(self, name: str, extra_info: Optional[str] = None, card_hash: Optional[str] = None, 
-                        preview_path: Optional[str] = None, action_buttons: Optional[Dict[str, List[int]]] = None) -> bool:
+                        preview_path: Optional[str] = None, action_buttons: Optional[Dict[str, List[int]]] = None,
+                        cropped_path: Optional[str] = None) -> bool:
         """Add a new notification to cache. Returns False if already exists."""
         key = self._get_key(name)
         
@@ -116,7 +118,8 @@ class DecisionCache:
             extra_info=extra_info,
             card_hash=card_hash,
             preview_path=preview_path,
-            action_buttons=action_buttons
+            action_buttons=action_buttons,
+            cropped_path=cropped_path
         )
         
         # Add to hash cache

@@ -188,10 +188,11 @@ class FBClickerBot:
                 # UNIFIED WORKFLOW: process decisions AND send notifications in one pass
                 async def notification_callback(name: str, screenshot_path: str, extra_info: str = None, 
                                               preview_path: str = None, card_hash: str = None,
-                                              action_buttons: dict = None, is_unanswered: bool = False):
+                                              action_buttons: dict = None, is_unanswered: bool = False,
+                                              cropped_path: str = None):
                     """Callback to send notification - add to cache first, then send."""
                     # Add to cache so we can track the decision (with hash and preview for future matching)
-                    cache.add_notification(name, extra_info, card_hash, preview_path, action_buttons)
+                    cache.add_notification(name, extra_info, card_hash, preview_path, action_buttons, cropped_path)
                     
                     # If user hasn't answered questions, send simplified text-only notification
                     if is_unanswered:
