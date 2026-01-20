@@ -18,11 +18,10 @@ opencv-python-headless>=4.8.0
 numpy>=1.24.0
 imagehash>=4.3.0
 # OCR
-surya-ocr
+rapidocr_onnxruntime
 
 # HTTP client
 httpx>=0.25.0
 
 # Utilities
 structlog>=23.2.0
-
