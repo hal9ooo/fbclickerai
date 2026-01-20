@@ -8,7 +8,7 @@ FBClicker monitors Facebook group member requests and sends notifications to a T
 
 ### Key Features
 
-- 🤖 **AI-Powered OCR** - Uses Surya OCR for accurate name extraction from member request cards
+- 🤖 **AI-Powered OCR** - Uses RapidOCR (ONNX) for accurate name extraction from member request cards
 - 👁️ **Computer Vision** - OpenCV-based card detection and button localization
 - 🕵️ **Stealth Mode** - Advanced anti-detection measures (fingerprint spoofing, human-like behavior)
 - 📱 **Telegram Control** - Remote moderation via inline buttons
@@ -25,7 +25,7 @@ The bot uses a sophisticated computer vision pipeline to process Facebook's UI:
 flowchart LR
     A[📸 Screenshot] --> B[🔲 OpenCV Card Detection]
     B --> C[✂️ Card Segmentation]
-    C --> D[📝 Surya OCR]
+    C --> D[📝 RapidOCR]
     D --> E[👤 Name Extraction]
     E --> F{Decision?}
     F -->|Pending| G[📱 Telegram Notification]
@@ -54,23 +54,20 @@ upper_gray = np.array([180, 25, 248])
 
 ### 2. OCR Engine (`src/actions/group_moderator.py`)
 
-Uses **Surya OCR** (GPU-accelerated, but runs in CPU mode in Docker):
+Uses **RapidOCR** (ONNX Runtime, CPU-optimized):
 
 ```python
-from surya.models import load_predictors
+from src.vision.ocr_adapter import OCREngine
 
-predictors = load_predictors()
-det_predictor = predictors["detection"]
-rec_predictor = predictors["recognition"]
-
+engine = OCREngine()
 # Process card image
-predictions = rec_predictor([image], ["ocr_with_boxes"], det_predictor)
+predictions = engine.run_ocr(image)
 ```
 
-**Why Surya over Tesseract?**
-- Better accuracy on styled/anti-aliased text
-- Handles Facebook's modern fonts reliably
-- Returns bounding boxes for precise text localization
+**Why RapidOCR over Surya?**
+- Significantly lower memory usage (<1GB vs 6GB)
+- Excellent accuracy on styled text
+- Fast inference on CPU
 
 ### 3. Coordinate System
 
@@ -385,7 +382,7 @@ sequenceDiagram
     loop Every poll_interval (±jitter)
         Bot->>Facebook: Navigate to Member Requests
         Bot->>Bot: Screenshot + OpenCV Card Detection
-        Bot->>Bot: Surya OCR on each card
+        Bot->>Bot: RapidOCR on each card
         
         alt Name has pending decision
             Bot->>Facebook: Click Approve/Decline
@@ -429,7 +426,7 @@ FILTER_BAR_HEIGHT = 220
 | Component | Technology |
 |-----------|------------|
 | Browser Automation | Playwright + playwright-stealth |
-| OCR Engine | Surya OCR (CPU mode) |
+| OCR Engine | RapidOCR (ONNX Runtime) |
 | Computer Vision | OpenCV (card detection, button finding) |
 | Telegram Bot | python-telegram-bot |
 | Configuration | Pydantic Settings |

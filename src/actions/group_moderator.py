@@ -7,11 +7,9 @@ from datetime import datetime
 import structlog
 import cv2
 import numpy as np
-
-# Surya OCR 0.17+ API
-from surya.models import load_predictors
 from PIL import Image
 
+from src.vision.ocr_adapter import OCREngine
 from src.config import settings
 from src.browser.human_behavior import HumanBehavior
 from src.vision.screenshot_analyzer import ScreenshotAnalyzer, MemberRequest
@@ -33,13 +31,10 @@ class GroupModerator:
         # Initialize CardDetector
         self.card_detector = CardDetector(settings.screenshots_dir)
 
-        # Initialize Surya OCR models (Predictors)
-        logger.info("Loading Surya OCR (CPU mode)...")
-        # Ensure device='cpu' explicitly if needed, but torch default should be cpu if no cuda
-        predictors = load_predictors()
-        self.det_predictor = predictors["detection"]
-        self.rec_predictor = predictors["recognition"]
-        logger.info("Surya models loaded.")
+        # Initialize RapidOCR (via Adapter)
+        logger.info("Loading RapidOCR (CPU mode)...")
+        self.ocr_engine = OCREngine()
+        logger.info("RapidOCR loaded.")
     
     @property
     def member_requests_url(self) -> str:
@@ -265,14 +260,14 @@ class GroupModerator:
                                 notifications_to_send.append((matched_name, screenshot_to_send, cached_extra, cached_preview, card_hash, cached_buttons, cached_unanswered, cached_cropped))
                                 continue
                     
-                    # Surya OCR (only for new/unknown cards)
+                    # RapidOCR (only for new/unknown cards)
                     logger.info("=" * 50)
                     logger.info(f"OCR PROCESSING CARD {card.card_index}")
                     logger.info(f"  Image path: {card.image_path}")
                     logger.info(f"  Card Y range: {card.y_start}-{card.y_end}")
                     logger.info(f"  Image dimensions: {img_width}x{img_height}")
                     
-                    predictions = self.rec_predictor([image], ["ocr_with_boxes"], self.det_predictor)
+                    predictions = self.ocr_engine.run_ocr(image)
                     prediction = predictions[0]
                     
                     # Extract text and identify name
