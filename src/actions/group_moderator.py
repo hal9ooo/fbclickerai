@@ -1077,19 +1077,30 @@ Be very brief and direct."""
         try:
             # Filter to get only text elements with valid bbox (exclude buttons)
             text_bboxes = []
+
+            # Exclude these UI elements to prevent crop from extending too far right
+            excluded_ui = [
+                'approva', 'rifiuta', '•••',
+                'invia messaggio', 'rispondi', 'segnala',
+                'blocca', 'condividi', 'mi piace', 'commenta'
+            ]
+
             for t in ocr_texts:
                 bbox = t.get('bbox')
                 text_lower = t['text'].lower()
-                # Exclude UI buttons from bbox calculation
-                if bbox and not any(ui in text_lower for ui in ['approva', 'rifiuta', '•••']):
+
+                # Check if text contains any excluded UI term
+                is_ui = any(ui in text_lower for ui in excluded_ui)
+
+                if bbox and not is_ui:
                     text_bboxes.append(bbox)
             
             if not text_bboxes:
                 logger.warning("No text bboxes found for cropping")
                 return card_image_path
             
-            # Calculate bounding box of all text
-            min_x = min(b[0] for b in text_bboxes)
+            # Calculate bounding box of all RELEVANT text
+            # We explicitly ignore min_x and just use 0 to preserve avatar on the left
             min_y = min(b[1] for b in text_bboxes)
             max_x = max(b[2] for b in text_bboxes)
             max_y = max(b[3] for b in text_bboxes)
@@ -1098,7 +1109,8 @@ Be very brief and direct."""
             img = Image.open(card_image_path)
             img_width, img_height = img.size
             
-            crop_left = max(0, int(min_x) - padding)
+            # Always start from left edge (0) to keep avatar
+            crop_left = 0
             crop_top = max(0, int(min_y) - padding)
             crop_right = min(img_width, int(max_x) + padding)
             crop_bottom = min(img_height, int(max_y) + padding)
