@@ -172,95 +172,17 @@ class GroupModerator:
             
             click_performed = False
             
-            # Import cache and imagehash for hash checking
-            from src.cache import cache
-            import imagehash
-            
             # 4. Process each card
             for card in cards:
                 try:
-                    # Load image first (needed for hash AND OCR)
+                    # Load image first (needed for OCR)
                     image = Image.open(card.image_path)
                     img_width, img_height = image.size
                     
-                    # OPTIMIZATION: Check perceptual hash BEFORE expensive OCR
-                    card_hash = str(imagehash.average_hash(image))
+                    # Caching disabled: always run OCR on the current card
+                    card_hash = None
                     
-                    if settings.card_hash_threshold > 0:
-                        matched_name = cache.is_hash_similar(card_hash, settings.card_hash_threshold)
-                        if matched_name:
-                            # CRITICAL: Check if a decision is pending
-                            if matched_name in pending_decisions:
-                                # Try to get cached button coordinates
-                                cached_req = cache.get_request(matched_name)
-                                decision = pending_decisions[matched_name]
-                                
-                                # If we have cached buttons, we can click without OCR!
-                                if cached_req and cached_req.action_buttons:
-                                    logger.info(f"Card {card.card_index}: Hash match '{matched_name}' with PENDING DECISION")
-                                    logger.info(f"  Cached buttons available - executing WITHOUT OCR")
-                                    
-                                    target = "approve" if decision == "approve" else "decline"
-                                    coords = cached_req.action_buttons.get(target)
-                                    
-                                    if coords:
-                                        x, y = coords
-                                        
-                                        # RESTORED: Calculate absolute page coordinates (handles sidebar/header offset)
-                                        abs_x, abs_y = self.card_detector.get_absolute_coords(card, x, y)
-                                        
-                                        # RESTORED: Scroll to element to ensure visibility
-                                        viewport_height = 864
-                                        scroll_to_y = max(0, abs_y - viewport_height // 2)
-                                        # logger.info(f"Scrolling to Y={scroll_to_y}")
-                                        await self.page.evaluate(f"window.scrollTo(0, {scroll_to_y})")
-                                        await self.human.random_delay(0.5, 0.8)
-                                        
-                                        # Get ACTUAL scroll position
-                                        actual_scroll_y = await self.page.evaluate("window.scrollY")
-                                        viewport_y = abs_y - actual_scroll_y
-                                        
-                                        logger.info(f"Clicking cached button at absolute ({abs_x}, {abs_y}) -> viewport ({abs_x}, {viewport_y})")
-                                        
-                                        # Save debug overlay before click
-                                        await self._save_click_overlay(abs_x, viewport_y, decision, card.card_index)
-                                        
-                                        await self.human.human_click(abs_x, viewport_y)
-                                        
-                                        # For DECLINE: longer delay for Facebook to respond
-                                        if decision == "decline":
-                                            await self.human.random_delay(2.0, 3.0)
-                                        
-                                        actions_taken.append(matched_name)
-                                        click_performed = True
-                                        
-                                        await self.human.random_delay(2, 3)
-                                        break  # Exit card loop, re-screenshot needed
-                                        
-                                logger.info(f"Card {card.card_index}: Hash match '{matched_name}' but decision pending (no cached buttons) - forcing OCR")
-                                # Fall through to OCR
-                            else:
-                                logger.info(f"Card {card.card_index}: hash matches cached '{matched_name}' - skipping OCR")
-                                # Retrieve cached preview and extra_info
-                                cached_request = cache.get_request(matched_name)
-                                cached_extra = cached_request.extra_info if cached_request else None
-                                cached_preview = cached_request.preview_path if cached_request else None
-                                # Retrieve cached buttons if any (for future use?)
-                                cached_buttons = cached_request.action_buttons if cached_request else None
-                                # Retrieve cached cropped path - use it instead of raw card image
-                                cached_cropped = cached_request.cropped_path if cached_request else None
-                                # Retrieve cached is_unanswered status
-                                cached_unanswered = cached_request.is_unanswered if cached_request else False
-                                
-                                # Use cached cropped path if available, otherwise fall back to raw card image
-                                screenshot_to_send = cached_cropped if cached_cropped else card.image_path
-                                
-                                logger.info(f"  Queuing notification with cached data (cropped: {cached_cropped is not None}, unanswered: {cached_unanswered})")
-                                # For cached matches, we can't determine is_unanswered without OCR, default to False
-                                notifications_to_send.append((matched_name, screenshot_to_send, cached_extra, cached_preview, card_hash, cached_buttons, cached_unanswered, cached_cropped))
-                                continue
-                    
-                    # RapidOCR (only for new/unknown cards)
+                    # RapidOCR
                     logger.info("=" * 50)
                     logger.info(f"OCR PROCESSING CARD {card.card_index}")
                     logger.info(f"  Image path: {card.image_path}")

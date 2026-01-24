@@ -67,7 +67,7 @@ class FBClickerBot:
             )
             while not await self.login_handler.is_logged_in():
                 logger.info("Waiting for valid session...")
-                await asyncio.sleep(30)
+                await self.human.human_wait(30)
         
         self.telegram.send_message("✅ Connesso a Facebook! Avvio moderazione...")
         
@@ -114,7 +114,7 @@ class FBClickerBot:
         while self._running:
             try:
                 if self.telegram.is_paused:
-                    await asyncio.sleep(5)
+                    await self.human.human_wait(5)
                     continue
                 
                 # Check working hours (06:00 - 22:00)
@@ -133,7 +133,7 @@ class FBClickerBot:
                     
                     sleep_time = self._get_jittered_interval()
                     logger.info("Outside working hours (06:00-22:00), sleeping...", current_hour=current_hour, sleep_seconds=sleep_time)
-                    await asyncio.sleep(sleep_time)
+                    await self.human.human_wait(sleep_time)
                     continue
                 
                 # Returning from night mode - restart browser
@@ -157,7 +157,7 @@ class FBClickerBot:
                         )
                         while not await self.login_handler.is_logged_in():
                             logger.info("Waiting for valid session...")
-                            await asyncio.sleep(30)
+                            await self.human.human_wait(30)
                     
                     self.telegram.send_message("✅ Browser riavviato e connesso!")
                     self._night_mode = False
@@ -171,7 +171,7 @@ class FBClickerBot:
                 # Navigate to requests page
                 if not await self.moderator.navigate_to_member_requests():
                     logger.warning("Failed to navigate, skipping this poll")
-                    await asyncio.sleep(30)
+                    await self.human.human_wait(30)
                     continue
                 
                 # Get pending decisions as a dict {name: decision}
@@ -232,12 +232,12 @@ class FBClickerBot:
                 # Wait for next poll with jitter for stealth
                 sleep_time = self._get_jittered_interval()
                 logger.info("Waiting for next poll", seconds=sleep_time, base=settings.poll_interval)
-                await asyncio.sleep(sleep_time)
+                await self.human.human_wait(sleep_time)
                 
             except Exception as e:
                 logger.error("Error in main loop", error=str(e))
                 self.telegram.send_message(f"⚠️ Errore: {str(e)}")
-                await asyncio.sleep(30)
+                await self.human.human_wait(30)
     
     async def _execute_pending_decisions(self):
         """DEPRECATED: Now handled by process_and_notify."""
