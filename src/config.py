@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     debug_ai_validation: bool = Field(default=True, description="Use OpenRouter AI to validate click positions")
     
     # Polling with jitter (stealth)
-    poll_interval: int = Field(default=3600, description="Base seconds between moderation checks")
+    poll_interval: int = Field(default=10800, description="Base seconds between moderation checks")
     poll_jitter: float = Field(
         default=0.3, 
         description="Random jitter factor (0.3 = ±30% variation on poll_interval)"

@@ -96,6 +96,10 @@ class HumanBehavior:
             delay = random.uniform(min_sec, max_sec)
         
         await asyncio.sleep(delay)
+
+    async def human_wait(self, seconds: float):
+        """Wait for a fixed duration using the same delay pipeline."""
+        await self.random_delay(seconds, seconds, use_gaussian=False)
     
     async def thinking_pause(self):
         """Simulate occasional thinking pauses that humans naturally have."""
