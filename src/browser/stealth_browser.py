@@ -304,7 +304,8 @@ class StealthBrowser:
             "--no-sandbox",
             "--disable-setuid-sandbox",
             "--disable-infobars",
-            "--window-position=0,0",
+            "--window-size=1920,1080",
+            "--start-maximized",
             "--ignore-certificate-errors",
             "--disable-extensions",
             "--no-first-run",
@@ -394,9 +395,12 @@ class StealthBrowser:
             has_auth = 'c_user' in cookie_names and 'xs' in cookie_names
             
             if not has_auth and not force:
-                logger.warning("Skipping session save - auth cookies missing", 
-                             cookies=cookie_names)
+                logger.info("Skipping session save - not logged in (auth cookies missing)")
                 return
+            
+            # If we have auth, or force is True, we save.
+            # But wait: if force is False, and we have auth, we should still compare 
+            # with existing file if possible? No, if we have auth, we are the 'latest' truth.
             
             os.makedirs(self._session_path.parent, exist_ok=True)
             await self._context.storage_state(path=str(self._session_path))

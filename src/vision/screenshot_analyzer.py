@@ -9,6 +9,7 @@ import structlog
 import cv2
 import numpy as np
 
+from src.vision.ocr_adapter import OCREngine
 from src.config import settings
 from src.vision.card_detector import CardDetector, DetectedCard
 
@@ -267,18 +268,49 @@ Return ONLY the JSON, no other text."""
             return VisionResponse(page_type="error", member_requests=[])
     
     async def detect_page_type(self, screenshot_path: str) -> str:
-        """Detect what type of Facebook page is shown using local OCR."""
-        logger.info("Detecting page type locally", path=screenshot_path)
-        
+        """
+        Detect page type (login, member_requests, group_home, etc) using OCR.
+        """
         try:
-            # Fallback for now: assume member requests page
+            # Load image
             img = cv2.imread(screenshot_path)
             if img is None:
                 return "unknown"
-            return "member_requests"
+            
+            # Use OCR to check for keywords
+            from PIL import Image
+            pil_img = Image.open(screenshot_path)
+            
+            # Initialize OCR if not already (lazy load)
+            if not hasattr(self, '_ocr_for_detection'):
+                self._ocr_for_detection = OCREngine()
+                
+            results = self._ocr_for_detection.run_ocr(pil_img)
+            text_lines = [line.text.lower() for line in results[0].text_lines]
+            full_text = " ".join(text_lines)
+            
+            logger.info("Detecting page type via OCR", text_len=len(full_text))
+            
+            # Keywords for Login Page
+            login_keywords = ["email", "indirizzo e-mail", "password", "password dimenticata", "crea nuovo account", "log in", "accedi"]
+            if any(k in full_text for k in login_keywords) and ("facebook" in full_text or "password" in full_text):
+                logger.info("Page detected: login")
+                return "login"
+                
+            # Keywords for Member Requests
+            request_keywords = ["richieste", "participant requests", "approva", "rifiuta", "domanda", "questions"]
+            if any(k in full_text for k in request_keywords):
+                logger.info("Page detected: member_requests")
+                return "member_requests"
+            
+            # Fallback
+            if "facebook" in full_text:
+                return "group_home"
+                
+            return "unknown"
             
         except Exception as e:
-            logger.error("Page type detection failed", error=str(e))
+            logger.error("Page detection failed", error=str(e))
             return "unknown"
     
     async def find_element(self, screenshot_path: str, description: str) -> Optional[Tuple[int, int]]:

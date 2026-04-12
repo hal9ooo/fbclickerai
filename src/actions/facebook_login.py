@@ -31,18 +31,32 @@ class FacebookLogin:
             screenshot = await self._take_screenshot("login_check")
             page_type = await self.analyzer.detect_page_type(screenshot)
             
+            # Check for actual auth cookies in the context
+            # This is the single most reliable check
+            cookies = await self.page.context.cookies()
+            cookie_names = [c['name'] for c in cookies]
+            has_auth = 'c_user' in cookie_names and 'xs' in cookie_names
+            
             if page_type == "login":
-                logger.info("Not logged in, login required")
+                logger.info("Not logged in (page type: login)")
                 return False
-            elif page_type in ["group_home", "member_requests", "post_approval"]:
-                logger.info("Already logged in")
+            
+            if has_auth:
+                logger.info("Already logged in (auth cookies found)")
                 return True
-            else:
-                # Check for common logged-in indicators via URL
-                current_url = self.page.url
-                if "login" in current_url or "checkpoint" in current_url:
-                    return False
+                
+            # Fallback to URL and page type if cookies are hidden or weird
+            current_url = self.page.url
+            if "login" in current_url or "checkpoint" in current_url:
+                logger.info("Not logged in (URL indicator)")
+                return False
+                
+            if page_type in ["group_home", "member_requests", "post_approval"]:
+                logger.info(f"Logged in indicator found (page type: {page_type})")
                 return True
+
+            logger.warning("Login status ambiguous, assuming not logged in")
+            return False
                 
         except Exception as e:
             logger.error("Login check failed", error=str(e))

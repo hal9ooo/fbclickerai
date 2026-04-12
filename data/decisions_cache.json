@@ -1,0 +1,2644 @@
+{
+  "pending": {
+    "doris doris": {
+      "name": "Doris Doris",
+      "notified_at": "2026-03-03T20:53:23.178104",
+      "decision": "approve",
+      "executed": false,
+      "extra_info": "2orefa\n5 gruppi in comune · Altri 147 gruppi\nIscrizioneaFacebook:\n17 anni fa\nViveaBrescia\nHaeffettuatol'iscrizionealgruppodirecente,ancoranessunpost\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devonoessererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\nsi\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico: \"Ho una\ndozzina diuovainunpaniere,quantesonointotale?\"\n12",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_1_cropped.png",
+      "is_unanswered": false
+    },
+    "aibi deda": {
+      "name": "AIBi Deda",
+      "notified_at": "2026-03-04T06:13:16.228702",
+      "decision": null,
+      "executed": false,
+      "extra_info": "40minutifa\nAltri 26 gruppi\nIscrizioneaFacebook:\n10 anni fa\nViveaParma\nfashionmodelingpressoModel\nRispondi con accuratezza aquesta domandapercheserveperverificare seil tuoprofiloe autentico:\"Houna\ndozzina di uova in un paniere, quante sono in totale?\"",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": false
+    },
+    "antoninasimvolokova": {
+      "name": "AntoninaSimvolokova",
+      "notified_at": "2026-03-04T08:24:08.570232",
+      "decision": null,
+      "executed": false,
+      "extra_info": "5minutifa\n293amici.46amicinelgruppo\n2gruppi in comune·Altri20 gruppi\nIscrizioneaFacebook:\n6 anni fa\nHainviatouncommento.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_082403_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": true
+    },
+    "matteoferri": {
+      "name": "MatteoFerri",
+      "notified_at": "2026-03-04T10:51:15.838215",
+      "decision": null,
+      "executed": false,
+      "extra_info": "45minutifa\n3 amici\n2gruppi in comune·Altri39gruppi\nIscrizioneaFacebook:\n5annifa\nHainviato2post.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_104944_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": true
+    },
+    "federicafasano": {
+      "name": "FedericaFasano",
+      "notified_at": "2026-03-04T10:51:15.935907",
+      "decision": null,
+      "executed": false,
+      "extra_info": "37minuti fa\n4gruppi incomune·Altri84gruppi\nIscrizioneaFacebook:\n14 anni fa\nViveaParma\nNon haancorarispostoalle domande-In attesadellarisposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": false
+    },
+    "claudiamcsforza": {
+      "name": "ClaudiamcSforza",
+      "notified_at": "2026-03-04T10:51:16.112993",
+      "decision": null,
+      "executed": false,
+      "extra_info": "36minuti fa\nAltri 63gruppi\nIscrizioneaFacebook:\n2 anni fa\nHainviato2post.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_8_105003_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": true
+    },
+    "baraabensalem": {
+      "name": "BaraaBensalem",
+      "notified_at": "2026-03-04T10:51:20.053407",
+      "decision": null,
+      "executed": false,
+      "extra_info": "9minutifa\n2gruppiincomune·Altri46gruppi\nIscrizione aFacebook:\n3 anni fa\nHainviatounpost.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_12_105055_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_12_cropped.png",
+      "is_unanswered": true
+    },
+    "firas m'rabet": {
+      "name": "Firas M'rabet",
+      "notified_at": "2026-03-04T10:51:20.125994",
+      "decision": null,
+      "executed": false,
+      "extra_info": "circaunminutofa\nAltri 69 gruppi\nIscrizione aFacebook:\n5 anni fa\nViveaParma\nFrequentalycee souani djerba\nLavorapressoSigmaConseil\nHa inviato 5 post. Anteprima\nNon ha ancora risposto alle domande· In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_13_105110_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_13_cropped.png",
+      "is_unanswered": true
+    },
+    "oum yahya": {
+      "name": "Oum Yahya",
+      "notified_at": "2026-03-04T14:23:56.772752",
+      "decision": null,
+      "executed": false,
+      "extra_info": "47minuti fa\n83 amici·1 amicola nel gruppo\n4 gruppi incomune·Altri161gruppi\nIscrizioneaFacebook:\n3 anni fa\nViveaMilano\nHainviato un commento.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_2_142320_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_2_cropped.png",
+      "is_unanswered": true
+    },
+    "mirko else": {
+      "name": "Mirko Else",
+      "notified_at": "2026-03-04T14:23:56.844707",
+      "decision": null,
+      "executed": false,
+      "extra_info": "33minuti fa\n 13 amici\n3gruppi incomune·Altri56gruppi\nIscrizioneaFacebook:\n6 anni fa\nViveaCasalgrande\nHa inviato unpost.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_3_142335_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_3_cropped.png",
+      "is_unanswered": true
+    },
+    "parmigianoreggiano": {
+      "name": "ParmigianoReggiano",
+      "notified_at": "2026-03-04T14:23:56.915917",
+      "decision": null,
+      "executed": false,
+      "extra_info": "12minuti fa\n10amici\n4 gruppi in comune·Altri 60 gruppi\nIscrizione aFacebook:\nun anno fa\nHainviatounpost.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_4_142349_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": true
+    },
+    "letie de baha": {
+      "name": "Letie DE Baha",
+      "notified_at": "2026-03-04T14:23:56.993219",
+      "decision": null,
+      "executed": false,
+      "extra_info": "6minutifa\n4999amici.40amicinelgruppo\n2 gruppi in comune · Altri 274 gruppi\nIscrizioneaFacebook:\n7 anni fa\nVive aParma\nLavorapressoOss\nNonha ancorarisposto alledomande·In attesa dellarisposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": false
+    },
+    "salvatoregaetano": {
+      "name": "SalvatoreGaetano",
+      "notified_at": "2026-03-04T20:18:51.565801",
+      "decision": null,
+      "executed": false,
+      "extra_info": "35minutifa\n900amici.177amicinelgruppo\n3gruppi incomune·Altri32gruppi\nIscrizioneaFacebook:\n9 anni fa\nHainviato2post.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_4_201815_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": true
+    },
+    "luca romito": {
+      "name": "Luca Romito",
+      "notified_at": "2026-03-04T20:18:52.039032",
+      "decision": null,
+      "executed": false,
+      "extra_info": "6minuti fa\n253amici.8amicinelgruppo\nAltri 66 gruppi\nIscrizioneaFacebook:\n9 anni fa\nHainviatounpost.Anteprima\nNon ha ancora rispostoalledomande·Inattesa dellarisposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_201846_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": true
+    },
+    "no multilevel marketing,spam,o offerte di lavoro.gli annunci devono essere autentici e il prezzo ben visibile.i": {
+      "name": "No multilevel marketing,spam,o offerte di lavoro.Gli annunci devono essere autentici e il prezzo ben visibile.I",
+      "notified_at": "2026-03-05T08:18:49.282159",
+      "decision": null,
+      "executed": false,
+      "extra_info": "commenti devonoessererispettosienon sipotraoffendereipartecipanti.Sei d'accordo?\nCerto\nRispondiconaccuratezzaa auesta domandapercheserveperverificareseil tuoprofiloeautentico:Houna",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {},
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": false
+    },
+    "lonluca": {
+      "name": "lonLuca",
+      "notified_at": "2026-03-05T08:18:49.441425",
+      "decision": null,
+      "executed": false,
+      "extra_info": "49minutifa\n989amici·16amicinelgruppo\nAltri 41 gruppi\nIscrizioneaFacebook:\n13 anni fa\nVive aReggionellEmilia\nHa studiatopressoUTM-UniversitateaTehnica a Moldovei\nLavorapressoGSFoglianoAsDePinsami\nNon ha ancora risposto alle domande· In attesa della risposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": true
+    },
+    "monica bruno": {
+      "name": "Monica Bruno",
+      "notified_at": "2026-03-05T08:18:49.665804",
+      "decision": null,
+      "executed": false,
+      "extra_info": "2minutifa\n480amici·1amicolanelgruppo\nAltri 26 gruppi\nIscrizioneaFacebook:\n13 anni fa\nViveaPeveragno\nHa frequentato licenza terzamedia\nHa inviato un post.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_9_081844_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": true
+    },
+    "angelica mezzadri": {
+      "name": "Angelica Mezzadri",
+      "notified_at": "2026-03-05T10:29:21.831350",
+      "decision": null,
+      "executed": false,
+      "extra_info": "40minutifa\n265amici·1amicizia in comune·57amici nelgruppo\n4gruppi incomune·Altri22gruppi\nIscrizione aFacebook:\n17 anni fa\nVive aParma\nHastudiatopressoITCMelloni\nLavora presso Chiesi Italia\nHa inviato un commento.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_11_102910_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": true
+    },
+    "martinaforioso": {
+      "name": "MartinaForioso",
+      "notified_at": "2026-03-05T12:41:02.002385",
+      "decision": "approve",
+      "executed": false,
+      "extra_info": "circaun'orafa\n152amici·9amicinelgruppo\nAltri 34 gruppi\nIscrizione a Facebook:\n5 anni fa\nVive a Reggio nell'Emilia\nHa inviato unpost.Anteprima\nRispondi con accuratezza a questa domanda perche serveper verificare seil tuo profiloe autentico:\"Ho una\ndozzina di uova in unpaniere,quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\n!S",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_11_124015_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": false
+    },
+    "shimaa emad": {
+      "name": "Shimaa Emad",
+      "notified_at": "2026-03-05T12:41:04.252593",
+      "decision": "decline",
+      "executed": false,
+      "extra_info": "49minuti fa\n Altri 60 gruppi\nIscrizioneaFacebook:\n15 anni fa\nViveaMansura\nNon haancorarispostoalle domande-In attesadellarisposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": false
+    },
+    "monicastefani": {
+      "name": "MonicaStefani",
+      "notified_at": "2026-03-05T15:18:03.783464",
+      "decision": "approve",
+      "executed": false,
+      "extra_info": "18 ore fa\n19 amici · 2 amici nel gruppo\n2 gruppi in comune·Altri9 gruppi\nIscrizione a Facebook:\nun anno fa\nViveaParma\nHa frequentato liss\"calamandrei\"\nLavorapressoGEAProcomacSpa\nHa inviato un post.Anteprima\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosie non sipotra offendereipartecipanti.Sei d'accordo?\n!S",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_0_151737_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_0_cropped.png",
+      "is_unanswered": false
+    },
+    "agar poli": {
+      "name": "Agar Poli",
+      "notified_at": "2026-03-05T15:26:22.583320",
+      "decision": null,
+      "executed": false,
+      "extra_info": "20minuti fa\n3amici\nAltri 11 gruppi\nIscrizioneaFacebook:\n10 anni fa\nHainviatounpost.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_4_152616_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": true
+    },
+    "abdul aziz": {
+      "name": "Abdul Aziz",
+      "notified_at": "2026-03-05T17:59:06.673807",
+      "decision": null,
+      "executed": false,
+      "extra_info": "25minuti fa\n3943amici·14amicinelgruppo\n2 gruppi in comune·Altri 36 gruppi\nIscrizione aFacebook:\n12 anni fa\nViveaParma\nHa inviato un post. Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_175815_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": true
+    },
+    "davide baroni": {
+      "name": "Davide Baroni",
+      "notified_at": "2026-03-05T17:59:06.823472",
+      "decision": null,
+      "executed": false,
+      "extra_info": "14 minuti fa\nAltri 15 gruppi\nIscrizioneaFacebook:\n7 anni fa\nViveaSassuolo\nLavorapressoKerakoll\nHainviatouncommento.Anteprima\nNon ha ancora risposto alle domande·In attesa dellarisposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_8_175844_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": true
+    },
+    "barbaradigregorio": {
+      "name": "BarbaraDiGregorio",
+      "notified_at": "2026-03-05T17:59:06.915979",
+      "decision": null,
+      "executed": false,
+      "extra_info": "6minutifa\nAltri26gruppi\nIscrizione a Facebook:\n14 anni fa\nViveaReggionell'Emilia\nHainviatounpost.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_9_175900_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": true
+    },
+    "michelavecchi": {
+      "name": "MichelaVecchi",
+      "notified_at": "2026-03-05T20:29:31.411266",
+      "decision": null,
+      "executed": false,
+      "extra_info": "56minutifa\n3gruppiincomune·Altri14gruppi\nIscrizione a Facebook:\n17 anni fa\nHainviato2post.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_5_202752_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": true
+    },
+    "oanastanciu": {
+      "name": "OanaStanciu",
+      "notified_at": "2026-03-05T20:29:31.494801",
+      "decision": null,
+      "executed": false,
+      "extra_info": "40minuti fa\n200 amici · 12 amici nel gruppo\n2gruppi incomune·Altri18gruppi\nIscrizioneaFacebook:\n14 anni fa\nViveaParma\nHainviatouncommento.Anteprima\nNon ha ancora risposto alle domande·In attesa dellarisposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_202806_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": true
+    },
+    "lucky lucky": {
+      "name": "Lucky Lucky",
+      "notified_at": "2026-03-05T20:29:31.577877",
+      "decision": null,
+      "executed": false,
+      "extra_info": "36minuti fa\n137amici·2amicinelgruppo\n2gruppiincomune·Altri78gruppi\nIscrizioneaFacebook:\n9 annifa\nHainviatounpost.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_202821_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": true
+    },
+    "stefano margini": {
+      "name": "Stefano Margini",
+      "notified_at": "2026-03-05T20:29:31.720088",
+      "decision": null,
+      "executed": false,
+      "extra_info": "15 minuti fa\n398 amici·8 amici nel gruppo\nAltri 116 gruppi\nIscrizione a Facebook:\n16 anni fa\nVivea Reggio nell'Emilia\nHa frequentato itaszanelli\nLavorapressoDolinaSoce/SocaValley\nHa inviato un post. Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_9_202853_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": true
+    },
+    "graziano mazzullo": {
+      "name": "Graziano Mazzullo",
+      "notified_at": "2026-03-05T20:29:31.862157",
+      "decision": null,
+      "executed": false,
+      "extra_info": "8minutifa\n147amici\nAltri 161 gruppi\nIscrizione a Facebook:\n5 anni fa\nVivea Catania\nHastudiatopressoUniversitadegliStudidiCatania\nLavorapresso Catania\nHa inviato un post. Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_11_202925_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": true
+    },
+    "aldovallidaniela": {
+      "name": "AldovalliDaniela",
+      "notified_at": "2026-03-06T08:56:32.369226",
+      "decision": null,
+      "executed": false,
+      "extra_info": "18 ore fa\n461amici·86amicinelgruppo\nAltri 29 gruppi\nIscrizione aFacebook:\n13 anni fa\nViveaSanSecondoParmense\nHastudiatopressoUniversitadiParma\nLavorapressoButtiniCalzature\nNo multilevel marketing, spam, o offerte di tavoro, Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essererispettosienon sipotra offendereipartecipanti.Sei d'accordo?\nSi\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico: \"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\nUnadozzinadovrebberoessere12",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_0_cropped.png",
+      "is_unanswered": false
+    },
+    "elisalussi": {
+      "name": "Elisalussi",
+      "notified_at": "2026-03-06T09:01:51.109970",
+      "decision": null,
+      "executed": false,
+      "extra_info": "2orefa\n19 gruppi\nIscrizioneaFacebook:\n5 anni fa\nVive a LaSpezia\nFrequenta Istituto Alberghiero G.Casini La Spezia\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nOk\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico: \"Ho una\ndozzinadiuova in unpaniere,quantesono intotale?\"\n12",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_0_cropped.png",
+      "is_unanswered": false
+    },
+    "alessandrozahariev": {
+      "name": "AlessandroZahariev",
+      "notified_at": "2026-03-06T09:01:51.821696",
+      "decision": null,
+      "executed": false,
+      "extra_info": "21minutifa\n952amici·12amicinelgruppo\n4gruppi in comune·Altri 53gruppi\nIscrizione aFacebook:\n17 anni fa\nHainviatounpost.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_2_090124_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_2_cropped.png",
+      "is_unanswered": true
+    },
+    "davide addeo": {
+      "name": "Davide Addeo",
+      "notified_at": "2026-03-06T11:53:26.887099",
+      "decision": null,
+      "executed": false,
+      "extra_info": "circa un'orafa\nAltri11 gruppi\nIscrizione aFacebook:\n16 anni fa\nViveaRaggio,Emilia-RomagnayItaly\nHa studiatopresso IPSIA G.Vallauri\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro, Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devonoessererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\nsi",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_2_cropped.png",
+      "is_unanswered": false
+    },
+    "merchantdel terrain": {
+      "name": "Merchantdel Terrain",
+      "notified_at": "2026-03-06T11:53:27.069623",
+      "decision": null,
+      "executed": false,
+      "extra_info": "47minutifa\n2gruppiincomune·Altri28gruppi\nIscrizione aFacebook:\n6 anni fa\nHainviato3post.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_3_115241_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_3_cropped.png",
+      "is_unanswered": true
+    },
+    "emporio dell'usato": {
+      "name": "Emporio Dell'usato",
+      "notified_at": "2026-03-06T11:53:27.147760",
+      "decision": null,
+      "executed": false,
+      "extra_info": "32minuti fa\nAltri 69 gruppi\nIscrizioneaFacebook:\n3 anni fa\nHainviato2post.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_4_115255_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": true
+    },
+    "alessandroalex": {
+      "name": "AlessandroAlex",
+      "notified_at": "2026-03-06T11:53:27.290446",
+      "decision": null,
+      "executed": false,
+      "extra_info": "14 minuti fa\n61amici\nAltri 65gruppi\nIscrizioneaFacebook:\n6 anni fa\nViveaVerona\nHa inviato 5 post. Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_115322_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": true
+    },
+    "chiaraemikimangialapuglia": {
+      "name": "ChiaraeMikiMangiaLaPuglia",
+      "notified_at": "2026-03-06T15:00:10.951378",
+      "decision": null,
+      "executed": false,
+      "extra_info": "circa un'ora fa\nAltri101 gruppi\nIscrizione aFacebook:\n6 anni fa\nHa frequentato istituto professionale alberghiero\"a.perotti\"bari\ntitolarepressoMangiaLaPuglia\nRispondi con accuratezza aquesta domandapercheserveperverificareseil tuoprofiloeautentico:\"Houna\ndozzina diuova in unpaniere,quantesono intotale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nOk",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          46
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_3_cropped.png",
+      "is_unanswered": false
+    },
+    "lucianastro": {
+      "name": "LuciaNastro",
+      "notified_at": "2026-03-06T15:00:11.297985",
+      "decision": null,
+      "executed": false,
+      "extra_info": "35minuti fa\n2 gruppi in comune·Altri 19 gruppi\nIscrizioneaFacebook:\n12 anni fa\nHa inviatounpost.Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\nCerto\nRispondi con accuratezza aquesta domanda perche serveperverificare seil tuoprofiloe autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_5_145936_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": false
+    },
+    "cristiano turri": {
+      "name": "Cristiano Turri",
+      "notified_at": "2026-03-06T15:00:11.719512",
+      "decision": null,
+      "executed": false,
+      "extra_info": "27minuti fa\n239 amici · 18 amici nel gruppo\n3gruppiincomune·Altri90gruppi\nIscrizione aFacebook:\n3 anni fa\nViveaReggionellEmilia\nHainviatounpost.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_145951_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": true
+    },
+    "stefanocanovi": {
+      "name": "StefanoCanovi",
+      "notified_at": "2026-03-06T15:00:11.793550",
+      "decision": null,
+      "executed": false,
+      "extra_info": "14 minuti fa\nAltri 24 gruppi\nIscrizioneaFacebook:\n9 anni fa\nViveaGattatico\nHainviatounpost.Anteprima\nNonhaancorarisposto alle domande.In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_150006_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": true
+    },
+    "mi rta": {
+      "name": "Mi Rta",
+      "notified_at": "2026-03-06T18:02:34.422733",
+      "decision": null,
+      "executed": false,
+      "extra_info": "41minuti fa\nAltri 95 gruppi\nIscrizioneaFacebook:\n18 anni fa\nHainviatounpost.Anteprima\nNon ha ancora rispostoalle domande·Inattesa dellarisposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_5_180157_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": true
+    },
+    "robertavicini": {
+      "name": "RobertaVicini",
+      "notified_at": "2026-03-06T20:59:20.347208",
+      "decision": null,
+      "executed": false,
+      "extra_info": "45minutifa\n555 amici\n2 gruppi in comune · Altri 34 gruppi\nIscrizione aFacebook:\n15 anni fa\nVive a Modena\nHa frequentato Liceo Scientifico Alessandro Tassoni Modena ltaly\nLawyerpressoLiberoprofessionista\nNon ha ancora risposto alle domande· In attesa della risposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": true
+    },
+    "ritastraface": {
+      "name": "RitaStraface",
+      "notified_at": "2026-03-06T20:59:20.682223",
+      "decision": null,
+      "executed": false,
+      "extra_info": "11 minuti fa\n502 amici ·18 amici nel gruppo\n4 gruppi in comune · Altri 46 gruppi\nIscrizioneaFacebook:\n17 anni fa\nVive a Parma\nHa inviato un post. Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nsi",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_9_205823_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": false
+    },
+    "davidegiannattasio": {
+      "name": "DavideGiannattasio",
+      "notified_at": "2026-03-06T20:59:21.166519",
+      "decision": null,
+      "executed": false,
+      "extra_info": "6minutifa\n3gruppi incomune·Altri27gruppi\nIscrizione aFacebook:\n14 anni fa\nHainviatounpost.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_10_205840_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_10_cropped.png",
+      "is_unanswered": true
+    },
+    "mariateresad'amico": {
+      "name": "MariaTeresaD'Amico",
+      "notified_at": "2026-03-06T20:59:21.368061",
+      "decision": null,
+      "executed": false,
+      "extra_info": "3minutifa\n636amici·30amicinelgruppo\n7 gruppi in comune ·Altri 71 gruppi\nIscrizione a Facebook:\n17 anni fa\nHa inviato un post. Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devonoessererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\nsi\ndozzinadiuova in unpaniere,quantesono intotale?\"\n12",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_12_205915_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_12_cropped.png",
+      "is_unanswered": false
+    },
+    "mariopagano": {
+      "name": "MarioPagano",
+      "notified_at": "2026-03-07T09:14:17.666443",
+      "decision": null,
+      "executed": false,
+      "extra_info": "56 minuti fa\nAltri 33 gruppi\nIscrizioneaFacebook:\n16 anni fa\nHastudiatopressoUniversitaLaSapienzaFacoltaDiScienzeInfermieristiche\nZ人FpressoPoliclinicoSantOrsola-Malpighi\nNonha ancorarispostoalledomande·In attesa dellarisposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1046,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": false
+    },
+    "dario pri": {
+      "name": "Dario Pri",
+      "notified_at": "2026-03-07T09:14:17.937748",
+      "decision": null,
+      "executed": false,
+      "extra_info": "54minutifa\n 211 amici · 31 amici nel gruppo\n5 gruppi in comune ·Altri 96 gruppi\nIscrizione a Facebook:\nun annofa\nViveaParma\nHa inviato 2 post. Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosi enon sipotra offendereipartecipanti.Sei d'accordo?\nOk\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_091324_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": false
+    },
+    "eugenievanmarcke": {
+      "name": "EugenieVanmarcke",
+      "notified_at": "2026-03-07T09:14:18.687607",
+      "decision": null,
+      "executed": false,
+      "extra_info": "7minuti fa\n850amici·2amicinelgruppo\nAltri 6 gruppi\nIscrizioneaFacebook:\n17 anni fa\nHa studiato presso Sint Lucas Brussel\nHa inviato5post.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_8_091348_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": true
+    },
+    "daniele buratti": {
+      "name": "Daniele Buratti",
+      "notified_at": "2026-03-07T09:14:18.759007",
+      "decision": null,
+      "executed": false,
+      "extra_info": "2minutifa\nAltri 68 gruppi\nIscrizioneaFacebook:\n15 anni fa\nVive aReggionellEmilia\nHa frequentato obligo\nHa lavorato presso me stesso\nHa inviato un post. Anteprima\nNon ha ancora risposto alle domande · In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_9_091411_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": true
+    },
+    "luisa cassano": {
+      "name": "Luisa Cassano",
+      "notified_at": "2026-03-07T14:43:20.907981",
+      "decision": null,
+      "executed": false,
+      "extra_info": "33minutifa\nAltri 43 gruppi\nIscrizioneaFacebook:\n15 anni fa\nViveaSanMauroForte\nHastudiatopressoUniversitadegliStudidiRomaTorVergata\nLavorapressoFondazionePoliclinicoUniversitarioAgostino Gemelli IRccS\nHainviatounpost.Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile.1\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\nSi\nRispondi con accuratezza a questa domandapercheserveperverificareseil tuo profiloe autentico:\"Ho una\ndozzina di uova in un paniere,quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_144249_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          46
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": false
+    },
+    "lucia cassano": {
+      "name": "Lucia Cassano",
+      "notified_at": "2026-03-07T14:43:21.573869",
+      "decision": null,
+      "executed": false,
+      "extra_info": "29minutifa\n1911 amici·10 amici nel gruppo\nAltri 39 gruppi\nIscrizione a Facebook:\n15 anni fa\nViveaParma\nHastudiatopressoUniversitadiRomaTorVergata\nLavorapressoChiesiFarmaceutici\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nsi\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico: \"Ho una\ndozzina di uova in un paniere, quante sono in totale?\n12",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": false
+    },
+    "emanuelli cristian": {
+      "name": "Emanuelli Cristian",
+      "notified_at": "2026-03-07T14:43:21.757374",
+      "decision": null,
+      "executed": false,
+      "extra_info": "29minuti fa\n156amici·38amicinelgruppo\nAltri 26 gruppi\nIscrizioneaFacebook:\n8 anni fa\nHainviatouncommento.Anteprima\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro, Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosi enon sipotraoffendereipartecipanti.Sei d'accordo?\nOk",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_9_144310_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": false
+    },
+    "gianfranco ollari": {
+      "name": "Gianfranco Ollari",
+      "notified_at": "2026-03-07T14:43:22.080554",
+      "decision": null,
+      "executed": false,
+      "extra_info": "26minutifa\n1025amici·117amicinelgruppo\n 2 gruppi in comune · Altri 2 gruppi\nIscrizione a Facebook:\n6 anni fa\nNon haancorarispostoalle domande-In attesadellarisposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_10_cropped.png",
+      "is_unanswered": false
+    },
+    "mayssa haji": {
+      "name": "Mayssa Haji",
+      "notified_at": "2026-03-07T18:01:37.061251",
+      "decision": null,
+      "executed": false,
+      "extra_info": "circaun'orafa\n8  2 gruppi in comune · Altri 108 gruppi\nIscrizioneaFacebook:\n4 anni fa\nVive aTunisi\nHastudiatopressoUniversitedeFlorence\nHa inviato 2 commenti. Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosi enon sipotra offendereipartecipanti.Sei d'accordo?\n!S\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico:\"Ho una\ndozzina di uova in unpaniere,quantesono in totale?\"\n!S",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_10_180042_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_10_cropped.png",
+      "is_unanswered": false
+    },
+    "davide pasquali": {
+      "name": "Davide Pasquali",
+      "notified_at": "2026-03-07T18:01:40.576560",
+      "decision": null,
+      "executed": false,
+      "extra_info": "47minuti fa\n451amici·110amicinelgruppo\n4 gruppi in comune-Altri 81 gruppi\nIscrizioneaFacebook:\n2 anni fa\nVive a Parigi\nHa inviato un post.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_11_180056_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": true
+    },
+    "ceciliapernis": {
+      "name": "CeciliaPernis",
+      "notified_at": "2026-03-07T18:01:40.671820",
+      "decision": null,
+      "executed": false,
+      "extra_info": "46minutifa\n96amici.8amicinelgruppo\nAltri 10 gruppi\nIscrizioneaFacebook:\n14 anni fa\nViveaParma\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_12_cropped.png",
+      "is_unanswered": true
+    },
+    "dariabandini": {
+      "name": "DariaBandini",
+      "notified_at": "2026-03-07T18:01:40.752504",
+      "decision": null,
+      "executed": false,
+      "extra_info": "15minuti fa\n93amici.4amicinelgruppo\n3gruppi in comune·Altri 18gruppi\nIscrizione aFacebook:\n13 anni fa\nHainviatouncommento.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_13_180115_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_13_cropped.png",
+      "is_unanswered": true
+    },
+    "davideaddeo": {
+      "name": "DavideAddeo",
+      "notified_at": "2026-03-07T21:23:56.617560",
+      "decision": null,
+      "executed": false,
+      "extra_info": "un giomo fa\nAltri11 gruppi\nIscrizione aFacebook:\n16 anni fa\nViveaRaggio,Emilia-Romagna,Italy\nHa studiatopresso IPSIA G.Vallauri\nRispondi con accuratezza a questa domanda perche serve perverificare se il tuo profilo e autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nrnmmentidevnnneccerericnettnciennncinntranffendereinarterinantiSeid'arrnrrln?",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_2_cropped.png",
+      "is_unanswered": false
+    },
+    "hainviatouncommento.anteprima": {
+      "name": "Hainviatouncommento.Anteprima",
+      "notified_at": "2026-03-07T21:23:56.824023",
+      "decision": null,
+      "executed": false,
+      "extra_info": "Rispondi con accuratezza a questa domanda perche serveperverificare seil tuoprofiloeautentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nOKk",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_4_212244_modal.png",
+      "action_buttons": {},
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": false
+    },
+    "mattiapalombieri": {
+      "name": "MattiaPalombieri",
+      "notified_at": "2026-03-07T21:23:57.790124",
+      "decision": null,
+      "executed": false,
+      "extra_info": "55minutifa\n  104 amici · 1 amicola nel gruppo\n4gruppi incomune·Altri 21gruppi\nIscrizione aFacebook:\n7 anni fa\nViveaOria\nHastudiatopressoUniversitadelSalento\nRispondi con accuratezza a questa domanda perche serveper verificare seil tuo profiloe autentico:\"Ho una\ndozzina diuova in unpaniere,quantesono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nsi",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": false
+    },
+    "luciana cervi": {
+      "name": "Luciana Cervi",
+      "notified_at": "2026-03-08T06:24:50.071817",
+      "decision": null,
+      "executed": false,
+      "extra_info": "9orefa\n22amici-5amicinelgruppo\nAltri 9 gruppi\nIscrizione aFacebook:\n4 anni fa\nHa inviato 2 post. Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosi enonsipotraoffenderei partecipanti.Sei d'accordo?\nSi sono d'accordo.\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico: \"Ho una\ndozzinadiuova in unpaniere,quantesono intotale?\"\n12uova",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_062423_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": false
+    },
+    "edo tafa": {
+      "name": "Edo Tafa",
+      "notified_at": "2026-03-08T06:24:50.589847",
+      "decision": null,
+      "executed": false,
+      "extra_info": "14 minuti fa\n2 gruppi\nIscrizioneaFacebook:\n16 anni fa\nViveaParma\nHainviatouncommento.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_8_062444_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": true
+    },
+    "elisabettabettylasagni": {
+      "name": "ElisabettaBettyLasagni",
+      "notified_at": "2026-03-08T09:23:47.987204",
+      "decision": null,
+      "executed": false,
+      "extra_info": "50minutifa\nAltri38 gruppi\nIscrizioneaFacebook:\n14 annifa\nViveaBorzano,Emilia-Romagna,Italy\nHafrequentatoIstitutoD'ArteG.Chierici\nImpiegatapressoAllisonOff-HighwayDrive&MotionSystems\nNonha ancorarisposto alledomande·In attesa dellarisposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1046,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_13_cropped.png",
+      "is_unanswered": false
+    },
+    "carstockcarstock": {
+      "name": "CarStockCarStock",
+      "notified_at": "2026-03-08T09:23:48.201047",
+      "decision": null,
+      "executed": false,
+      "extra_info": "47minuti fa\n801amici·1amicola nel gruppo\nAltri 39 gruppi\nIscrizioneaFacebook:\n2 anni fa\nVive aVilla di Tirano\nHainviato2post.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_14_092335_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": true
+    },
+    "maurizio cavedoni": {
+      "name": "Maurizio Cavedoni",
+      "notified_at": "2026-03-08T11:40:37.446776",
+      "decision": null,
+      "executed": false,
+      "extra_info": "circaun'orafa\n178amici·1amicolanel gruppo\nAltri 27 gruppi\nIscrizione a Facebook:\n3 anni fa\nVive a Vignola\nManagerjuniorpressoDipendentepubblico\nNo multilevel marketing,spam,o offerte di lavoro.Gli annunci devono essere autentici eil prezzoben visibile.\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\nCerto\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_13_cropped.png",
+      "is_unanswered": false
+    },
+    "nunzia fagandini": {
+      "name": "Nunzia Fagandini",
+      "notified_at": "2026-03-08T11:40:37.640696",
+      "decision": null,
+      "executed": false,
+      "extra_info": "58minuti fa\n1327amici·267amicinelgruppo\n5 gruppi in comune · Altri 161 gruppi\nIscrizione a Facebook:\n15 anni fa\nViveaTraversetolo\nHastudiatopressoUniversitadiParma\ntraversetolo presso Mondo Donna\nHa inviato un post. Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_14_114026_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": true
+    },
+    "khalid temara": {
+      "name": "Khalid Temara",
+      "notified_at": "2026-03-08T15:19:26.618744",
+      "decision": null,
+      "executed": false,
+      "extra_info": "40minuti fa\n878amici·8amicinelgruppo\nAltri 56 gruppi\nIscrizioneaFacebook:\n17 anni fa\nHa frequentato IIs\"Fermo Corni\"Modena\nLavorapressoLiberoprofessionista\nHa inviato un post. Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_14_151915_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": true
+    },
+    "carlo zibani": {
+      "name": "Carlo Zibani",
+      "notified_at": "2026-03-09T08:29:29.680561",
+      "decision": null,
+      "executed": false,
+      "extra_info": "13 ore fa\n 60 amici · 12 amici nel gruppo\n2gruppi in comune·Altri58gruppi\nIscrizione a Facebook:\n13 anni fa\nViveaParma\nHa inviato un post.Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\nsi d'accordissimo.\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_8_082920_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": false
+    },
+    "elisa lussi": {
+      "name": "Elisa lussi",
+      "notified_at": "2026-03-15T13:17:37.856762",
+      "decision": null,
+      "executed": false,
+      "extra_info": "unasettimanafa\n19 gruppi\nIscrizioneaFacebook:\n5 anni fa\nVive a LaSpezia\nFrequenta Istituto Alberghiero G.Casini La Spezia\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nOk\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico: \"Ho una\ndozzinadiuova in unpaniere,quantesono intotale?\"\n12",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_0_cropped.png",
+      "is_unanswered": false
+    },
+    "lucia nastro": {
+      "name": "Lucia Nastro",
+      "notified_at": "2026-03-15T13:17:39.251542",
+      "decision": null,
+      "executed": false,
+      "extra_info": "unasettimanafa\n2 gruppi in comune · Altri 19 gruppi\nlscrizioneaFacebook:\n12 anni fa\nHa inviato unpost.Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\nCerto\nRispondi con accuratezza aquesta domanda perche serveperverificare seil tuoprofiloe autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_4_131428_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": false
+    },
+    "giuliano sala": {
+      "name": "Giuliano Sala",
+      "notified_at": "2026-03-15T15:39:20.626057",
+      "decision": null,
+      "executed": false,
+      "extra_info": "46minuti fa\n3 gruppi in comune·Altri 167 gruppi\nIscrizioneaFacebook:\n6 anni fa\nViveaBedonia\nHa inviato un commento.Anteprima\nNo multilevel marketing,spam,o offerte di lavoro.Gli annunci devono essere autentici e il prezzobenvisibile.|\ncommenti devono essere rispettosienon si potra offendere i partecipanti.Sei d'accordo?\nSonod'accordissimo",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_0_153730_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_0_cropped.png",
+      "is_unanswered": false
+    },
+    "mohamedbouzid": {
+      "name": "MohamedBouzid",
+      "notified_at": "2026-03-15T15:39:21.177719",
+      "decision": null,
+      "executed": false,
+      "extra_info": "44minuti fa\n1014amici·23amicinelgruppo\nAltri 11 gruppi\nIscrizioneaFacebook:\n16 anni fa\nNon haancorarispostoalle domande-In attesadellarisposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_1_cropped.png",
+      "is_unanswered": false
+    },
+    "antiquariato sale": {
+      "name": "Antiquariato Sale",
+      "notified_at": "2026-03-15T15:39:21.353457",
+      "decision": null,
+      "executed": false,
+      "extra_info": "VENDESI\n42minutifa\n4 amici·2 amici nel gruppo\n2gruppiincomune·Altri16gruppi\nIscrizione aFacebook:\n2 anni fa\nViveaParma\nHainviato4post.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_2_153751_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_2_cropped.png",
+      "is_unanswered": true
+    },
+    "emporiodell'usato": {
+      "name": "EmporioDell'usato",
+      "notified_at": "2026-03-15T15:39:21.454621",
+      "decision": null,
+      "executed": false,
+      "extra_info": "35minutifa\nAltri 69 gruppi\nIscrizioneaFacebook:\n3 anni fa\nHainviatounpost.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_3_153807_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_3_cropped.png",
+      "is_unanswered": true
+    },
+    "rosellabalestreri bedogni": {
+      "name": "RosellaBalestreri Bedogni",
+      "notified_at": "2026-03-15T15:39:21.536475",
+      "decision": null,
+      "executed": false,
+      "extra_info": "31minutifa\nAltri 112 gruppi\nIscrizione a Facebook:\nun anno fa\nVive a Casalmaggiore\nHainviatouncommento.Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\n!S\ndozzina di uovainunpaniere,quantesono intotale?\n12",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_4_153823_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": false
+    },
+    "adammonti": {
+      "name": "AdamMonti",
+      "notified_at": "2026-03-15T15:39:21.968905",
+      "decision": null,
+      "executed": false,
+      "extra_info": "31 minuti fa\nIscrizioneaFacebook:\n5 anni fa\nHainviato3post.Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\nsi\nRispondi con accuratezza a questa domandapercheserveperverificareseil tuo profiloe autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_5_153843_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": false
+    },
+    "antoniociancioparatore": {
+      "name": "AntonioCiancioParatore",
+      "notified_at": "2026-03-15T15:39:22.733801",
+      "decision": null,
+      "executed": false,
+      "extra_info": "6minuti fa\n54amici.6amicinelgruppo\n6 gruppi in comune·Altri166gruppi\nIscrizione aFacebook:\n2annifa\nHainviatouncommento.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_153917_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": true
+    },
+    "annamariadiricco": {
+      "name": "AnnamariaDiricco",
+      "notified_at": "2026-03-15T17:58:53.137782",
+      "decision": null,
+      "executed": false,
+      "extra_info": "52 minuti fa\n 4 gruppi in comune · Altri 52 gruppi\nIscrizione aFacebook:\n11 anni fa\nViveaParma\nPrecedentementeoperaiapressoNessunpostodilavoro\nHa inviato 2 commenti.Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosi enon sipotraoffendereipartecipanti.Sei d'accordo?\nsi",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_2_175722_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_2_cropped.png",
+      "is_unanswered": false
+    },
+    "belli rene": {
+      "name": "Belli Rene",
+      "notified_at": "2026-03-15T17:58:53.458990",
+      "decision": null,
+      "executed": false,
+      "extra_info": "45minutifa\n486 amici·13 amici nel gruppo\n3gruppiincomune·Altri107gruppi\nIscrizione aFacebook:\n17 anni fa\nViveaArceto,Emilia-Romagna,Italy\nHafrequentatoITI\nLavorapressoOmpi\nHa inviato 5post.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_3_175737_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_3_cropped.png",
+      "is_unanswered": true
+    },
+    "monica fattorini": {
+      "name": "Monica Fattorini",
+      "notified_at": "2026-03-15T17:58:53.532818",
+      "decision": null,
+      "executed": false,
+      "extra_info": "37minuti fa\n131 amici\n2 gruppi in comune·Altri 34 gruppi\nIscrizioneaFacebook:\n15 anni fa\nVive aBologna\nLavorapressolavoropermestessa\nHa inviato 2 post. Anteprima\nNon ha ancora risposto alle domande · In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_4_175754_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          46
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": true
+    },
+    "fabianafaroldi": {
+      "name": "FabianaFaroldi",
+      "notified_at": "2026-03-15T17:58:53.607683",
+      "decision": null,
+      "executed": false,
+      "extra_info": "24minuti fa\nAltri 4 gruppi\nIscrizioneaFacebook:\n4annifa\nNon haancora rispostoalle domande·In attesadella risposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": false
+    },
+    "luis re": {
+      "name": "Luis Re",
+      "notified_at": "2026-03-15T17:58:53.754785",
+      "decision": null,
+      "executed": false,
+      "extra_info": "18 minuti fa\n3 gruppi in comune·Altri 17 gruppi\nIscrizioneaFacebook:\n26settimanefa\nHainviatouncommento.Anteprima\nRispondi con accuratezza a questa domanda perche serveper verificare seil tuoprofiloe autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\nOk\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\nOk",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_175816_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          44
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": false
+    },
+    "asi tommy": {
+      "name": "Asi Tommy",
+      "notified_at": "2026-03-15T17:58:54.087124",
+      "decision": null,
+      "executed": false,
+      "extra_info": "11minutifa\n2525amici·2amicinelgruppo\n248 gruppi\nIscrizioneaFacebook:\n15 anni fa\nHa frequentato MediapolisHighSchool\nHainviatouncommento.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_175830_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": true
+    },
+    "carlo picardi vignozzi": {
+      "name": "Carlo Picardi Vignozzi",
+      "notified_at": "2026-03-15T20:16:34.129259",
+      "decision": null,
+      "executed": false,
+      "extra_info": "31minuti fa\n187amici·17amicinelgruppo\nAltri 3 gruppi\nIscrizioneaFacebook:\n11 anni fa\nVive a Noceto\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1046,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_4_cropped.png",
+      "is_unanswered": true
+    },
+    "giorgia tinelli": {
+      "name": "Giorgia Tinelli",
+      "notified_at": "2026-03-15T20:16:34.288300",
+      "decision": null,
+      "executed": false,
+      "extra_info": "17 minuti fa\n4267 amici · 1 amicizia in comune · 663 amici nel gruppo\n8 gruppi in comune · Altri 208 gruppi\nIscrizioneaFacebook:\n12 anni fa\nVive a Castione Dei Marchesi,Emilia-Romagna,Italy\nHa frequentatoEducatrice\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosi enon sipotraoffendereipartecipanti.Sei d'accordo?\nsi",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": false
+    },
+    "omarcozza": {
+      "name": "OmarCozza",
+      "notified_at": "2026-03-15T20:16:34.743046",
+      "decision": null,
+      "executed": false,
+      "extra_info": "13minuti fa\nAltri 42 gruppi\nIscrizioneaFacebook:\n17 anni fa\nViveaPinerolo\ndiMeStessopressoTelorifaccioio\nHainviatounpost.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_201612_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": true
+    },
+    "pakito salv": {
+      "name": "Pakito Salv",
+      "notified_at": "2026-03-15T20:16:34.854659",
+      "decision": null,
+      "executed": false,
+      "extra_info": "2minuti fa\nAltri 86 gruppi\nIscrizioneaFacebook:\n14 anni fa\nViveaCastellammarediStabia\nHainviatounpost.Anteprima\nNon ha ancora rispostoalledomande·Inattesa dellarisposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_8_201628_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": true
+    },
+    "lvanasimonini": {
+      "name": "lvanaSimonini",
+      "notified_at": "2026-03-16T07:49:45.112542",
+      "decision": "approve",
+      "executed": false,
+      "extra_info": "9orefa\n36amici·1amicolanelgruppo\nAltri 5 gruppi\nIscrizioneaFacebook:\n8anni fa\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\nSi concordo\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\nSono dodici",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": false
+    },
+    "amalohavillavicencio": {
+      "name": "AmalohaVillavicencio",
+      "notified_at": "2026-03-16T07:49:45.579397",
+      "decision": null,
+      "executed": false,
+      "extra_info": "48minutifa\nAltri171gruppi\nIscrizioneaFacebook:\n17 anni fa\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzoben visibile.I\ncommenti devonoessererispettosienonsipotraoffendereipartecipanti.Seid'accordo?\nsi",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1046,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": false
+    },
+    "domenicomastrototaro": {
+      "name": "DomenicoMastrototaro",
+      "notified_at": "2026-03-16T07:49:45.729947",
+      "decision": null,
+      "executed": false,
+      "extra_info": "8minutifa\n2gruppiincomune·Altri25gruppi\nIscrizioneaFacebook:\n16 anni fa\nHainviatounpost.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_8_074939_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": true
+    },
+    "serenacazzato": {
+      "name": "SerenaCazzato",
+      "notified_at": "2026-03-16T10:41:45.675048",
+      "decision": null,
+      "executed": false,
+      "extra_info": "43minutifa\n4gruppiincomune·Altri42gruppi\nlscrizione aFacebook:\n17 anni fa\nHainviato5post.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_9_104046_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": true
+    },
+    "mauro peggiani": {
+      "name": "Mauro Peggiani",
+      "notified_at": "2026-03-16T10:41:45.793043",
+      "decision": null,
+      "executed": false,
+      "extra_info": "36minutifa\n356amici·3amicinelgruppo\n2gruppi in comune·Altri 105gruppi\nIscrizioneaFacebook:\nun annofa\nHainviatounpost.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_10_104104_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_10_cropped.png",
+      "is_unanswered": true
+    },
+    "llenia balestrieri": {
+      "name": "llenia Balestrieri",
+      "notified_at": "2026-03-16T10:41:45.882162",
+      "decision": null,
+      "executed": false,
+      "extra_info": "28minuti fa\n439 amici · 1 amicizia in comune · 72 amici nel gruppo\nAltri 4 gruppi\nIscrizioneaFacebook:\n10 anni fa\nViveaFornovodiTaro\nHastudiatoFinanzaeRiskManagementpressoFacoltadi EconomiadiParma\nHa inviato 4post.Anteprima\nNon ha ancora risposto alle domande.In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_11_104121_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": true
+    },
+    "ana ariana": {
+      "name": "Ana Ariana",
+      "notified_at": "2026-03-16T10:41:45.965779",
+      "decision": null,
+      "executed": false,
+      "extra_info": "9minuti fa\n176amici·25amicinelgruppo\nAltri 14 gruppi\nIscrizione aFacebook:\n9 anni fa\nViveaLondra\nHainviato un commento.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_12_104136_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_12_cropped.png",
+      "is_unanswered": true
+    },
+    "mauropeggiani": {
+      "name": "MauroPeggiani",
+      "notified_at": "2026-03-16T14:19:17.100117",
+      "decision": null,
+      "executed": false,
+      "extra_info": "56minuti fa\n356amici·3amicinelgruppo\n2 gruppiin comune·Altri105 gruppi\nIscrizioneaFacebook:\nun annofa\nHa inviatounpost.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_11_141817_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": true
+    },
+    "milenaferraguti": {
+      "name": "MilenaFerraguti",
+      "notified_at": "2026-03-16T14:19:17.199103",
+      "decision": null,
+      "executed": false,
+      "extra_info": "49minutifa\n86amici·2amicinelgruppo\n2gruppiincomune·Altri390gruppi\nIscrizioneaFacebook:\n4 anni fa\nHainviato3post.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_12_141834_modal.png",
+      "action_buttons": {
+        "decline": [
+          1046,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_12_cropped.png",
+      "is_unanswered": true
+    },
+    "ciro di maio": {
+      "name": "Ciro Di Maio",
+      "notified_at": "2026-03-16T14:19:17.295368",
+      "decision": null,
+      "executed": false,
+      "extra_info": "34minuti fa\n 244 amici · 34 amici nel gruppo\n7gruppiincomune·Altri190gruppi\nIscrizione a Facebook:\n6 annifa\nViveaSalvador(Brasile)\nHastudiatopressoUniversitaBocconi\nHa inviatoun commento.Anteprima\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico: \"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\nbici",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_13_141850_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_13_cropped.png",
+      "is_unanswered": false
+    },
+    "luca luca": {
+      "name": "Luca Luca",
+      "notified_at": "2026-03-16T14:19:17.637182",
+      "decision": null,
+      "executed": false,
+      "extra_info": "30minuti fa\nAltri 16 gruppi\nIscrizioneaFacebook:\n5 anni fa\nLavorapressoLiberoprofessionista\nHainviatounpost.Anteprima\nNon ha ancora risposto alle domande·In attesa dellarisposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_14_141906_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": true
+    },
+    "hadi b saleh": {
+      "name": "Hadi B Saleh",
+      "notified_at": "2026-03-16T17:39:31.640316",
+      "decision": null,
+      "executed": false,
+      "extra_info": "3orefa\n8 5 gruppi in comune · Altri 264 gruppi\nIscrizione a Facebook:\n11 anni fa\nViveaParma\nStudia Master'sDegreeofScience inFoodSafetypressoUniversita degli Studi di Parma\nLavora presso Customer Service Assistant\nHa inviato un commento. Anteprima\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\nd'accordo\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico: \"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_11_173833_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          46
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": false
+    },
+    "mondo cancello": {
+      "name": "Mondo Cancello",
+      "notified_at": "2026-03-16T17:39:32.079123",
+      "decision": null,
+      "executed": false,
+      "extra_info": "2orefa\n59 amici ·13 amici nel gruppo\n2gruppi in comune·Altri 49gruppi\nIscrizione a Facebook:\n6 anni fa\nHainviato2post.Anteprima\ndozzina di uova in un paniere,quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro, Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essererispettosienonsipotra offendereipartecipanti.Sei d'accordo?\nD'accordo",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_12_173850_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_12_cropped.png",
+      "is_unanswered": false
+    },
+    "sandrarojas": {
+      "name": "SandraRojas",
+      "notified_at": "2026-03-16T17:39:33.149030",
+      "decision": null,
+      "executed": false,
+      "extra_info": "54minuti fa\n3164 amici·12 amici nel gruppo\n4gruppi in comune·Altri82gruppi\nIscrizione aFacebook:\n12 anni fa\nViveaParma\nHa inviato un commento.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_14_173920_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": true
+    },
+    "hadi bsaleh": {
+      "name": "Hadi BSaleh",
+      "notified_at": "2026-03-17T06:18:30.416075",
+      "decision": "decline",
+      "executed": false,
+      "extra_info": "16orefa\n5 gruppi in comune·Altri 264 gruppi\nIscrizioneaFacebook:\n11 anni fa\nViveaParma\nLavorapressoCustomerServiceAssistant\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosi enon sipotraoffendereipartecipanti.Sei d'accordo?\nd'accordo\nRispondi con accuratezza a questa domanda perche serveperverificare seil tuoprofiloe autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          46
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": false
+    },
+    "2 gruppi in comune · altri 163 gruppi": {
+      "name": "  2 gruppi in comune · Altri 163 gruppi",
+      "notified_at": "2026-03-17T08:39:27.297582",
+      "decision": null,
+      "executed": false,
+      "extra_info": "IscrizioneaFacebook:\n15 anni fa\nViveaFidenza\nRispondi con accuratezza a questa domandapercheserveperverificare seil tuoprofiloe autentico:\"Houna\ndozzina diuovainunpaniere,quantesonointotale?\nsi\nNo multilevel marketing,spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile.I\ncommentidevonoessererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\nno",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {},
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": false
+    },
+    "ivanasimonini": {
+      "name": "IvanaSimonini",
+      "notified_at": "2026-03-17T14:05:48.436800",
+      "decision": null,
+      "executed": false,
+      "extra_info": "un giomofa\n36amici·1amicolanelgruppo\nAltri8gruppi\nIscrizioneaFacebook:\n8 anni fa\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devonoessererispettosienonsipotraoffendereipartecipanti.Seid'accordo?\nSi concordo\nRispondicon accuratezza a questa domandaperche serveperverificareseil tuoprofiloeautentico:\"Houna\ndozzina di uova in un paniere, quante sono in totale?\"\nSono dodici",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_3_cropped.png",
+      "is_unanswered": false
+    },
+    "douglas batista": {
+      "name": "Douglas Batista",
+      "notified_at": "2026-03-17T14:25:13.861030",
+      "decision": "decline",
+      "executed": false,
+      "extra_info": "59minuti fa\n1376 amici · 78 amici nel gruppo\n2 gruppi in comune·Altri 22 gruppi\nIscrizione aFacebook:\n15 anni fa\nVive a Salvador(Brasile)\nHastudiatopressoitisbereninifidenza\nNo multilevel marketing,spam,o offerte di lavoro.Gliannunci devono essere autentici eil prezzo ben visibile.1\n!S\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\nHounadozzinadiuova inunpaniere,quantesonointotale?",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_10_cropped.png",
+      "is_unanswered": false
+    },
+    "monicafattorini": {
+      "name": "MonicaFattorini",
+      "notified_at": "2026-03-17T17:11:28.389476",
+      "decision": null,
+      "executed": false,
+      "extra_info": "50minutifa\n131 amici\n2 gruppi in comune · Altri 35 gruppi\nIscrizioneaFacebook:\n15 anni fa\nVive a Bologna\nLavorapressolavoropermestessa\nHa inviato un post. Anteprima\nNon ha ancora risposto alle domande· In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_171106_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": true
+    },
+    "elenamechkovabettati": {
+      "name": "ElenaMechkovaBettati",
+      "notified_at": "2026-03-17T20:23:42.735730",
+      "decision": "approve",
+      "executed": false,
+      "extra_info": "circa un'ora fa\n194amici·22amicinelgruppo\n8gruppiincomune·Altri66gruppi\nIscrizioneaFacebook:\n14 anni fa\nViveaFontanellato\nHastudiatopressoVoronezhStateUniversity\nHa inviato un post. Anteprima\nRispondi con accuratezza a questa domandapercheserveperverificareseil tuoprofiloe autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile.1\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\nSi,sono d'accordo",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_7_202252_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          46
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": false
+    },
+    "manu zanichelli": {
+      "name": "Manu Zanichelli",
+      "notified_at": "2026-03-17T20:23:43.283004",
+      "decision": null,
+      "executed": false,
+      "extra_info": "27minuti fa\n355amici·5amicinelgruppo\n2 gruppi in comune·Altri 17 gruppi\nIscrizione aFacebook:\n7 anni fa\nVive a Modena\nHa inviato unpost.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_8_202307_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": true
+    },
+    "radu mitcu": {
+      "name": "Radu Mitcu",
+      "notified_at": "2026-03-17T20:23:43.373718",
+      "decision": null,
+      "executed": false,
+      "extra_info": "14 minuti fa\n534amici·34amicinelgruppo\nAltri 26 gruppi\nIscrizioneaFacebook:\n11 anni fa\nViveaParma\nHa inviato unpost.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_9_202321_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": true
+    },
+    "samuel berni": {
+      "name": "Samuel Berni",
+      "notified_at": "2026-03-17T20:23:43.454886",
+      "decision": null,
+      "executed": false,
+      "extra_info": "12 minuti fa\n450 amici · 1 amicizia in comune · 96 amici nel gruppo\n4 gruppi in comune · Altri 56 gruppi\nIscrizioneaFacebook:\n2 anni fa\nViveaSalaBaganza\ntornitorecncpressoBattioniePagani\nHa inviato un post.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_10_202337_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_10_cropped.png",
+      "is_unanswered": true
+    },
+    "elena mechkova bettati": {
+      "name": "Elena Mechkova Bettati",
+      "notified_at": "2026-03-18T07:33:15.847014",
+      "decision": null,
+      "executed": false,
+      "extra_info": "12 ore fa\n194amici·22amicinelgruppo\n8 gruppi in comune ·Altri 66gruppi\nIscrizione aFacebook:\n14 anni fa\nViveaFontanellato\nHastudiatopressoVoronezhStateUniversity\nHa inviato un post. Anteprima\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico: \"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile.I\ncommenti devonoessererispettosienonsipotraoffendereipartecipanti.Sei d'accordo?\nSi,sono d'accordo",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_5_073207_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_5_cropped.png",
+      "is_unanswered": false
+    },
+    "simonapattini": {
+      "name": "SimonaPattini",
+      "notified_at": "2026-03-18T07:33:16.416671",
+      "decision": null,
+      "executed": false,
+      "extra_info": "10 ore fa\n8  2 gruppi in comune · Altri 38 gruppi\nIscrizioneaFacebook:\n16 anni fa\nHa inviato un commento.Anteprima\nRispondi con accuratezza aquesta domandapercheserveperverificareseil tuoprofiloeautentico:\"Houna\ndozzina di uova in un paniere,quante sono in totale?\"\n12 12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\nsi",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_6_073223_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_6_cropped.png",
+      "is_unanswered": false
+    },
+    "eugenio curatolo": {
+      "name": "Eugenio Curatolo",
+      "notified_at": "2026-03-18T07:33:16.706876",
+      "decision": null,
+      "executed": false,
+      "extra_info": "6orefa\n3425amici·1amiciziaincomune·426amicinelgruppo\nAltri22gruppi\nIscrizione a Facebook:\n17 anni fa\nViveaParma\nHafrequentatoitisbereninifidenza\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosi enon sipotra offendereipartecipanti.Sei d'accordo?\nvabene\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico: \"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_7_cropped.png",
+      "is_unanswered": false
+    },
+    "aurangzeb john": {
+      "name": "Aurangzeb John",
+      "notified_at": "2026-03-18T07:33:16.896022",
+      "decision": null,
+      "executed": false,
+      "extra_info": "5orefa\n4 gruppi in comune · Altri 119 gruppi\nIscrizione aFacebook:\n11 anni fa\nVive aParma\nHa frequentatoITTCamilloRondani\nAsstmusicproducer/ViolinistatInsiemepressoMusicstudio\nRispondi con accuratezza a questa domandapercheserveperverificare seil tuoprofiloe autentico:\"Ho una\ndozzina di uovainunpaniere,quantesonointotale?\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosi e non si potra offenderei partecipanti. Sei d'accordo?\nSisonod'accordo",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_8_cropped.png",
+      "is_unanswered": false
+    },
+    "marketapovalacova": {
+      "name": "MarketaPovalacova",
+      "notified_at": "2026-03-18T07:33:17.102289",
+      "decision": null,
+      "executed": false,
+      "extra_info": "58minuti fa\n82 gruppi in comune · Altri 66 gruppi\nIscrizione aFacebook:\n15 anni fa\nViveaParma\nLavorapressoMutti Pomodoro\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico: \"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro, Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommentidevonoessererispettosienonsipotraoffendereipartecipanti.Seid'accordo?\n!S",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          868,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_9_cropped.png",
+      "is_unanswered": false
+    },
+    "dorian grei": {
+      "name": "Dorian Grei",
+      "notified_at": "2026-03-18T07:33:17.291644",
+      "decision": null,
+      "executed": false,
+      "extra_info": "48minutifa\n2gruppi incomune·Altri327gruppi\nIscrizioneaFacebook:\n7 anni fa\nVive a Bologna\nHainviatounpost.Anteprima\nNon ha ancora rispostoalledomande·Inattesa dellarisposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_10_073254_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_10_cropped.png",
+      "is_unanswered": true
+    },
+    "cristian deejay cristian arroyave": {
+      "name": "Cristian Deejay Cristian Arroyave",
+      "notified_at": "2026-03-18T10:38:16.985009",
+      "decision": null,
+      "executed": false,
+      "extra_info": "2orefa\n5 gruppi in comune ·Altri65 gruppi\nIscrizione aFacebook:\n16 anni fa\nViveaParma\nHastudiatoScienzepolitichepressoUniversitaDlParma\nHa inviato 2 post.Anteprima\ndozzina di uova in un paniere, quante sono in totale?\"\n12\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devonoessererispettosienon sipotraoffendereipartecipanti.Sei d'accordo?\nSi certosono d'accordo.",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_10_103748_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          868,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_10_cropped.png",
+      "is_unanswered": false
+    },
+    "tea beltrami": {
+      "name": "Tea Beltrami",
+      "notified_at": "2026-03-18T10:38:17.291515",
+      "decision": null,
+      "executed": false,
+      "extra_info": "circa un'ora fa\n2634amici·50amicinelgruppo\n Altri 31 gruppi\nIscrizione aFacebook:\n15 anni fa\nViveaGuastalla\nHa studiatopressoUniversita diBologna sedeRimini:Culturee tecnichedella moda-Clam\nLavora presso Studente\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosi e non si potra offendere i partecipanti. Sei d'accordo?\nSicerto\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo e autentico: \"Ho una\ndozzina di uova in un paniere,quante sono in totale?\"\n12",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          46
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_11_cropped.png",
+      "is_unanswered": false
+    },
+    "joe khoule": {
+      "name": "Joe Khoule",
+      "notified_at": "2026-03-18T10:38:17.491226",
+      "decision": null,
+      "executed": false,
+      "extra_info": "46minuti fa\n2590 amici·294 amici nel gruppo\nAltri 12 gruppi\nIscrizione a Facebook:\n13 anni fa\nViveaParma\nHastudiatopressoENACEmiliaRomagna\nLavorapressobormioli luigi\nHa inviato uncommento.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_12_103810_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_12_cropped.png",
+      "is_unanswered": true
+    },
+    "rosalba carleo": {
+      "name": "Rosalba Carleo",
+      "notified_at": "2026-03-18T13:17:52.602068",
+      "decision": null,
+      "executed": false,
+      "extra_info": "50minutifa\n744amici·21amicinelgruppo\n2gruppi in comune·Altri 40 gruppi\nIscrizione aFacebook:\n12 anni fa\nHainviatounpost.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_12_131720_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_12_cropped.png",
+      "is_unanswered": true
+    },
+    "danielerestani": {
+      "name": "DanieleRestani",
+      "notified_at": "2026-03-18T13:17:52.670025",
+      "decision": null,
+      "executed": false,
+      "extra_info": "45 minuti fa\n7 gruppi in comune·Altri 64 gruppi\nIscrizioneaFacebook:\n4 annifa\nViveaParma\nRispondi con accuratezza a questa domanda perche serve per verificare se il tuo profilo é autentico:\"Ho una\ndozzina di uova in un paniere, quante sono in totale?\"\n12uova\nNo multilevel marketing, spam, o offerte di lavoro. Gli annunci devono essere autentici e il prezzo ben visibile. I\ncommenti devono essere rispettosienon sipotra offendereipartecipanti.Sei d'accordo?\nsi",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_13_cropped.png",
+      "is_unanswered": false
+    },
+    "andrea zolesi": {
+      "name": "Andrea Zolesi",
+      "notified_at": "2026-03-18T13:17:52.886829",
+      "decision": null,
+      "executed": false,
+      "extra_info": "33minutifa\n736amici·96amicinelgruppo\n6gruppi in comune·Altri 41gruppi\nIscrizione aFacebook:\n15 anni fa\nHainviatounpost.Anteprima\nNon haancora rispostoalle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_14_131742_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": true
+    },
+    "pinocarrellotengotutto": {
+      "name": "PinoCarrelloTengotutto",
+      "notified_at": "2026-03-18T16:08:06.524597",
+      "decision": null,
+      "executed": false,
+      "extra_info": "33minuti fa\nAltri 20 gruppi\nIscrizioneaFacebook:\n3 anni fa\nViveaMilano\nscuola mediapressoMilano\nHa inviatoun post.Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_13_160738_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_13_cropped.png",
+      "is_unanswered": true
+    },
+    "mauro morsia": {
+      "name": "Mauro Morsia",
+      "notified_at": "2026-03-18T16:08:06.598002",
+      "decision": null,
+      "executed": false,
+      "extra_info": "28minuti fa\n1821amici·7 amicinel gruppo\n2 gruppi in comune ·Altri 222 gruppi\nIscrizione a Facebook:\n16 anni fa\nViveaPiacenza\nHa studiatopressoBlues\nLavorapressoSarannocazzimiei\nHa inviato un post. Anteprima\nNon ha ancora risposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_14_160755_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": true
+    },
+    "liberata cavalli": {
+      "name": "Liberata Cavalli",
+      "notified_at": "2026-03-18T19:59:18.738785",
+      "decision": null,
+      "executed": false,
+      "extra_info": "46minutifa\n213amici·27amicinel gruppo\n2 gruppi in comune·Altri 21 gruppi\nIscrizioneaFacebook:\nun anno fa\nRispondi con accuratezza aquesta domandapercheserveperverificareseil tuoprofiloeautentico:\"Houna\ndozzina di uovainunpaniere,quantesonointotale?\"\n12\nNo multilevel marketing,spam,o offerte di lavoro.Gli annunci devono essere autentici e il prezzobenvisibile.\ncommenti devono essererispettosienon sipotra offendereipartecipanti.Sei d'accordo?\nok",
+      "card_hash": null,
+      "preview_path": null,
+      "action_buttons": {
+        "decline": [
+          1047,
+          45
+        ],
+        "approve": [
+          869,
+          47
+        ]
+      },
+      "cropped_path": "data/screenshots/card_13_cropped.png",
+      "is_unanswered": false
+    },
+    "violetviolet": {
+      "name": "VioletViolet",
+      "notified_at": "2026-03-18T19:59:18.981426",
+      "decision": null,
+      "executed": false,
+      "extra_info": "27minuti fa\n2gruppiin comune·Altri311gruppi\nlscrizione aFacebook:\n3 anni fa\nHainviato3post.Anteprima\nNon ha ancorarisposto alle domande·In attesa della risposta",
+      "card_hash": null,
+      "preview_path": "data/screenshots/preview_card_14_195907_modal.png",
+      "action_buttons": {
+        "decline": [
+          1047,
+          44
+        ],
+        "approve": [
+          869,
+          46
+        ]
+      },
+      "cropped_path": "data/screenshots/card_14_cropped.png",
+      "is_unanswered": true
+    }
+  }
+}
