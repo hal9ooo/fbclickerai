@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     # OpenRouter API
     openrouter_api_key: str = Field(..., description="OpenRouter API key")
     openrouter_model: str = Field(
-        default="google/gemini-2.5-pro-preview-06-05",
+        default="google/gemini-2.0-flash-exp",
         description="Vision model to use (must support images)"
     )
     openrouter_base_url: str = Field(
@@ -49,16 +49,15 @@ class Settings(BaseSettings):
     )
 
     # Perceptual hash threshold for skipping OCR on already-seen cards
-    # 0 = disabled, higher = more tolerant (10 = recommended, max ~64)
     card_hash_threshold: int = Field(
         default=1,
         description="Hamming distance threshold for card image similarity (0=disabled, 2=strict)"
     )
     
-    # Paths
-    data_dir: str = Field(default="/app/data", description="Data directory path")
-    screenshots_dir: str = Field(default="/app/data/screenshots", description="Screenshots directory")
-    sessions_dir: str = Field(default="/app/data/sessions", description="Browser sessions directory")
+    # Paths (REMOVED /app prefix to work both locally and in Docker)
+    data_dir: str = Field(default="data", description="Data directory path")
+    screenshots_dir: str = Field(default="data/screenshots", description="Screenshots directory")
+    sessions_dir: str = Field(default="data/sessions", description="Browser sessions directory")
     
     class Config:
         env_file = ".env"
@@ -67,4 +66,3 @@ class Settings(BaseSettings):
 
 # Global settings instance
 settings = Settings()
-
