@@ -2,9 +2,9 @@
 # Deploy session file to remote server and restart container
 # Usage: ./deploy_session.sh [remote_user@host]
 
-REMOTE="${1:-root@192.168.1.203}"
+REMOTE="${1:-vscode@192.168.1.203}"
 SESSION_FILE="data/sessions/facebook_session.json"
-REMOTE_PATH="/root/progetti/dev/fbclicker/data/sessions"
+REMOTE_PATH="/vscode/progetti/dev/fbclicker/data/sessions"
 REMOTE_CONTAINER_PATH="/app/data/sessions"
 
 echo "🚀 Deploying session to $REMOTE"
