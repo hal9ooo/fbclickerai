@@ -31,11 +31,9 @@ RUN apt-get update && apt-get install -y \
 
 # Copy source code
 COPY src/ ./src/
-COPY manual_login.py ./
-COPY vnc_login.sh ./
-COPY run_bot_vnc.sh ./
+
 COPY entrypoint.sh ./
-RUN chmod +x vnc_login.sh run_bot_vnc.sh entrypoint.sh
+RUN chmod +x entrypoint.sh
 
 # Create directories for persistent data
 RUN mkdir -p /app/data/screenshots /app/data/sessions
