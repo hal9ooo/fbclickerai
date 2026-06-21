@@ -19,6 +19,34 @@ services:
       - DETECTOR_BATCH_SIZE=2
       - RECOGNITION_BATCH_SIZE=4
 
+  # Manual-login container: starts Xvfb + x11vnc + noVNC so you can
+  # solve CAPTCHA / 2FA in a browser-based desktop. The same
+  # facebook_session.json is then used by the fbclicker service.
+  # Usage:
+  #   docker compose --profile manual up -d fbclicker-manual
+  #   # open http://localhost:6080/vnc.html (tunnel -L 6080 if remote)
+  #   # in xterm: ./manual_login_container.sh
+  #   docker compose --profile manual down
+  #   docker compose up -d fbclicker
+  fbclicker-manual:
+    build: .
+    container_name: fbclicker-manual
+    profiles: ["manual"]
+    env_file:
+      - .env
+    ports:
+      - "6080:6080"
+    volumes:
+      - ./data:/app/data
+      - fbclicker_cache:/root/.cache
+    environment:
+      - TZ=Europe/Rome
+      - HEADLESS=false
+      - DISPLAY=:99
+      - DETECTOR_BATCH_SIZE=2
+      - RECOGNITION_BATCH_SIZE=4
+    command: ["bash", "-c", "./start_vnc.sh && exec sleep infinity"]
+
 volumes:
   fbclicker_data:
   fbclicker_cache:

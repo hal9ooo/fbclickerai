@@ -335,16 +335,34 @@ cp .env.example .env
 
 ### 2. Manual Login (Required Once)
 
-The bot requires a valid Facebook session. Create one manually to avoid CAPTCHAs:
+The bot requires a valid Facebook session. Create one manually to avoid CAPTCHAs.
+
+**Recommended (browser-based, no VNC client needed):**
 
 ```bash
-# Option 1: X11 Forwarding (if you have X Server)
-docker compose run --rm -e HEADLESS=false fbclicker python manual_login.py
+# Start the manual-login container with Xvfb + noVNC
+docker compose --profile manual up -d fbclicker-manual
 
-# Option 2: VNC (recommended for remote servers)
-docker compose run --rm -p 5900:5900 fbclicker ./vnc_login.sh
-# Connect VNC client to localhost:5900
+# From your Windows machine, tunnel the noVNC port via SSH
+ssh -L 6080:localhost:6080 <user>@<server>
+
+# Open in any browser:
+#   http://localhost:6080/vnc.html
+# (password is printed in the container logs)
+docker compose --profile manual logs fbclicker-manual
+
+# Inside the noVNC desktop, open an xterm and run:
+cd /app && ./manual_login_container.sh
+# Log into Facebook in the browser, press ENTER, session is saved.
+
+# When done:
+docker compose --profile manual down
 ```
+
+Why this way: the session and fingerprint files are written by the **same
+container** that runs the bot, so there is no `scp`/copy step and no
+fingerprint/cookie mismatch. This was the source of the past "session
+not recognized" problems.
 
 ### 3. Run Production
 
