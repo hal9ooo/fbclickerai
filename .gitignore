@@ -45,3 +45,6 @@ volume_backup/
 # Logs
 *.log
 logs/
+
+# Local code-graph index (never commit)
+.tokensave/
