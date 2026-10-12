@@ -8,7 +8,7 @@ Generato da `agent-pipeline`. Non modificare a mano: usa `bin/install.sh --updat
 
 `.github/workflows/ci.yml` esegue:
 
-- `python -c "raise SystemExit('No isolated automated test suite: onboarding blocked; see CI-safe backlog')"`
+- `.venv/bin/python -m unittest discover -s tests -t . -q`
 
 Gli stessi comandi sono in `.agent/pipeline.yml` (`checks`), usati dal coordinatore per la verifica delle PR automatiche.
 
