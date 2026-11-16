@@ -9,7 +9,8 @@ data/sessions/
 facebook_session.json
 fingerprint.json
 
-# Screenshots and debug files
+# Runtime state (decisioni e screenshot)
+data/decisions_cache.json
 data/screenshots/
 debug_*.png
 *.tar
